@@ -2,69 +2,58 @@ const certificates = [
   {
     title: "Samsung IoT Engineering",
     file: "/certificates/Sams_IOT.jpeg",
-    preview: "/certificates/Sams_IOT.jpeg",
     type: "image",
   },
   {
     title: "Samsung AI Engineering (AI Track)",
     file: "/certificates/Sams_AI-preview.jpg",
-    preview: "/certificates/Sams_AI-preview.jpg",
     type: "image",
   },
 
   {
     title: "OCI Data Science Professional",
     file: "/certificates/OL_DS.pdf",
-    preview: "/certificates/pdf-placeholder.png",
     type: "pdf",
   },
   {
     title: "OCI Generative AI Professional",
     file: "/certificates/OL_G.pdf",
-    preview: "/certificates/pdf-placeholder.png",
     type: "pdf",
   },
   {
     title: "Generative AI with AWS",
     file: "/certificates/aws-gen-ai.pdf",
-    preview: "/certificates/pdf-placeholder.png",
     type: "pdf",
   },
   {
     title: "Building RAG Agents with LLMs",
     file: "/certificates/NV_RAG.pdf",
-    preview: "/certificates/pdf-placeholder.png",
     type: "pdf",
   },
   {
     title: "ML Regression & Classification",
     file: "/certificates/SV_AJ.pdf",
-    preview: "/certificates/pdf-placeholder.png",
     type: "pdf",
   },
   {
     title: "AI for All (GenAI Practice)",
     file: "/certificates/Gen_nvidia.pdf",
-    preview: "/certificates/pdf-placeholder.png",
     type: "pdf",
   },
 
   {
     title: "Intro to Programming",
     file: "/certificates/Nvidia_DLI_ITI.png",
-    preview: "/certificates/Nvidia_DLI_ITI.png",
     type: "image",
   },
   {
     title: "Intro to Programming",
     file: "/certificates/intro.jpg",
-    preview: "/certificates/intro.jpg",
     type: "image",
   },
   {
     title: "IBM Quantum Computing",
     file: "/certificates/Quantum.jpg",
-    preview: "/certificates/Quantum.jpg",
     type: "image",
   },
 ];
@@ -89,19 +78,34 @@ export default function Certificates() {
               </span>
             )}
 
-            {/* Clickable preview */}
-            <a
-              href={cert.file}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src={cert.preview}
-                alt={cert.title}
-                className="rounded-lg w-full h-[200px] object-cover"
-                loading="lazy"
-              />
-            </a>
+            {/* IMAGE CERTIFICATES */}
+            {cert.type === "image" && (
+              <a
+                href={cert.file}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={cert.file}
+                  alt={cert.title}
+                  className="rounded-lg w-full h-[200px] object-cover"
+                  loading="lazy"
+                />
+              </a>
+            )}
+
+            {/* PDF CERTIFICATES (clean + safe) */}
+            {cert.type === "pdf" && (
+              <a
+                href={cert.file}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="w-full h-[200px] bg-slate-800 rounded-lg flex items-center justify-center text-white font-medium hover:bg-slate-700 transition">
+                  View Certificate
+                </div>
+              </a>
+            )}
 
             {/* Title */}
             <h3 className="mt-3 text-white font-semibold text-sm text-center">
