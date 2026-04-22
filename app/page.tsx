@@ -13,14 +13,11 @@ import Footer from '@/components/Footer'
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-[#030712] overflow-x-hidden">
-      {/* Global grid background */}
       <div className="fixed inset-0 grid-bg opacity-100 pointer-events-none z-0" />
-      {/* Global radial glow */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(0,212,255,0.06)_0%,transparent_70%)]" />
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(124,58,237,0.06)_0%,transparent_70%)]" />
       </div>
-
       <div className="relative z-10">
         <Navbar />
         <Hero />
@@ -28,7 +25,7 @@ export default function Home() {
         <Skills />
         <Projects />
         <FeaturedProjects />
-        <Certificates /> 
+        <Certificates />
         <Achievements />
         <Stats />
         <Contact />
