@@ -12,21 +12,23 @@ const certificates = [
   { id:1, title:'Deep Learning for Computer Vision', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'👁', file:'/certificates/Deep_Learning_For_computer_Vision.pdf', preview:'/certificates/previews/Deep_Learning_For_computer_Vision.png', type:'pdf' as const },
   { id:2, title:'Computer Vision Applications', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'🎯', file:'/certificates/Computer_Vision_Applications.pdf', preview:'/certificates/previews/Computer_Vision_Applications.png', type:'pdf' as const },
   // AI & ML
-  { id:5, title:'AI for All: From Basics to GenAI', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🧠', file:'/certificates/AI_for_All_From_Basics_to_GenAI.pdf', preview:'/certificates/previews/AI_for_All_From_Basics_to_GenAI_Practice_AI_for_All_From_Basics_to_GenAI_Practice_-_Nvidia.png', type:'pdf' as const },
+  { id:10, title:'Oracle Generative AI Professional', issuer:'Oracle', category:'AI & ML', color:'#FF0000', emoji:'🌐', file:'/certificates/Orcale GEN AI.pdf', preview:'/certificates/previews/Orcale_GEN_AI.png', type:'pdf' as const },
   { id:6, title:'Building LLM Applications with Prompt Engineering', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'💬', file:'/certificates/Building_LLM_Applications.pdf', preview:'/certificates/previews/Building_LLM_Applications_With_Prompt_Engineering.png', type:'pdf' as const },
   { id:7, title:'RAG — Retrieval-Augmented Generation', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🔗', file:'/certificates/RAG_Nvdia.pdf', preview:'/certificates/previews/RAG_Nvdia.png', type:'pdf' as const },
   { id:8, title:'Introducing Generative AI with AWS', issuer:'Amazon Web Services', category:'AI & ML', color:'#FF9900', emoji:'☁️', file:'/certificates/Introducing_Generative_AI_with_AWS.pdf', preview:'/certificates/previews/Introducing_Generative_AI_with_AWS.png', type:'pdf' as const },
   { id:9, title:'ITI Generative AI', issuer:'ITI Egypt', category:'AI & ML', color:'#7C3AED', emoji:'🎓', file:'/certificates/ITI_Gen_AI.pdf', preview:'/certificates/previews/ITI_Gen_AI.png', type:'pdf' as const },
-  { id:10, title:'Oracle Generative AI Professional', issuer:'Oracle', category:'AI & ML', color:'#FF0000', emoji:'🌐', file:'/certificates/Orcale GEN AI.pdf', preview:'/certificates/previews/Orcale_GEN_AI.png', type:'pdf' as const },
+  { id:5, title:'AI for All: From Basics to GenAI', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🧠', file:'/certificates/AI_for_All_From_Basics_to_GenAI.pdf', preview:'/certificates/previews/AI_for_All_From_Basics_to_GenAI_Practice_AI_for_All_From_Basics_to_GenAI_Practice_-_Nvidia.png', type:'pdf' as const },
+
   // Machine Learning
   { id:11, title:'Supervised ML: Regression & Classification', issuer:'DeepLearning.AI / Coursera', category:'Machine Learning', color:'#06FFA5', emoji:'📊', file:'/certificates/Supervised_ML.pdf', preview:'/certificates/previews/Supervised_Machine_Learning_Regression_and_Classification.png', type:'pdf' as const },
   { id:12, title:'Introduction to Deep Learning', issuer:'Professional Course', category:'Machine Learning', color:'#06FFA5', emoji:'🧬', file:'/certificates/introduction_to_deep_learning.pdf', preview:'/certificates/previews/introduction_to_deep_learning.png', type:'pdf' as const },
   // Data Science
+  { id:16, title:'Oracle Data Science Professional', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🗄️', file:'/certificates/Orcale_DataScience.pdf', preview:'/certificates/previews/Orcale_DataScience.png', type:'pdf' as const },
+  { id:17, title:'Oracle Data Science Badge', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🔴', file:'/certificates/DS_b.jpg', preview:'/certificates/DS_b.jpg', type:'image' as const },
   { id:13, title:'Data Science Capstone', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📈', file:'/certificates/Data_Science_Capstone.pdf', preview:'/certificates/previews/Data_Science_Capstone.png', type:'pdf' as const },
   { id:14, title:'Data Analysis with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'🐍', file:'/certificates/data_analysis_with_python.pdf', preview:'/certificates/previews/data_analysis_with_python.png', type:'pdf' as const },
   { id:15, title:'Data Visualization with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📉', file:'/certificates/data visualisation with python.pdf', preview:'/certificates/previews/data_visualisation_with_python.png', type:'pdf' as const },
-  { id:16, title:'Oracle Data Science Professional', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🗄️', file:'/certificates/Orcale_DataScience.pdf', preview:'/certificates/previews/Orcale_DataScience.png', type:'pdf' as const },
-  { id:17, title:'Oracle Data Science Badge', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🔴', file:'/certificates/DS_b.jpg', preview:'/certificates/DS_b.jpg', type:'image' as const },
+
   // Programming
   { id:18, title:'Python for AI and Data Science', issuer:'IBM / Coursera', category:'Programming', color:'#FF6B6B', emoji:'🐍', file:'/certificates/python_for_AI_and_Data_science.pdf', preview:'/certificates/previews/python_for_AI_and_Data_science.png', type:'pdf' as const },
   // Quantum
