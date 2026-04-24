@@ -8,9 +8,6 @@ const certificates = [
   // Engineering
   { id:20, title:'Samsung AI Engineering', issuer:'Samsung Innovation Campus', category:'Engineering', color:'#1428A0', emoji:'📱', file:'/certificates/Samsung_AI_Engineering.jpg', preview:'/certificates/Samsung_AI_Engineering.png', type:'image' as const },
   { id:21, title:'Samsung IOT Engineering', issuer:'Samsung', category:'Engineering', color:'#1428A0', emoji:'🏆', file:'/certificates/Sams_IOT.jpeg', preview:'/certificates/Sams_IOT.jpeg', type:'image' as const },
-  // Computer Vision
-  { id:1, title:'Deep Learning for Computer Vision', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'👁', file:'/certificates/Deep_Learning_For_computer_Vision.pdf', preview:'/certificates/previews/Deep_Learning_For_computer_Vision.png', type:'pdf' as const },
-  { id:2, title:'Computer Vision Applications', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'🎯', file:'/certificates/Computer_Vision_Applications.pdf', preview:'/certificates/previews/Computer_Vision_Applications.png', type:'pdf' as const },
   // AI & ML
   { id:10, title:'Oracle Generative AI Professional', issuer:'Oracle', category:'AI & ML', color:'#FF0000', emoji:'🌐', file:'/certificates/Orcale GEN AI.pdf', preview:'/certificates/previews/Orcale_GEN_AI.png', type:'pdf' as const },
   { id:6, title:'Building LLM Applications with Prompt Engineering', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'💬', file:'/certificates/Building_LLM_Applications.pdf', preview:'/certificates/previews/Building_LLM_Applications_With_Prompt_Engineering.png', type:'pdf' as const },
@@ -29,6 +26,10 @@ const certificates = [
   { id:14, title:'Data Analysis with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'🐍', file:'/certificates/data_analysis_with_python.pdf', preview:'/certificates/previews/data_analysis_with_python.png', type:'pdf' as const },
   { id:15, title:'Data Visualization with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📉', file:'/certificates/data visualisation with python.pdf', preview:'/certificates/previews/data_visualisation_with_python.png', type:'pdf' as const },
 
+  // Computer Vision
+  { id:1, title:'Deep Learning for Computer Vision', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'👁', file:'/certificates/Deep_Learning_For_computer_Vision.pdf', preview:'/certificates/previews/Deep_Learning_For_computer_Vision.png', type:'pdf' as const },
+  { id:2, title:'Computer Vision Applications', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'🎯', file:'/certificates/Computer_Vision_Applications.pdf', preview:'/certificates/previews/Computer_Vision_Applications.png', type:'pdf' as const },
+ 
   // Programming
   { id:18, title:'Python for AI and Data Science', issuer:'IBM / Coursera', category:'Programming', color:'#FF6B6B', emoji:'🐍', file:'/certificates/python_for_AI_and_Data_science.pdf', preview:'/certificates/previews/python_for_AI_and_Data_science.png', type:'pdf' as const },
   // Quantum
