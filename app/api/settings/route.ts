@@ -5,90 +5,14 @@ import {
   validateOrigin,
   parseRequestBody,
   stripHtml,
+  validateSettingsBody,
+  type SiteConfig,
+  type SiteConfigBody,
 } from '@/lib/api-helpers'
 
 export const dynamic = 'force-dynamic'
 
 const FILENAME = 'site-config'
-
-/** The shape of a site-config.json document. */
-export type SiteConfig = {
-  bookingUrl: string | null
-  contactEmail: string
-  formspreeEndpoint: string
-  siteUrl: string
-  siteTitle: string
-  siteDescription: string
-}
-
-/** Fields accepted from the PUT body — all optional except siteTitle & siteDescription. */
-export type SiteConfigBody = Partial<SiteConfig>
-
-/* ── Validation ─────────────────────────────────────────────────────────── */
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-function isValidUrl(value: string): boolean {
-  try {
-    new URL(value)
-    return true
-  } catch {
-    return false
-  }
-}
-
-/**
- * Validate the PUT body.
- * - siteTitle and siteDescription are required (must be non-empty strings).
- * - contactEmail, if provided, must be a valid email.
- * - bookingUrl, if provided, must be a valid URL or null.
- * - formspreeEndpoint, if provided, must be a valid URL.
- * - siteUrl, if provided, must be a valid URL.
- */
-export function validateSettingsBody(body: SiteConfigBody): {
-  valid: boolean
-  errors: string[]
-} {
-  const errors: string[] = []
-
-  if (
-    body.siteTitle !== undefined &&
-    (typeof body.siteTitle !== 'string' || !body.siteTitle.trim())
-  ) {
-    errors.push('siteTitle is required and must be a non-empty string')
-  }
-  if (
-    body.siteDescription !== undefined &&
-    (typeof body.siteDescription !== 'string' || !body.siteDescription.trim())
-  ) {
-    errors.push('siteDescription is required and must be a non-empty string')
-  }
-  if (
-    body.contactEmail !== undefined &&
-    (typeof body.contactEmail !== 'string' || !EMAIL_RE.test(body.contactEmail.trim()))
-  ) {
-    errors.push('contactEmail must be a valid email address')
-  }
-  if (body.bookingUrl !== undefined && body.bookingUrl !== null) {
-    if (typeof body.bookingUrl !== 'string' || !isValidUrl(body.bookingUrl.trim())) {
-      errors.push('bookingUrl must be a valid URL or null')
-    }
-  }
-  if (
-    body.formspreeEndpoint !== undefined &&
-    (typeof body.formspreeEndpoint !== 'string' || !isValidUrl(body.formspreeEndpoint.trim()))
-  ) {
-    errors.push('formspreeEndpoint must be a valid URL')
-  }
-  if (
-    body.siteUrl !== undefined &&
-    (typeof body.siteUrl !== 'string' || !isValidUrl(body.siteUrl.trim()))
-  ) {
-    errors.push('siteUrl must be a valid URL')
-  }
-
-  return { valid: errors.length === 0, errors }
-}
 
 /* ── Route handlers ────────────────────────────────────────────────────── */
 
