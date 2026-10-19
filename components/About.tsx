@@ -7,22 +7,22 @@ const highlights = [
   {
     icon: <Brain size={22} className="text-[#00D4FF]" />,
     title: 'Computer Vision',
-    desc: 'Designing real-time detection, segmentation, and classification systems using YOLO, CNNs, and Transformers.',
+    desc: 'Real-time detection, tracking and classification with YOLO, CNNs and Transformers — from custom dataset annotation through to ONNX deployment.',
   },
   {
     icon: <Cpu size={22} className="text-[#7C3AED]" />,
-    title: 'AI Systems at Scale',
-    desc: 'Deploying models from research prototypes to production environments with measurable real-world impact.',
+    title: 'Generative AI & LLMs',
+    desc: 'LLM application development, prompt engineering and RAG pipelines, with training and certification from NVIDIA and Oracle.',
   },
   {
     icon: <Code2 size={22} className="text-[#06FFA5]" />,
-    title: 'Engineering Depth',
-    desc: 'Proficient in Python and C++, with deep expertise in PyTorch, TensorFlow, and OpenCV pipelines.',
+    title: 'AI Systems & Edge',
+    desc: 'End-to-end pipelines — ingestion to inference to messaging — deployed on Raspberry Pi, ESP32 and MQTT for real-time edge AI.',
   },
   {
     icon: <MessageSquare size={22} className="text-[#00D4FF]" />,
     title: 'Teaching & Communication',
-    desc: 'Passionate about making complex AI concepts accessible through clear explanations and real demos.',
+    desc: 'Instructor and mentor across Samsung Innovation Campus, IEEE, CAT Reloaded and Neurobotics — making complex AI concepts accessible.',
   },
 ]
 
@@ -47,18 +47,21 @@ export default function About() {
           {/* Left: Text */}
           <div>
             <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-100 mb-6 leading-tight">
-              Turning pixels into{' '}
-              <span className="gradient-text">intelligence</span>
+              Building AI that{' '}
+              <span className="gradient-text">ships</span>
             </h2>
             <div className="space-y-4 text-slate-400 font-body leading-relaxed text-base">
               <p>
-                I&apos;m <span className="text-slate-200 font-semibold">Ahmed Gwely</span>, an AI Engineer focused on Computer Vision systems that do more than just work — they perform under real-world conditions.
+                I&apos;m <span className="text-slate-200 font-semibold">Ahmed Gwely</span>, an AI Engineer working across the full lifecycle of intelligent systems — training and evaluating models, integrating them into real applications, and deploying them where they actually run.
               </p>
               <p>
-                My work spans the full pipeline: from <span className="text-[#00D4FF]">training deep learning models</span> on custom datasets, to optimizing inference for edge deployment, to building APIs that integrate vision AI into production apps.
+                My foundation is <span className="text-[#06FFA5]">Computer Vision</span>: real-time detection, tracking and classification built on custom datasets, then optimized for edge inference. I&apos;ve shipped that end to end — a video and sensor pipeline running in production for water-station automation, and YOLO-based monitoring deployed on a Raspberry Pi 5.
               </p>
               <p>
-                Beyond building, I care deeply about <span className="text-[#7C3AED]">teaching and sharing knowledge</span>. On TikTok and through content, I break down cutting-edge AI into concepts anyone can grasp — because great technology only matters if it&apos;s understood.
+                Alongside vision, I work in <span className="text-[#7C3AED]">Generative AI and LLMs</span> — prompt engineering, retrieval-augmented generation and agentic, tool-based workflows — backed by NVIDIA and Oracle certifications and applied in local-first assistant work.
+              </p>
+              <p>
+                Beyond building, I care deeply about <span className="text-[#00D4FF]">teaching and sharing knowledge</span>. As an instructor and mentor across Samsung Innovation Campus, IEEE and university programs, I break down cutting-edge AI into concepts anyone can grasp — because great technology only matters if it&apos;s understood.
               </p>
               <p>
                 I&apos;m driven by one question: <em className="text-slate-300">&ldquo;What does this AI system actually solve?&rdquo;</em>
@@ -68,7 +71,7 @@ export default function About() {
             {/* Quick facts */}
             <div className="mt-8 grid grid-cols-2 gap-4">
               {[
-                ['Focus', 'Computer Vision & DL'],
+                ['Focus', 'AI · CV · GenAI · Edge'],
                 ['Stack', 'Python · PyTorch · OpenCV'],
                 ['Location', 'Egypt 🇪🇬'],
                 ['Status', '🟢 Open to Work'],

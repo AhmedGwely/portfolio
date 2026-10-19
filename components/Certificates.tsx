@@ -1,49 +1,47 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Award, X, ExternalLink, ChevronLeft, ChevronRight, ZoomIn, FileText } from 'lucide-react'
 
 const certificates = [
-  // Computer Vision
-  { id:1, title:'Deep Learning for Computer Vision', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'👁', file:'/certificates/Deep Learning For computer Vision.pdf', preview:'/certificates/previews/Deep_Learning_For_computer_Vision.png', type:'pdf' as const },
-  { id:2, title:'Computer Vision Applications', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'🎯', file:'/certificates/Computer Vision Applications.pdf', preview:'/certificates/previews/Computer_Vision_Applications.png', type:'pdf' as const },
-  { id:3, title:'Introduction to Computer Vision', issuer:'AI Course', category:'Computer Vision', color:'#00D4FF', emoji:'🔍', file:'/certificates/Introduction_to_Computer_Vision.png', preview:'/certificates/Introduction_to_Computer_Vision.png', type:'image' as const },
-  // AI & ML
-  { id:4, title:'AI for Everyone', issuer:'DeepLearning.AI / Coursera', category:'AI & ML', color:'#7C3AED', emoji:'🤖', file:'/certificates/AI_for_Everyone(AI4E) (1).png', preview:'/certificates/AI_for_Everyone(AI4E) (1).png', type:'image' as const },
-  { id:5, title:'AI for All: From Basics to GenAI', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🧠', file:'/certificates/AI for All From Basics to GenAI Practice_AI for All From Basics to GenAI Practice - Nvidia.pdf', preview:'/certificates/previews/AI_for_All_From_Basics_to_GenAI_Practice_AI_for_All_From_Basics_to_GenAI_Practice_-_Nvidia.png', type:'pdf' as const },
-  { id:6, title:'Building LLM Applications with Prompt Engineering', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'💬', file:'/certificates/Building LLM Applications With Prompt Engineering.pdf', preview:'/certificates/previews/Building_LLM_Applications_With_Prompt_Engineering.png', type:'pdf' as const },
-  { id:7, title:'RAG — Retrieval-Augmented Generation', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🔗', file:'/certificates/RAG Nvdia.pdf', preview:'/certificates/previews/RAG_Nvdia.png', type:'pdf' as const },
-  { id:8, title:'Introducing Generative AI with AWS', issuer:'Amazon Web Services', category:'AI & ML', color:'#FF9900', emoji:'☁️', file:'/certificates/Introducing Generative AI with AWS.pdf', preview:'/certificates/previews/Introducing_Generative_AI_with_AWS.png', type:'pdf' as const },
-  { id:9, title:'ITI Generative AI', issuer:'ITI Egypt', category:'AI & ML', color:'#7C3AED', emoji:'🎓', file:'/certificates/ITI Gen AI.pdf', preview:'/certificates/previews/ITI_Gen_AI.png', type:'pdf' as const },
-  { id:10, title:'Oracle Generative AI Professional', issuer:'Oracle', category:'AI & ML', color:'#FF0000', emoji:'🌐', file:'/certificates/Orcale GEN AI.pdf', preview:'/certificates/previews/Orcale_GEN_AI.png', type:'pdf' as const },
-  // Machine Learning
-  { id:11, title:'Supervised ML: Regression & Classification', issuer:'DeepLearning.AI / Coursera', category:'Machine Learning', color:'#06FFA5', emoji:'📊', file:'/certificates/Supervised Machine Learning Regression and Classification.pdf', preview:'/certificates/previews/Supervised_Machine_Learning_Regression_and_Classification.png', type:'pdf' as const },
-  { id:12, title:'Introduction to Deep Learning', issuer:'Professional Course', category:'Machine Learning', color:'#06FFA5', emoji:'🧬', file:'/certificates/introduction to deep learning.pdf', preview:'/certificates/previews/introduction_to_deep_learning.png', type:'pdf' as const },
-  // Data Science
-  { id:13, title:'Data Science Capstone', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📈', file:'/certificates/Data Science Capstone.pdf', preview:'/certificates/previews/Data_Science_Capstone.png', type:'pdf' as const },
-  { id:14, title:'Data Analysis with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'🐍', file:'/certificates/data analysis with python.pdf', preview:'/certificates/previews/data_analysis_with_python.png', type:'pdf' as const },
-  { id:15, title:'Data Visualization with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📉', file:'/certificates/data visualisation with python.pdf', preview:'/certificates/previews/data_visualisation_with_python.png', type:'pdf' as const },
-  { id:16, title:'Oracle Data Science Professional', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🗄️', file:'/certificates/Orcale DataScience.pdf', preview:'/certificates/previews/Orcale_DataScience.png', type:'pdf' as const },
-  { id:17, title:'Oracle Data Science Badge', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🔴', file:'/certificates/OCI25DSOCP.jpg', preview:'/certificates/OCI25DSOCP.jpg', type:'image' as const },
-  // Programming
-  { id:18, title:'Python for AI and Data Science', issuer:'IBM / Coursera', category:'Programming', color:'#FF6B6B', emoji:'🐍', file:'/certificates/python for AI and Data science.pdf', preview:'/certificates/previews/python_for_AI_and_Data_science.png', type:'pdf' as const },
-  { id:19, title:'Python Programming Basics', issuer:'Coursera', category:'Programming', color:'#FF6B6B', emoji:'💻', file:'/certificates/Python_Programming_Basics (1).png', preview:'/certificates/Python_Programming_Basics (1).png', type:'image' as const },
   // Engineering
-  { id:20, title:'Samsung AI Engineering', issuer:'Samsung Innovation Campus', category:'Engineering', color:'#1428A0', emoji:'📱', file:'/certificates/Samsung AI Engineering.jpeg', preview:'/certificates/Samsung AI Engineering.jpeg', type:'image' as const },
-  { id:21, title:'Samsung Innovation Campus', issuer:'Samsung', category:'Engineering', color:'#1428A0', emoji:'🏆', file:'/certificates/Samsung Innovation Campus.jpeg', preview:'/certificates/Samsung Innovation Campus.jpeg', type:'image' as const },
+  { id:20, title:'Samsung AI Engineering', issuer:'Samsung Innovation Campus', category:'Engineering', color:'#1428A0', emoji:'📱', file:'/certificates/Samsung_AI_Engineering.jpg', preview:'/certificates/Samsung_AI_Engineering.png', type:'image' as const },
+  { id:21, title:'Samsung IOT Engineering', issuer:'Samsung', category:'Engineering', color:'#1428A0', emoji:'🏆', file:'/certificates/Sams_IOT.jpeg', preview:'/certificates/Sams_IOT.jpeg', type:'image' as const },
+  // AI & ML
+  { id:10, title:'Oracle Generative AI Professional', issuer:'Oracle', category:'AI & ML', color:'#FF0000', emoji:'🌐', file:'/certificates/Orcale_GEN_AI.pdf', preview:'/certificates/previews/Orcale_GEN_AI.png', type:'pdf' as const },
+  { id:6, title:'Building LLM Applications with Prompt Engineering', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'💬', file:'/certificates/Building_LLM_Applications.pdf', preview:'/certificates/previews/Building_LLM_Applications_With_Prompt_Engineering.png', type:'pdf' as const },
+  { id:7, title:'RAG — Retrieval-Augmented Generation', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🔗', file:'/certificates/RAG_Nvdia.pdf', preview:'/certificates/previews/RAG_Nvdia.png', type:'pdf' as const },
+  { id:8, title:'Introducing Generative AI with AWS', issuer:'Amazon Web Services', category:'AI & ML', color:'#FF9900', emoji:'☁️', file:'/certificates/Introducing_Generative_AI_with_AWS.pdf', preview:'/certificates/previews/Introducing_Generative_AI_with_AWS.png', type:'pdf' as const },
+  { id:9, title:'ITI Generative AI', issuer:'ITI Egypt', category:'AI & ML', color:'#7C3AED', emoji:'🎓', file:'/certificates/ITI_Gen_AI.pdf', preview:'/certificates/previews/ITI_Gen_AI.png', type:'pdf' as const },
+  { id:5, title:'AI for All: From Basics to GenAI', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🧠', file:'/certificates/AI_for_All_From_Basics_to_GenAI.pdf', preview:'/certificates/previews/AI_for_All_From_Basics_to_GenAI_Practice_AI_for_All_From_Basics_to_GenAI_Practice_-_Nvidia.png', type:'pdf' as const },
+
+  // Machine Learning
+  { id:11, title:'Supervised ML: Regression & Classification', issuer:'DeepLearning.AI / Coursera', category:'Machine Learning', color:'#06FFA5', emoji:'📊', file:'/certificates/Supervised_ML.pdf', preview:'/certificates/previews/Supervised_Machine_Learning_Regression_and_Classification.png', type:'pdf' as const },
+  { id:12, title:'Introduction to Deep Learning', issuer:'Professional Course', category:'Machine Learning', color:'#06FFA5', emoji:'🧬', file:'/certificates/introduction_to_deep_learning.pdf', preview:'/certificates/previews/introduction_to_deep_learning.png', type:'pdf' as const },
+  // Data Science
+  { id:16, title:'Oracle Data Science Professional', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🗄️', file:'/certificates/Orcale_DataScience.pdf', preview:'/certificates/previews/Orcale_DataScience.png', type:'pdf' as const },
+  { id:17, title:'Oracle Data Science Badge', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🔴', file:'/certificates/DS_b.jpg', preview:'/certificates/DS_b.jpg', type:'image' as const },
+  { id:13, title:'Data Science Capstone', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📈', file:'/certificates/Data_Science_Capstone.pdf', preview:'/certificates/previews/Data_Science_Capstone.png', type:'pdf' as const },
+  { id:14, title:'Data Analysis with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'🐍', file:'/certificates/data_analysis_with_python.pdf', preview:'/certificates/previews/data_analysis_with_python.png', type:'pdf' as const },
+  { id:15, title:'Data Visualization with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📉', file:'/certificates/data visualisation with python.pdf', preview:'/certificates/previews/data_visualisation_with_python.png', type:'pdf' as const },
+
+  // Computer Vision
+  { id:1, title:'Deep Learning for Computer Vision', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'👁', file:'/certificates/Deep_Learning_For_computer_Vision.pdf', preview:'/certificates/previews/Deep_Learning_For_computer_Vision.png', type:'pdf' as const },
+  { id:2, title:'Computer Vision Applications', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'🎯', file:'/certificates/Computer_Vision_Applications.pdf', preview:'/certificates/previews/Computer_Vision_Applications.png', type:'pdf' as const },
+ 
+  // Programming
+  { id:18, title:'Python for AI and Data Science', issuer:'IBM / Coursera', category:'Programming', color:'#FF6B6B', emoji:'🐍', file:'/certificates/python_for_AI_and_Data_science.pdf', preview:'/certificates/previews/python_for_AI_and_Data_science.png', type:'pdf' as const },
   // Quantum
-  { id:22, title:'Quantum Computing Introduction', issuer:'GUC × Qiskit Fallfest', category:'Quantum', color:'#8B5CF6', emoji:'⚛️', file:'/certificates/quantum-intro-GUC Qiskit Fallfest cert.jpg', preview:'/certificates/quantum-intro-GUC Qiskit Fallfest cert.jpg', type:'image' as const },
+  { id:22, title:'Quantum Computing Introduction', issuer:'GUC × Qiskit Fallfest', category:'Quantum', color:'#8B5CF6', emoji:'⚛️', file:'/certificates/quantum-intro-GUC_Qiskit_Fallfest_cert.jpg', preview:'/certificates/quantum-intro-GUC_Qiskit_Fallfest_cert.jpg', type:'image' as const },
   // Projects
-  { id:23, title:'Smart Farm Management System', issuer:'Project Certificate', category:'Projects', color:'#06FFA5', emoji:'🌱', file:'/certificates/Smart Farm Management System_doc..pdf', preview:'/certificates/previews/Smart_Farm_Management_System_doc..png', type:'pdf' as const },
-  { id:24, title:'Smart Company IoT System', issuer:'Project Certificate', category:'Projects', color:'#06FFA5', emoji:'🏭', file:'/certificates/Smart company IOT system.pdf', preview:'/certificates/previews/Smart_company_IOT_system.png', type:'pdf' as const },
 ]
 
 const CATEGORIES = ['All','Computer Vision','AI & ML','Machine Learning','Data Science','Programming','Engineering','Projects','Quantum']
 
 // ── Modal ────────────────────────────────────────────────────────────────────
 function CertificateModal({ cert, onClose, onPrev, onNext, index, total }: {
-  cert: typeof certificates[number]; onClose:()=>void; onPrev:()=>void; onNext:()=>void; index:number; total:number
+  cert: Certificate; onClose:()=>void; onPrev:()=>void; onNext:()=>void; index:number; total:number
 }) {
   return (
     <div
@@ -110,7 +108,7 @@ function CertificateModal({ cert, onClose, onPrev, onNext, index, total }: {
 
 // ── Card ─────────────────────────────────────────────────────────────────────
 function CertCard({ cert, index, inView, onClick }: {
-  cert: typeof certificates[number]; index:number; inView:boolean; onClick:()=>void
+  cert: Certificate; index:number; inView:boolean; onClick:()=>void
 }) {
   const [imgErr, setImgErr] = useState(false)
 
@@ -169,16 +167,50 @@ function CertCard({ cert, index, inView, onClick }: {
 }
 
 // ── Section ───────────────────────────────────────────────────────────────────
+type Certificate = typeof certificates[number]
+
 export default function Certificates() {
   const { ref, inView } = useInView({ threshold:0.05, triggerOnce:true })
   const [filter, setFilter] = useState('All')
   const [selectedIdx, setSelectedIdx] = useState<number|null>(null)
+  const [certs, setCerts] = useState<Certificate[]>(certificates)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
-  const filtered = filter==='All' ? certificates : certificates.filter(c=>c.category===filter)
+  useEffect(() => {
+    const ctrl = new AbortController()
+    fetch('/api/certificates', { signal: ctrl.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error()
+        return res.json() as Promise<Certificate[]>
+      })
+      .then((data) => {
+        if (data.length > 0) setCerts(data)
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false))
+    return () => ctrl.abort()
+  }, [])
+
+  const filtered = filter==='All' ? certs : certs.filter(c=>c.category===filter)
 
   const closeModal = () => setSelectedIdx(null)
   const prevCert  = () => setSelectedIdx(i => i!==null ? (i-1+filtered.length)%filtered.length : null)
   const nextCert  = () => setSelectedIdx(i => i!==null ? (i+1)%filtered.length : null)
+
+  // Loading state
+  if (loading) {
+    return (
+      <section id="certificates" ref={ref} className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="glass rounded-2xl p-12 text-center" style={{ border: '1px solid rgba(124,58,237,0.08)' }}>
+            <div className="w-8 h-8 mx-auto mb-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'rgba(124,58,237,0.25)', borderTopColor: 'transparent' }} />
+            <p className="font-body text-slate-400 text-sm">Loading certificates…</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section id="certificates" ref={ref} className="py-32 px-6">
@@ -198,7 +230,7 @@ export default function Certificates() {
             <div className="flex items-center gap-2 rounded-xl px-4 py-2"
               style={{ background:'rgba(124,58,237,0.08)', border:'1px solid rgba(124,58,237,0.2)' }}>
               <Award size={15} style={{ color:'#7C3AED' }}/>
-              <span className="font-mono text-sm text-slate-400">{certificates.length} certificates</span>
+              <span className="font-mono text-sm text-slate-400">{certs.length} certificates</span>
             </div>
           </div>
         </motion.div>
@@ -212,7 +244,7 @@ export default function Certificates() {
                 ? { background:'#7C3AED', color:'#fff', boxShadow:'0 0 20px rgba(124,58,237,0.4)' }
                 : { background:'rgba(255,255,255,0.04)', color:'#94a3b8', border:'1px solid rgba(255,255,255,0.06)' }}>
               {cat}
-              {cat!=='All' && <span className="ml-1.5 text-[10px] opacity-60">({certificates.filter(c=>c.category===cat).length})</span>}
+              {cat!=='All' && <span className="ml-1.5 text-[10px] opacity-60">({certs.filter(c=>c.category===cat).length})</span>}
             </button>
           ))}
         </motion.div>
@@ -227,10 +259,10 @@ export default function Certificates() {
         {/* Stats */}
         <motion.div initial={{ opacity:0 }} animate={inView?{ opacity:1 }:{}} transition={{ delay:0.9 }} className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
-            { label:'Computer Vision', count:certificates.filter(c=>c.category==='Computer Vision').length, color:'#00D4FF' },
-            { label:'AI & ML',         count:certificates.filter(c=>c.category==='AI & ML').length,         color:'#7C3AED' },
-            { label:'Data Science',    count:certificates.filter(c=>c.category==='Data Science').length,    color:'#FFD700' },
-            { label:'Programming',     count:certificates.filter(c=>c.category==='Programming').length,     color:'#FF6B6B' },
+            { label:'Computer Vision', count:certs.filter(c=>c.category==='Computer Vision').length, color:'#00D4FF' },
+            { label:'AI & ML',         count:certs.filter(c=>c.category==='AI & ML').length,         color:'#7C3AED' },
+            { label:'Data Science',    count:certs.filter(c=>c.category==='Data Science').length,    color:'#FFD700' },
+            { label:'Programming',     count:certs.filter(c=>c.category==='Programming').length,     color:'#FF6B6B' },
           ].map(s => (
             <div key={s.label} className="rounded-xl p-4 text-center"
               style={{ background:`${s.color}08`, border:`1px solid ${s.color}20` }}>

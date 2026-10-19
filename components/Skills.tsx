@@ -4,32 +4,63 @@ import { motion } from 'framer-motion'
 
 const skillCategories = [
   {
-    label: 'Programming',
-    color: '#00D4FF',
-    skills: [
-      { name: 'Python', level: 95 },
-      { name: 'C++', level: 72 },
-      { name: 'SQL', level: 65 },
-    ],
-  },
-  {
-    label: 'AI / Deep Learning',
+    label: 'Generative AI & LLMs',
     color: '#7C3AED',
     skills: [
-      { name: 'Computer Vision', level: 95 },
-      { name: 'CNNs & Object Detection', level: 92 },
-      { name: 'Transformers & ViT', level: 80 },
-      { name: 'Model Optimization', level: 78 },
+      { name: 'Prompt Engineering' },
+      { name: 'RAG Pipelines' },
+      { name: 'LLM Application Development' },
+      { name: 'Agentic / Tool-Based Reasoning' },
     ],
   },
   {
-    label: 'Tools & Frameworks',
+    label: 'AI Agents & Automation',
+    color: '#00D4FF',
+    skills: [
+      { name: 'Tool / Function Calling' },
+      { name: 'Multi-Step Agent Workflows' },
+      { name: 'Task Automation Pipelines' },
+      { name: 'Async Architecture' },
+    ],
+  },
+  {
+    label: 'Machine Learning & Deep Learning',
     color: '#06FFA5',
     skills: [
-      { name: 'PyTorch', level: 90 },
-      { name: 'OpenCV', level: 93 },
-      { name: 'TensorFlow / Keras', level: 80 },
-      { name: 'Git & Docker', level: 82 },
+      { name: 'PyTorch (Ultralytics)' },
+      { name: 'CNNs & GANs' },
+      { name: 'Model Training & Evaluation' },
+      { name: 'Dataset Annotation (Roboflow)' },
+    ],
+  },
+  {
+    label: 'Computer Vision',
+    color: '#00D4FF',
+    skills: [
+      { name: 'YOLO (Ultralytics)' },
+      { name: 'OpenCV' },
+      { name: 'MediaPipe' },
+      { name: 'ONNX / ONNX Runtime' },
+    ],
+  },
+  {
+    label: 'IoT & Edge AI',
+    color: '#06FFA5',
+    skills: [
+      { name: 'Raspberry Pi 5' },
+      { name: 'ESP32 & Embedded Linux' },
+      { name: 'MQTT' },
+      { name: 'Firebase Realtime DB' },
+    ],
+  },
+  {
+    label: 'Data Science & Analytics',
+    color: '#7C3AED',
+    skills: [
+      { name: 'Statistical Modeling' },
+      { name: 'Feature Engineering' },
+      { name: 'Data Cleaning & Preprocessing' },
+      { name: 'Power BI & Visualization' },
     ],
   },
 ]
@@ -38,36 +69,32 @@ const techStack = [
   { name: 'PyTorch', icon: '🔥' },
   { name: 'OpenCV', icon: '👁' },
   { name: 'YOLO', icon: '🎯' },
-  { name: 'TensorFlow', icon: '📦' },
+  { name: 'ONNX', icon: '⚙️' },
   { name: 'Python', icon: '🐍' },
-  { name: 'C++', icon: '⚡' },
-  { name: 'Docker', icon: '🐳' },
-  { name: 'FastAPI', icon: '🚀' },
-  { name: 'Numpy', icon: '🔢' },
-  { name: 'Scikit-learn', icon: '🧪' },
+  { name: 'Streamlit', icon: '📊' },
+  { name: 'Raspberry Pi', icon: '🍓' },
+  { name: 'ESP32', icon: '📡' },
+  { name: 'MQTT', icon: '🔗' },
+  { name: 'Firebase', icon: '🔥' },
+  { name: 'Roboflow', icon: '🏷️' },
   { name: 'Git', icon: '🌿' },
+  { name: 'Docker', icon: '🐳' },
   { name: 'Linux', icon: '🐧' },
 ]
 
-function SkillBar({ name, level, color, inView, delay }: {
-  name: string; level: number; color: string; inView: boolean; delay: number
+function SkillItem({ name, color, inView, delay }: {
+  name: string; color: string; inView: boolean; delay: number
 }) {
   return (
-    <div className="mb-4">
-      <div className="flex justify-between items-center mb-1.5">
-        <span className="font-body text-sm text-slate-300">{name}</span>
-        <span className="font-mono text-xs text-slate-500">{level}%</span>
-      </div>
-      <div className="h-1.5 bg-[rgba(255,255,255,0.05)] rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1.2, delay, ease: [0.16, 1, 0.3, 1] }}
-          className="h-full rounded-full"
-          style={{ background: `linear-gradient(90deg, ${color}99, ${color})` }}
-        />
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, x: -12 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="mb-3 flex items-center gap-2.5"
+    >
+      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color }} />
+      <span className="font-body text-sm text-slate-300">{name}</span>
+    </motion.div>
   )
 }
 
@@ -94,30 +121,29 @@ export default function Skills() {
           </h2>
         </motion.div>
 
-        {/* Skill bars grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        {/* Skill categories grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {skillCategories.map((cat, ci) => (
             <motion.div
               key={cat.label}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: ci * 0.15 }}
-              className="glass rounded-2xl p-6 border border-[rgba(0,212,255,0.08)]"
+              transition={{ duration: 0.7, delay: ci * 0.1 }}
+              className="glass glass-hover rounded-2xl p-6 border border-[rgba(0,212,255,0.08)] hover-lift"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-2 h-6 rounded-full" style={{ background: cat.color }} />
-                <h3 className="font-display font-semibold text-slate-200 text-sm uppercase tracking-wider">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-2 h-6 rounded-full shrink-0" style={{ background: cat.color }} />
+                <h3 className="font-display font-semibold text-slate-200 text-sm uppercase tracking-wider leading-tight">
                   {cat.label}
                 </h3>
               </div>
               {cat.skills.map((skill, si) => (
-                <SkillBar
+                <SkillItem
                   key={skill.name}
                   name={skill.name}
-                  level={skill.level}
                   color={cat.color}
                   inView={inView}
-                  delay={0.2 + si * 0.1 + ci * 0.1}
+                  delay={0.15 + si * 0.07 + ci * 0.06}
                 />
               ))}
             </motion.div>

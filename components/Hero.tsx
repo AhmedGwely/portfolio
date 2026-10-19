@@ -1,13 +1,14 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, ChevronDown, Eye, Play } from 'lucide-react'
+import { Github, Linkedin, ChevronDown, Eye, Play, Download } from 'lucide-react'
 
 const TYPING_STRINGS = [
   'AI Engineer',
-  'Computer Vision Specialist',
-  'Deep Learning Architect',
-  'Intelligent Systems Builder',
+  'Generative AI & LLM Developer',
+  'AI Agents & Automation',
+  'Computer Vision Engineer',
+  'IoT & Edge AI Engineer',
 ]
 
 // TikTok SVG icon
@@ -155,26 +156,32 @@ export default function Hero() {
         </motion.h1>
 
         {/* Typed role */}
-        <motion.div variants={itemVariants} className="h-10 flex items-center justify-center mb-6">
+        <motion.div variants={itemVariants} className="h-10 flex items-center justify-center mb-4">
           <span className="font-mono text-xl sm:text-2xl text-[#00D4FF]">
             {typedText}
             <span className="inline-block w-0.5 h-6 bg-[#00D4FF] ml-1 animate-pulse" />
           </span>
         </motion.div>
 
+        {/* Supporting headline */}
+        <motion.p variants={itemVariants} className="font-display font-semibold text-slate-300 text-base sm:text-lg mb-6">
+          Generative AI, LLMs, AI Agents &amp; Computer Vision
+        </motion.p>
+
         {/* Tagline */}
-        <motion.p variants={itemVariants} className="text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-body">
-          Building{' '}
-          <span className="text-[#00D4FF] font-semibold">Intelligent Vision Systems</span>
-          {' '}that solve real-world problems —{' '}
-          from pixel to production.
+        <motion.p variants={itemVariants} className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-body">
+          I build practical AI systems end to end — from{' '}
+          <span className="text-[#00D4FF] font-semibold">machine learning</span> and{' '}
+          <span className="text-[#06FFA5] font-semibold">computer vision</span> to{' '}
+          <span className="text-[#7C3AED] font-semibold">LLM-powered applications</span>, RAG pipelines,
+          and AI-driven automation.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div variants={itemVariants} className="flex flex-wrap gap-4 justify-center mb-12">
           <a
             href="#projects"
-            className="group relative px-8 py-3.5 rounded-xl bg-[#00D4FF] text-[#030712] font-display font-bold text-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.5)]"
+            className="group relative px-7 py-3.5 rounded-xl bg-[#00D4FF] text-[#030712] font-display font-bold text-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.5)]"
           >
             <span className="relative z-10 flex items-center gap-2">
               <Eye size={16} />
@@ -183,10 +190,19 @@ export default function Hero() {
             <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
           </a>
           <a
-            href="#contact"
-            className="px-8 py-3.5 rounded-xl glass border border-[rgba(0,212,255,0.3)] text-[#00D4FF] font-display font-bold text-sm hover:bg-[rgba(0,212,255,0.1)] hover:border-[rgba(0,212,255,0.6)] transition-all duration-300"
+            href="#featured-video"
+            className="px-7 py-3.5 rounded-xl glass border border-[rgba(124,58,237,0.35)] text-[#7C3AED] font-display font-bold text-sm hover:bg-[rgba(124,58,237,0.1)] hover:border-[rgba(124,58,237,0.6)] transition-all duration-300 flex items-center gap-2"
           >
-            Let&apos;s Talk
+            <Play size={15} />
+            Watch Featured Video
+          </a>
+          <a
+            href="/cv.pdf"
+            download
+            className="px-7 py-3.5 rounded-xl glass border border-[rgba(0,212,255,0.3)] text-[#00D4FF] font-display font-bold text-sm hover:bg-[rgba(0,212,255,0.1)] hover:border-[rgba(0,212,255,0.6)] transition-all duration-300 flex items-center gap-2"
+          >
+            <Download size={15} />
+            Download CV
           </a>
         </motion.div>
 

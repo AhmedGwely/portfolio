@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "AI Engineering Spotlight",
+    "type": "youtube",
+    "url": "https://youtu.be/Z_daZ8G1Qls",
+    "thumbnail": "https://img.youtube.com/vi/Z_daZ8G1Qls/maxresdefault.jpg",
+    "description": "Featured video — AI Engineering Spotlight",
+    "source": "YouTube"
+  },
+  {
+    "id": 2,
+    "title": "Water Station Automation — AI + IoT",
+    "type": "youtube",
+    "url": "https://youtu.be/z5086ay7q60",
+    "thumbnail": "https://img.youtube.com/vi/z5086ay7q60/maxresdefault.jpg",
+    "description": "End-to-end CV pipeline: custom YOLO model trained from scratch, deployed with real-time inference and MQTT IoT integration.",
+    "source": "YouTube"
+  },
+  {
+    "id": 3,
+    "title": "Sign Language Recognition with ML Classifier",
+    "type": "youtube",
+    "url": "https://youtu.be/h96VBPSGO2k",
+    "thumbnail": "https://img.youtube.com/vi/h96VBPSGO2k/maxresdefault.jpg",
+    "description": "Real-time sign language detection using computer vision and machine learning classifiers.",
+    "source": "YouTube"
+  },
+  {
+    "id": 4,
+    "title": "Hand Gestures with 3D Shapes",
+    "type": "youtube",
+    "url": "https://youtu.be/9v3JB-1kxgg",
+    "thumbnail": "https://img.youtube.com/vi/9v3JB-1kxgg/maxresdefault.jpg",
+    "description": "Control and interact with 3D shapes in real-time using hand gestures detected via computer vision.",
+    "source": "YouTube"
+  },
+  {
+    "id": 5,
+    "title": "Temple Run Controlled by Body Movements",
+    "type": "youtube",
+    "url": "https://youtu.be/Z_daZ8G1Qls",
+    "thumbnail": "https://img.youtube.com/vi/Z_daZ8G1Qls/maxresdefault.jpg",
+    "description": "Play Temple Run using only your body movements — no keyboard or touch needed.",
+    "source": "YouTube"
+  },
+  {
+    "id": 6,
+    "title": "Emotion Detection with Computer Vision",
+    "type": "tiktok",
+    "url": "https://www.tiktok.com/@ahmedgwely10/video/7473293180511735047",
+    "thumbnail": "",
+    "description": "Real-time facial emotion recognition system detecting human feelings from webcam feed.",
+    "source": "TikTok"
+  },
+  {
+    "id": 7,
+    "title": "Text Recognition with Computer Vision (OCR)",
+    "type": "tiktok",
+    "url": "https://www.tiktok.com/@ahmedgwely10/video/7400084419186396437",
+    "thumbnail": "",
+    "description": "Automated text extraction from images and real-world scenes using computer vision.",
+    "source": "TikTok"
+  },
+  {
+    "id": 8,
+    "title": "Real-Time Object Detection Pipeline",
+    "type": "youtube",
+    "url": "https://youtu.be/9v3JB-1kxgg",
+    "thumbnail": "https://img.youtube.com/vi/9v3JB-1kxgg/maxresdefault.jpg",
+    "description": "Production-grade object detection system built for speed and accuracy on live video streams.",
+    "source": "YouTube"
+  }
+]

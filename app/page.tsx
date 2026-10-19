@@ -2,13 +2,21 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Skills from '@/components/Skills'
+import FeaturedVideo from '@/components/FeaturedVideo'
 import Projects from '@/components/Projects'
 import FeaturedProjects from '@/components/FeaturedProjects'
 import Certificates from '@/components/Certificates'
 import Achievements from '@/components/Achievements'
-import Stats from '@/components/Stats'
+import Gallery from '@/components/Gallery'
+// NOTE: <Stats /> is intentionally not rendered.
+// Its four figures (15+ projects, 500+ students, 12+ technologies, 94% accuracy)
+// are unverified and were hidden from the public site pending confirmation.
+// The component is preserved at components/Stats.tsx — see
+// F:\portfolio-review\PHASE1-unverified-claims-review.md
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+
+export const dynamic = 'force-dynamic'
 
 export default function Home() {
   return (
@@ -23,11 +31,12 @@ export default function Home() {
         <Hero />
         <About />
         <Skills />
+        <FeaturedVideo />
         <Projects />
         <FeaturedProjects />
         <Certificates />
         <Achievements />
-        <Stats />
+        <Gallery />
         <Contact />
         <Footer />
       </div>

@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ProjectCard, { ProjectData } from './ProjectCard'
@@ -22,6 +22,7 @@ const allProjects: ProjectData[] = [
    },
    badge: '🏭 AI + IoT',
    badgeColor: '#06FFA5',
+   category: 'IoT & Edge',
   },
   {
     title: 'Sign Language Recognition with ML Classifier',
@@ -38,6 +39,7 @@ const allProjects: ProjectData[] = [
     },
     badge: '♿ Accessibility',
     badgeColor: '#06FFA5',
+    category: 'Computer Vision',
   },
   {
     title: 'Hand Gestures with 3D Shapes',
@@ -54,6 +56,7 @@ const allProjects: ProjectData[] = [
     },
     badge: '🖐 Gesture Control',
     badgeColor: '#00D4FF',
+    category: 'Computer Vision',
   },
   {
     title: 'Temple Run Controlled by Body Movements',
@@ -70,6 +73,7 @@ const allProjects: ProjectData[] = [
     },
     badge: '🎮 GameAI',
     badgeColor: '#7C3AED',
+    category: 'Computer Vision',
   },
   {
     title: 'Emotion Detection with Computer Vision',
@@ -85,6 +89,7 @@ const allProjects: ProjectData[] = [
     },
     badge: '😊 Emotion AI',
     badgeColor: '#FF6B6B',
+    category: 'Computer Vision',
   },
   {
     title: 'Text Recognition with Computer Vision (OCR)',
@@ -100,13 +105,14 @@ const allProjects: ProjectData[] = [
     },
     badge: '📝 OCR',
     badgeColor: '#FFD700',
+    category: 'Computer Vision',
   },
   {
     title: 'Real-Time Object Detection Pipeline',
     description: 'Production-grade object detection system built for speed and accuracy on live video streams.',
     problem: 'Generic detection models are too slow or inaccurate for real-world deployment scenarios.',
     solution: 'Fine-tuned YOLOv8 on custom datasets with TensorRT optimization for maximum inference speed.',
-    impact: 'Runs at 60fps with 94% mAP — ready for edge deployment without cloud dependency.',
+    impact: 'Fine-tuned YOLOv8 with TensorRT optimization for high-throughput inference — suitable for edge deployment without cloud dependency.',
     tech: ['YOLOv8', 'TensorRT', 'PyTorch', 'OpenCV', 'Python'],
     github: 'https://github.com/AhmedGwely',
     video: {
@@ -116,13 +122,68 @@ const allProjects: ProjectData[] = [
     },
     badge: '🚀 Production',
     badgeColor: '#00D4FF',
+    category: 'Computer Vision',
   },
 ]
 
+/** Filter definitions. Only categories that at least one real project belongs to. */
+const PROJECT_FILTERS = [
+  { key: 'All', label: 'All' },
+  { key: 'Computer Vision', label: 'Computer Vision' },
+  { key: 'IoT & Edge', label: 'IoT & Edge AI' },
+] as const
+
 export default function Projects() {
-  const [filter, setFilter] = useState('All')
+  const [filter, setFilter] = useState<string>('All')
   const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true })
-  const FILTERS = ['All', 'Gesture', 'Detection', 'OCR', 'GameAI']
+  const [projects, setProjects] = useState<ProjectData[]>(allProjects)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    const ctrl = new AbortController()
+    fetch('/api/projects', { signal: ctrl.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error()
+        return res.json() as Promise<ProjectData[]>
+      })
+      .then((data) => {
+        if (data.length > 0) setProjects(data)
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false))
+    return () => ctrl.abort()
+  }, [])
+
+  // The actual filtering — previously the state was set but never applied.
+  const visibleProjects = useMemo(
+    () => (filter === 'All' ? projects : projects.filter(p => p.category === filter)),
+    [filter, projects]
+  )
+
+  // Live counts per filter, derived from the real data.
+  const counts = useMemo(() => {
+    const map: Record<string, number> = { All: projects.length }
+    for (const f of PROJECT_FILTERS) {
+      if (f.key === 'All') continue
+      map[f.key] = projects.filter(p => p.category === f.key).length
+    }
+    return map
+  }, [projects])
+
+  // Loading state
+  if (loading) {
+    return (
+      <section id="projects" ref={ref} className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="glass rounded-2xl p-12 text-center" style={{ border: '1px solid rgba(0,212,255,0.08)' }}>
+            <div className="w-8 h-8 mx-auto mb-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'rgba(0,212,255,0.25)', borderTopColor: 'transparent' }} />
+            <p className="font-body text-slate-400 text-sm">Loading projects…</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section id="projects" ref={ref} className="py-32 px-6">
@@ -154,28 +215,51 @@ export default function Projects() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex gap-2 flex-wrap mb-10"
+          role="group"
+          aria-label="Filter projects by category"
         >
-          {FILTERS.map(f => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-lg text-sm font-body font-medium transition-all duration-200 ${
-                filter === f
-                  ? 'bg-[#00D4FF] text-[#030712] shadow-[0_0_20px_rgba(0,212,255,0.4)]'
-                  : 'glass text-slate-400 hover:text-slate-200 border border-[rgba(255,255,255,0.06)]'
-              }`}
-            >
-              {f}
-            </button>
-          ))}
+          {PROJECT_FILTERS.map(f => {
+            const active = filter === f.key
+            return (
+              <button
+                key={f.key}
+                onClick={() => setFilter(f.key)}
+                aria-pressed={active}
+                className={`px-4 py-2 rounded-lg text-sm font-body font-medium transition-all duration-200 ${
+                  active
+                    ? 'bg-[#00D4FF] text-[#030712] shadow-[0_0_20px_rgba(0,212,255,0.4)]'
+                    : 'glass text-slate-400 hover:text-slate-200 border border-[rgba(255,255,255,0.06)]'
+                }`}
+              >
+                {f.label}
+                <span className={`ml-1.5 text-[10px] ${active ? 'opacity-70' : 'opacity-50'}`}>
+                  ({counts[f.key] ?? 0})
+                </span>
+              </button>
+            )
+          })}
         </motion.div>
 
         {/* Project grid */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {allProjects.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
-          ))}
-        </div>
+        {visibleProjects.length > 0 ? (
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {visibleProjects.map((project, i) => (
+              <ProjectCard key={project.title} project={project} index={i} />
+            ))}
+          </div>
+        ) : (
+          <div className="glass rounded-2xl p-12 text-center border border-[rgba(0,212,255,0.08)]">
+            <p className="font-body text-slate-400 text-sm">
+              No projects in this category yet.
+            </p>
+            <button
+              onClick={() => setFilter('All')}
+              className="mt-4 px-4 py-2 rounded-lg text-sm font-body text-[#00D4FF] border border-[rgba(0,212,255,0.3)] hover:bg-[rgba(0,212,255,0.1)] transition-all"
+            >
+              Show all projects
+            </button>
+          </div>
+        )}
 
         <motion.div
           initial={{ opacity: 0 }}

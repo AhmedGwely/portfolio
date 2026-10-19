@@ -5,52 +5,52 @@ import { Trophy, Users, Rocket, Code } from 'lucide-react'
 
 const achievements = [
   {
-    icon: <Trophy size={24} className="text-[#FFD700]" />,
+    icon: <Rocket size={24} className="text-[#06FFA5]" />,
     category: 'Competition',
-    title: 'Top Performer — AI Hackathon',
-    description: 'Built a real-time fire detection system in 48 hours using YOLO + thermal imaging. Finished in the top 5% of 300+ teams.',
-    date: '2023',
+    title: 'Finalist — Egypt IoT & AI Challenge',
+    description: 'Selected as a finalist with GallineX, a smart poultry monitoring and power-management system, with financial support from ITIDA.',
+    date: '2025–2026',
+    accent: '#06FFA5',
+  },
+  {
+    icon: <Trophy size={24} className="text-[#FFD700]" />,
+    category: 'Award',
+    title: '2nd Place — Industry 4.0 Transformation Marathon',
+    description: 'Placed second in the Industry 4.0 Transformation Marathon.',
+    date: '04/2024',
     accent: '#FFD700',
   },
   {
     icon: <Users size={24} className="text-[#00D4FF]" />,
-    category: 'Teaching',
-    title: 'AI & CV Instructor — 500+ Students',
-    description: 'Taught computer vision fundamentals and practical deep learning to 500+ students across bootcamps and online platforms. 4.9★ rating.',
-    date: '2022–Present',
+    category: 'Speaking',
+    title: 'Conference Speaker — Opening Session',
+    description: 'Delivered "AI Evolution: Narrow to General Intelligence and Beyond" at the First Student Engineering Conference on AI Applications, Mansoura University — the only student selected to present.',
+    date: '01/2026',
     accent: '#00D4FF',
   },
   {
-    icon: <Rocket size={24} className="text-[#06FFA5]" />,
-    category: 'Deployment',
-    title: 'Production AI System — Smart City',
-    description: 'Deployed multi-camera traffic intelligence system in a live city pilot program. Processing 24/7 with 99.5% uptime.',
-    date: '2023',
-    accent: '#06FFA5',
-  },
-  {
-    icon: <Code size={24} className="text-[#7C3AED]" />,
-    category: 'Open Source',
-    title: 'TikTok AI Education Channel',
-    description: 'Growing AI education channel breaking down complex vision concepts with hands-on demos. Building the next generation of AI engineers.',
-    date: '2023–Present',
+    icon: <Users size={24} className="text-[#7C3AED]" />,
+    category: 'Teaching',
+    title: 'AI & Computer Vision Instructor',
+    description: 'Instructor and technical program lead for a computer vision and applied machine learning curriculum at Neurobotics, and a deep learning supervisor and mentor across IEEE Mansoura, CAT Reloaded and Luminous MU.',
+    date: '2024–Present',
     accent: '#7C3AED',
   },
   {
-    icon: <Trophy size={24} className="text-[#FF6B6B]" />,
-    category: 'Research',
-    title: 'Custom Dataset — 10K+ Images',
-    description: 'Curated and annotated proprietary industrial defect detection dataset. Trained models outperform ImageNet pretrained baselines by 12%.',
-    date: '2023',
-    accent: '#FF6B6B',
+    icon: <Code size={24} className="text-[#00D4FF]" />,
+    category: 'Community',
+    title: 'Head of AI Committee & Co-Founder',
+    description: 'Co-founded and led the AI Committee at Momentum MU, serving as Vice Head of Training and as a public speaker for data science and AI initiatives.',
+    date: '2023–2025',
+    accent: '#00D4FF',
   },
   {
-    icon: <Users size={24} className="text-[#06FFA5]" />,
-    category: 'Community',
-    title: 'Computer Vision Study Group Lead',
-    description: 'Founded and led weekly CV study group with 50+ active members. Covered CVPR papers, implementation workshops, and project showcases.',
-    date: '2022–Present',
-    accent: '#06FFA5',
+    icon: <Code size={24} className="text-[#7C3AED]" />,
+    category: 'Education',
+    title: 'TikTok AI Education Channel',
+    description: 'Growing AI education channel breaking down complex vision and AI concepts with hands-on demos — building the next generation of AI engineers.',
+    date: 'Present',
+    accent: '#7C3AED',
   },
 ]
 
@@ -71,7 +71,7 @@ export default function Achievements() {
             <div className="flex-1 h-px bg-gradient-to-r from-[rgba(0,212,255,0.3)] to-transparent" />
           </div>
           <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-100">
-            Milestones & <span className="gradient-text">Impact</span>
+            Milestones & <span className="gradient-text">Recognition</span>
           </h2>
         </motion.div>
 

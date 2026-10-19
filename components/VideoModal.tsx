@@ -7,7 +7,7 @@ interface VideoModalProps {
   isOpen: boolean
   onClose: () => void
   video: {
-    type: 'youtube' | 'tiktok' | 'mp4'
+    type: 'youtube' | 'tiktok' | 'mp4' | 'linkedin'
     url: string
   }
   title: string
@@ -21,6 +21,15 @@ function getYouTubeId(url: string) {
 function getTikTokId(url: string) {
   const match = url.match(/video\/(\d+)/)
   return match ? match[1] : null
+}
+
+// LinkedIn exposes an official embeddable player at /embed/feed/update/<urn>.
+// Handles both URN form (urn:li:ugcPost:123) and the post-slug form (ugcPost-123-vZie).
+function getLinkedInEmbed(url: string) {
+  if (url.includes('/embed/feed/update/')) return url
+  const urn = url.match(/(?:urn:li:)?(ugcPost|activity|share)[-:](\d+)/)
+  if (urn) return `https://www.linkedin.com/embed/feed/update/urn:li:${urn[1]}:${urn[2]}`
+  return url
 }
 
 export default function VideoModal({ isOpen, onClose, video, title }: VideoModalProps) {
@@ -68,13 +77,21 @@ export default function VideoModal({ isOpen, onClose, video, title }: VideoModal
             </div>
 
             {/* Video */}
-            <div className="relative bg-black" style={{ paddingBottom: video.type === 'tiktok' ? '177%' : '56.25%', maxHeight: video.type === 'tiktok' ? '80vh' : undefined }}>
+            <div
+              className="relative bg-black"
+              style={{
+                paddingBottom:
+                  video.type === 'tiktok' ? '177%' : video.type === 'linkedin' ? '70%' : '56.25%',
+                maxHeight: video.type === 'tiktok' ? '80vh' : undefined,
+              }}
+            >
               {video.type === 'youtube' && (
                 <iframe
                   className="absolute inset-0 w-full h-full"
                   src={`https://www.youtube.com/embed/${getYouTubeId(video.url)}?autoplay=1&rel=0`}
                   title={title}
                   frameBorder="0"
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
@@ -85,7 +102,19 @@ export default function VideoModal({ isOpen, onClose, video, title }: VideoModal
                   src={`https://www.tiktok.com/embed/v2/${getTikTokId(video.url)}`}
                   title={title}
                   frameBorder="0"
+                  loading="lazy"
                   allow="autoplay"
+                  allowFullScreen
+                />
+              )}
+              {video.type === 'linkedin' && (
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src={getLinkedInEmbed(video.url)}
+                  title={title}
+                  frameBorder="0"
+                  loading="lazy"
+                  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
                   allowFullScreen
                 />
               )}

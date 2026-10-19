@@ -14,12 +14,14 @@ export interface ProjectData {
   github?: string
   live?: string
   video?: {
-    type: 'youtube' | 'tiktok' | 'mp4'
+    type: 'youtube' | 'tiktok' | 'mp4' | 'linkedin'
     url: string
     thumbnail?: string
   }
   badge?: string
   badgeColor?: string
+  /** Category key used by the Projects filter. Must match a key in PROJECT_FILTERS. */
+  category?: string
 }
 
 function getYouTubeThumbnail(url: string) {
@@ -87,7 +89,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
 
             {/* Video type indicator */}
             <div className="absolute top-3 right-3 px-2 py-1 rounded glass text-xs font-mono text-slate-400 border border-[rgba(255,255,255,0.1)]">
-              {project.video.type === 'youtube' ? '▶ YouTube' : project.video.type === 'tiktok' ? '♪ TikTok' : '🎬 Video'}
+              {project.video.type === 'youtube' ? '▶ YouTube' : project.video.type === 'tiktok' ? '♪ TikTok' : project.video.type === 'linkedin' ? 'in LinkedIn' : '🎬 Video'}
             </div>
           </div>
         )}

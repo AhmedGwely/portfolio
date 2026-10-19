@@ -1,0 +1,178 @@
+[
+  {
+    "id": 1,
+    "title": "Water Station Automation \u2014 AI + IoT",
+    "description": "End-to-end CV pipeline: custom YOLO model trained from scratch, deployed with real-time inference and MQTT IoT integration.",
+    "problem": "Water filling stations had no automated monitoring \u2014 no way to detect trucks, pipes, or fill status in real time.",
+    "solution": "Built a full pipeline: collected & annotated custom dataset \u2192 fine-tuned YOLO (Truck, waterpipe, filling, filled) \u2192 real-time OpenCV inference \u2192 MQTT protocol broadcasting results live to IoT devices.",
+    "impact": "Live AI detections now trigger real-time automated actions across subscribed IoT devices on topic cam1/port1 \u2014 zero manual monitoring needed.",
+    "tech": [
+      "Python",
+      "YOLOv8",
+      "OpenCV",
+      "MQTT",
+      "IoT",
+      "Custom Dataset"
+    ],
+    "github": "https://github.com/AhmedGwely",
+    "live": "",
+    "video": {
+      "type": "youtube",
+      "url": "https://youtu.be/z5086ay7q60",
+      "thumbnail": "https://img.youtube.com/vi/z5086ay7q60/maxresdefault.jpg"
+    },
+    "badge": "\ud83c\udfed AI + IoT",
+    "badgeColor": "#06FFA5",
+    "category": "IoT & Edge"
+  },
+  {
+    "id": 2,
+    "title": "Sign Language Recognition with ML Classifier",
+    "description": "Real-time sign language detection using computer vision and machine learning classifiers.",
+    "problem": "Deaf and hard-of-hearing individuals face communication barriers with people who don't know sign language.",
+    "solution": "Built a real-time sign language classifier using MediaPipe hand landmarks + ML classifier to recognize gestures instantly.",
+    "impact": "Recognizes sign language letters in real-time \u2014 bridging communication gaps with accessible AI.",
+    "tech": [
+      "Python",
+      "MediaPipe",
+      "Scikit-learn",
+      "OpenCV",
+      "NumPy"
+    ],
+    "github": "https://github.com/AhmedGwely",
+    "live": "",
+    "video": {
+      "type": "youtube",
+      "url": "https://youtu.be/h96VBPSGO2k",
+      "thumbnail": "https://img.youtube.com/vi/h96VBPSGO2k/maxresdefault.jpg"
+    },
+    "badge": "\u267f Accessibility",
+    "badgeColor": "#06FFA5",
+    "category": "Computer Vision"
+  },
+  {
+    "id": 3,
+    "title": "Hand Gestures with 3D Shapes",
+    "description": "Control and interact with 3D shapes in real-time using hand gestures detected via computer vision.",
+    "problem": "Traditional mouse/keyboard interaction is limiting for 3D visualization and creative applications.",
+    "solution": "Mapped MediaPipe hand keypoints to 3D shape controls \u2014 rotate, scale, and move objects with your hands.",
+    "impact": "Touchless 3D interaction demo with zero hardware cost \u2014 runs on any webcam.",
+    "tech": [
+      "Python",
+      "MediaPipe",
+      "OpenCV",
+      "NumPy",
+      "Math3D"
+    ],
+    "github": "https://github.com/AhmedGwely",
+    "live": "",
+    "video": {
+      "type": "youtube",
+      "url": "https://youtu.be/9v3JB-1kxgg",
+      "thumbnail": "https://img.youtube.com/vi/9v3JB-1kxgg/maxresdefault.jpg"
+    },
+    "badge": "\ud83d\udd90 Gesture Control",
+    "badgeColor": "#00D4FF",
+    "category": "Computer Vision"
+  },
+  {
+    "id": 4,
+    "title": "Temple Run Controlled by Body Movements",
+    "description": "Play Temple Run using only your body movements \u2014 no keyboard or touch needed.",
+    "problem": "Games require physical controllers \u2014 what if your whole body was the controller?",
+    "solution": "Used OpenCV + MediaPipe pose estimation to map body poses to game commands in real-time.",
+    "impact": "Full game control with just a webcam \u2014 jump, slide, and turn using body poses.",
+    "tech": [
+      "Python",
+      "OpenCV",
+      "MediaPipe",
+      "PyAutoGUI",
+      "Pose Estimation"
+    ],
+    "github": "https://github.com/AhmedGwely",
+    "live": "",
+    "video": {
+      "type": "youtube",
+      "url": "https://youtu.be/Z_daZ8G1Qls",
+      "thumbnail": "https://img.youtube.com/vi/Z_daZ8G1Qls/maxresdefault.jpg"
+    },
+    "badge": "\ud83c\udfae GameAI",
+    "badgeColor": "#7C3AED",
+    "category": "Computer Vision"
+  },
+  {
+    "id": 5,
+    "title": "Emotion Detection with Computer Vision",
+    "description": "Real-time facial emotion recognition system detecting human feelings from webcam feed.",
+    "problem": "Understanding user emotions in real-time is critical for adaptive interfaces and HCI research.",
+    "solution": "Trained a CNN emotion classifier on FER dataset, integrated with OpenCV face detection pipeline.",
+    "impact": "Detects 7 emotions in real-time \u2014 happy, sad, angry, surprised, fear, disgust, neutral.",
+    "tech": [
+      "Python",
+      "CNN",
+      "OpenCV",
+      "TensorFlow",
+      "FER Dataset"
+    ],
+    "github": "https://github.com/AhmedGwely",
+    "live": "",
+    "video": {
+      "type": "tiktok",
+      "url": "https://www.tiktok.com/@ahmedgwely10/video/7473293180511735047",
+      "thumbnail": ""
+    },
+    "badge": "\ud83d\ude0a Emotion AI",
+    "badgeColor": "#FF6B6B",
+    "category": "Computer Vision"
+  },
+  {
+    "id": 6,
+    "title": "Text Recognition with Computer Vision (OCR)",
+    "description": "Automated text extraction from images and real-world scenes using computer vision.",
+    "problem": "Extracting text from images manually is slow \u2014 documents, signs, and screens need automation.",
+    "solution": "Built an OCR pipeline using OpenCV preprocessing + deep text detection for robust recognition.",
+    "impact": "Accurately reads text from complex real-world scenes, handwriting, and printed documents.",
+    "tech": [
+      "Python",
+      "OpenCV",
+      "OCR",
+      "Tesseract",
+      "Image Processing"
+    ],
+    "github": "https://github.com/AhmedGwely",
+    "live": "",
+    "video": {
+      "type": "tiktok",
+      "url": "https://www.tiktok.com/@ahmedgwely10/video/7400084419186396437",
+      "thumbnail": ""
+    },
+    "badge": "\ud83d\udcdd OCR",
+    "badgeColor": "#FFD700",
+    "category": "Computer Vision"
+  },
+  {
+    "id": 7,
+    "title": "Real-Time Object Detection Pipeline",
+    "description": "Production-grade object detection system built for speed and accuracy on live video streams.",
+    "problem": "Generic detection models are too slow or inaccurate for real-world deployment scenarios.",
+    "solution": "Fine-tuned YOLOv8 on custom datasets with TensorRT optimization for maximum inference speed.",
+    "impact": "Fine-tuned YOLOv8 with TensorRT optimization for high-throughput inference \u2014 suitable for edge deployment without cloud dependency.",
+    "tech": [
+      "YOLOv8",
+      "TensorRT",
+      "PyTorch",
+      "OpenCV",
+      "Python"
+    ],
+    "github": "https://github.com/AhmedGwely",
+    "live": "",
+    "video": {
+      "type": "youtube",
+      "url": "https://youtu.be/9v3JB-1kxgg",
+      "thumbnail": "https://img.youtube.com/vi/9v3JB-1kxgg/maxresdefault.jpg"
+    },
+    "badge": "\ud83d\ude80 Production",
+    "badgeColor": "#00D4FF",
+    "category": "Computer Vision"
+  }
+]
