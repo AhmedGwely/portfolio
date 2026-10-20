@@ -2,10 +2,64 @@
   {
     "id": 1,
     "src": "/certificates/cert_1%20(1).jpeg",
-    "caption": "QiskIBM",
+    "caption": "Audience and speakers at an AI conference session.",
     "alt": "Large group of attendees with conference lanyards posing together in a university lecture hall with a projector screen behind them.",
     "category": "Conferences & Community",
     "width": 7773,
     "height": 6048
+  },
+  {
+    "id": 2,
+    "src": "/certificates/cert_1%20(4).JPG",
+    "caption": "Full house for a technical session.",
+    "alt": "Wide group photograph of around sixty attendees with badges, seated and standing in rows in a lecture hall.",
+    "category": "Conferences & Community",
+    "width": 4032,
+    "height": 3024
+  },
+  {
+    "id": 3,
+    "src": "/certificates/cert_1%20(5).JPG",
+    "caption": "Attendees gathered after a workshop session.",
+    "alt": "Group photograph of workshop participants posing in front of a presentation screen in a tiered lecture room.",
+    "category": "Conferences & Community",
+    "width": 4032,
+    "height": 3024
+  },
+  {
+    "id": 4,
+    "src": "/gallery/samsung-mentorship-office.jpg",
+    "caption": "Samsung Electronics mentorship — office visit.",
+    "alt": "A man posing for a photo inside a Samsung corporate office, standing in front of a glass wall with large SAMSUNG lettering.",
+    "category": "Samsung Mentorship",
+    "width": 600,
+    "height": 800
+  },
+  {
+    "id": 5,
+    "src": "/gallery/samsung-innovation-campus-group.jpg",
+    "caption": "Samsung Innovation Campus — mentorship cohort.",
+    "alt": "Group of approximately ten young adults posing behind a blue Samsung Innovation Campus pull-up banner in a modern training room.",
+    "category": "Samsung Mentorship",
+    "width": 1280,
+    "height": 960
+  },
+  {
+    "id": 6,
+    "src": "/gallery/samsung-building-visit.jpg",
+    "caption": "Samsung Electronics — facility visit.",
+    "alt": "A man posing outdoors in front of a Samsung building with large illuminated SAMSUNG signage on the facade.",
+    "category": "Samsung Mentorship",
+    "width": 800,
+    "height": 1066
+  },
+  {
+    "id": 7,
+    "src": "/gallery/ai-deeplearning-leaderboard.jpg",
+    "caption": "#2 on the AI Deep Learning leaderboard — Samsung LIFE program.",
+    "alt": "Digital leaderboard graphic showing three ranked participants. Ahmed Fathy is ranked #2 in the AI deep learning track of a Samsung LIFE program.",
+    "category": "AI & Computer Vision",
+    "width": 480,
+    "height": 480
   }
 ]
