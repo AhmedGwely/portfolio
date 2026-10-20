@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties, type FormEvent } from 'react'
 
 /* ──────────────────────────────────────────────────────────────────────────
    Theme constants — mirror app/admin/layout.tsx
@@ -126,7 +126,9 @@ export default function GalleryAdminPage() {
   const [editingId, setEditingId] = useState<number | null>(null)
   const [form, setForm] = useState<FormState>(emptyForm)
   const [formErrors, setFormErrors] = useState<Record<string, string>>({})
-  const [deletingId, setDeletingId] = useState<number | null>(null)
+  const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null)
+  const [uploadResult, setUploadResult] = useState<string | null>(null)
+  const [fileInput, setFileInput] = useState<Record<number, File | null>>({})
 
   /* ── Fetch list ── */
   const fetchImages = useCallback(async () => {
@@ -213,24 +215,26 @@ export default function GalleryAdminPage() {
   }
 
   /* ── Delete ── */
-  async function handleDelete(id: number) {
-    if (!window.confirm('Are you sure you want to delete this image?')) return
-    setDeletingId(id)
+  async function handleDelete() {
+    if (deleteConfirm === null) return
+    if (!window.confirm('Are you sure you want to delete this image?')) {
+      setDeleteConfirm(null)
+      return
+    }
     try {
-      const res = await fetch(`/api/gallery/${id}`, { method: 'DELETE' })
+      const res = await fetch(`/api/gallery/${deleteConfirm}`, { method: 'DELETE' })
       if (!res.ok) {
-        const body = (await res.json().catch(() => null)) as {
-          error?: string
-        } | null
+        const body = (await res.json().catch(() => null)) as { error?: string } | null
         throw new Error(body?.error ?? `API returned ${res.status}`)
       }
-      setImages((prev) => prev.filter((i) => i.id !== id))
+      setImages((prev) => prev.filter((i) => i.id !== deleteConfirm))
+      setDeleteConfirm(null)
+      setUploadResult('Deleted.')
     } catch (err) {
       window.alert(
         err instanceof Error ? err.message : 'Failed to delete image',
       )
-    } finally {
-      setDeletingId(null)
+      setDeleteConfirm(null)
     }
   }
 
@@ -359,17 +363,22 @@ export default function GalleryAdminPage() {
                   >
                     Edit
                   </button>
-                  <button
-                    onClick={() => handleDelete(img.id)}
-                    disabled={deletingId === img.id}
-                    className="flex-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors disabled:opacity-50"
-                    style={{
-                      border: '1px solid rgba(239,68,68,0.3)',
-                      color: '#f87171',
-                    }}
-                  >
-                    {deletingId === img.id ? 'Deleting…' : 'Delete'}
-                  </button>
+                  {deleteConfirm === img.id ? (
+                    <span className="flex-1 px-3 py-1.5 rounded-lg text-xs font-medium text-red-400 bg-red-500/10">
+                      Confirm
+                    </span>
+                  ) : (
+                    <button
+                      onClick={() => setDeleteConfirm(img.id)}
+                      className="flex-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                      style={{
+                        border: '1px solid rgba(239,68,68,0.3)',
+                        color: '#f87171',
+                      }}
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

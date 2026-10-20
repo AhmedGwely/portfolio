@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic'
 
 const FILENAME = 'projects'
 
-type RouteContext = { params: { id: string } }
+type RouteContext = { params: Promise<{ id: string }> }
 
 function parseId(raw: string): number | null {
   const id = Number(raw)
@@ -27,7 +27,7 @@ export async function GET(
   _request: NextRequest,
   context: RouteContext,
 ): Promise<NextResponse> {
-  const id = parseId(context.params.id)
+  const id = parseId((await context.params).id)
   if (id === null) {
     return NextResponse.json({ error: 'Invalid id' }, { status: 400 })
   }
@@ -46,14 +46,14 @@ export async function PUT(
   request: NextRequest,
   context: RouteContext,
 ): Promise<NextResponse> {
-  const authError = requireAuth(request)
+  const authError = await requireAuth(request)
   if (authError) return authError
 
-  if (!validateOrigin(request)) {
+  if (!(await validateOrigin(request))) {
     return NextResponse.json({ error: 'Invalid origin' }, { status: 403 })
   }
 
-  const id = parseId(context.params.id)
+  const id = parseId((await context.params).id)
   if (id === null) {
     return NextResponse.json({ error: 'Invalid id' }, { status: 400 })
   }
@@ -110,14 +110,14 @@ export async function DELETE(
   request: NextRequest,
   context: RouteContext,
 ): Promise<NextResponse> {
-  const authError = requireAuth(request)
+  const authError = await requireAuth(request)
   if (authError) return authError
 
-  if (!validateOrigin(request)) {
+  if (!(await validateOrigin(request))) {
     return NextResponse.json({ error: 'Invalid origin' }, { status: 403 })
   }
 
-  const id = parseId(context.params.id)
+  const id = parseId((await context.params).id)
   if (id === null) {
     return NextResponse.json({ error: 'Invalid id' }, { status: 400 })
   }
