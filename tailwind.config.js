@@ -14,6 +14,16 @@ module.exports = {
         'dark-bg': '#030712',
         'dark-card': '#0D1117',
         'dark-border': '#1C2333',
+        // Midnight minimal theme (mapped from CSS vars in globals.css)
+        'bg': 'var(--bg)',
+        'surface': 'var(--surface)',
+        'border': 'var(--border)',
+        'text': 'var(--text)',
+        'text-muted': 'var(--text-muted)',
+        'text-dim': 'var(--text-dim)',
+        'accent': 'var(--accent)',
+        'accent-soft': 'rgba(62,207,142,0.12)',
+        'accent-dim': 'rgba(62,207,142,0.72)',
       },
       fontFamily: {
         'display': ['var(--font-display)', 'serif'],
