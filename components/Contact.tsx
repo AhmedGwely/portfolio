@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Mail, Send, Github, Linkedin, CheckCircle } from 'lucide-react'
+import { TalkAiCard } from './cta'
 
 function TikTokIcon({ size = 20 }: { size?: number }) {
   return (
@@ -99,11 +100,17 @@ export default function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="mb-16"
         >
-          <h2 className="text-4xl font-medium var(--text)">
-            Let’s Build Something
+          <div className="flex items-center gap-4 mb-4">
+            <span className="font-mono text-[var(--accent)] text-sm">07.</span>
+            <span className="var(--text-dim) font-mono text-xs uppercase tracking-widest">Contact</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.12)] to-transparent" />
+          </div>
+
+          <h2 className="font-display font-medium text-4xl sm:text-5xl var(--text) mb-2 leading-tight">
+            Let&apos;s Build Something
           </h2>
-          <p className="text-gray-400 mt-2">
-            AI / CV collaborations, freelance work, or ideas — I’m open.
+          <p className="var(--text-muted) font-body mt-2">
+            AI / CV collaborations, freelance work, or ideas — I&apos;m open.
           </p>
         </motion.div>
 
@@ -198,6 +205,9 @@ export default function Contact() {
             </div>
           </div>
         </div>
+
+        {/* Closing CTA — the same two CTAs as the hero */}
+        <TalkAiCard />
       </div>
     </section>
   )
