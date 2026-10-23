@@ -164,7 +164,7 @@ function GalleryCta() {
             <button
               onClick={() => setBookingOpen(true)}
               className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-body font-bold text-sm transition-all duration-300 hover:shadow-[0_0_35px_rgba(0,212,255,0.45)]"
-              style={{ background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`, color: '#030712' }}
+              style={{ background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`, color: '#0A0A0B' }}
             >
               <Calendar size={16} />
               Book a Call
@@ -301,7 +301,7 @@ function BookingModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 
               <button type="submit"
                 className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-body font-bold text-sm transition-all"
-                style={{ background: `linear-gradient(135deg, #25D366, #128C7E)`, color: '#030712' }}>
+                style={{ background: `linear-gradient(135deg, #25D366, #128C7E)`, color: '#0A0A0B' }}>
                 Send via WhatsApp
               </button>
               <p className="text-center text-slate-600 text-[11px]">
@@ -465,7 +465,7 @@ function MentorshipModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
               <div className="flex gap-3 pt-1">
                 <button type="submit"
                   className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-body font-bold text-sm transition-all"
-                  style={{ background: `linear-gradient(135deg, #25D366, #128C7E)`, color: '#030712' }}>
+                  style={{ background: `linear-gradient(135deg, #25D366, #128C7E)`, color: '#0A0A0B' }}>
                   Send via WhatsApp
                 </button>
                 <button type="button" onClick={onClose}
@@ -600,7 +600,7 @@ export default function Gallery() {
               return (
                 <button key={c} onClick={() => setCategory(c)} aria-pressed={active}
                   className={`px-4 py-2 rounded-lg text-sm font-body font-medium transition-all duration-200 ${
-                    active ? 'bg-[#00D4FF] text-[#030712] shadow-[0_0_20px_rgba(0,212,255,0.4)]'
+                    active ? 'bg-[#00D4FF] text-[#0A0A0B] shadow-[0_0_20px_rgba(0,212,255,0.4)]'
                            : 'glass text-slate-400 hover:text-slate-200 border border-[rgba(255,255,255,0.06)]'
                   }`}>
                   {c}

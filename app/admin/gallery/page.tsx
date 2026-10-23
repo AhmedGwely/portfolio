@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties, type FormEvent } from 'react'
+import { useCallback, useEffect, useState, type ChangeEvent, type CSSProperties, type FormEvent } from 'react'
 
 /* ──────────────────────────────────────────────────────────────────────────
    Theme constants — mirror app/admin/layout.tsx
@@ -26,6 +26,8 @@ type GalleryImage = {
   category: Category
   width: number
   height: number
+  /** Publication state. Absent means published (legacy default). */
+  isPublished?: boolean
 }
 
 type FormState = {
@@ -37,7 +39,7 @@ type FormState = {
   height: string
 }
 
-type Status = 'idle' | 'loading' | 'ready' | 'error'
+type Status = 'loading' | 'ready' | 'error'
 
 /* ──────────────────────────────────────────────────────────────────────────
    Form helpers
@@ -69,10 +71,8 @@ function validateForm(form: FormState): Record<string, string> {
   if (!form.alt.trim()) errors.alt = 'Alt text is required'
   const w = Number(form.width)
   const h = Number(form.height)
-  if (!form.width || !Number.isFinite(w) || w <= 0)
-    errors.width = 'Width must be a positive number'
-  if (!form.height || !Number.isFinite(h) || h <= 0)
-    errors.height = 'Height must be a positive number'
+  if (!form.width || !Number.isFinite(w) || w <= 0) errors.width = 'Width must be a positive number'
+  if (!form.height || !Number.isFinite(h) || h <= 0) errors.height = 'Height must be a positive number'
   return errors
 }
 
@@ -127,15 +127,22 @@ export default function GalleryAdminPage() {
   const [form, setForm] = useState<FormState>(emptyForm)
   const [formErrors, setFormErrors] = useState<Record<string, string>>({})
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null)
+  const [uploading, setUploading] = useState<Record<number, boolean>>({})
+  const [uploadProgress, setUploadProgress] = useState<Record<number, number>>({})
   const [uploadResult, setUploadResult] = useState<string | null>(null)
   const [fileInput, setFileInput] = useState<Record<number, File | null>>({})
+  const [fileError, setFileError] = useState<Record<number, string>>({})
+  const [deleteWarning, setDeleteWarning] = useState('')
 
-  /* ── Fetch list ── */
+  /* ── Fetch list ──
+   * Uses the authenticated admin path so drafts are listed. Public
+   * /api/gallery only ever returns published records.
+   */
   const fetchImages = useCallback(async () => {
     setStatus('loading')
     setError('')
     try {
-      const res = await fetch('/api/gallery')
+      const res = await fetch('/api/gallery/all')
       if (!res.ok) throw new Error(`API returned ${res.status}`)
       const data = (await res.json()) as GalleryImage[]
       setImages(data)
@@ -155,6 +162,9 @@ export default function GalleryAdminPage() {
     setEditingId(null)
     setForm(emptyForm)
     setFormErrors({})
+    setUploadResult(null)
+    setFileInput({})
+    setFileError({})
     setModalOpen(true)
   }
 
@@ -162,7 +172,40 @@ export default function GalleryAdminPage() {
     setEditingId(img.id)
     setForm(imageToForm(img))
     setFormErrors({})
+    setUploadResult(null)
+    setFileInput((prev) => ({ ...prev, [img.id]: null }))
+    setFileError({})
     setModalOpen(true)
+  }
+
+  /* ── Validate and select a file ── */
+  function handleFileSelect(e: ChangeEvent<HTMLInputElement>, id: number) {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const errors: Record<number, string> = {}
+    if (!['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(file.type)) {
+      errors[id] = `Unsupported type "${file.type}". Use JPEG, PNG, WebP, or GIF.`
+    } else if (file.size > 5 * 1024 * 1024) {
+      errors[id] = `File too large: ${(file.size / 1_000_000).toFixed(1)} MB. Max 5 MB.`
+    }
+
+    setFileError(errors)
+    if (Object.keys(errors).length > 0) return
+
+    setFileInput((prev) => ({ ...prev, [id]: file }))
+    setUploadResult(null)
+  }
+
+  /* ── Remove a file selection ── */
+  function removeFile(id: number) {
+    setFileInput((prev) => {
+      const next = { ...prev }
+      delete next[id]
+      return next
+    })
+    setFileError({})
+    setUploadResult(null)
   }
 
   /* ── Submit create or update ── */
@@ -172,10 +215,90 @@ export default function GalleryAdminPage() {
     setFormErrors(errors)
     if (Object.keys(errors).length > 0) return
 
+    const uploadId = editingId !== null ? editingId : Date.now()
+
+    // If there is a selected file, validate it first
+    if (fileInput[uploadId] !== undefined) {
+      if (fileError[uploadId]) {
+        setFormErrors((prev) => ({ ...prev, file: fileError[uploadId] }))
+        return
+      }
+    }
+
     setMutating(true)
     try {
+      // Step 1: If there's a selected file, upload it first
+      let fileUrl: string | null = null
+
+      if (fileInput[uploadId] !== undefined && fileInput[uploadId] !== null) {
+        setUploading((prev) => ({ ...prev, [uploadId]: true }))
+        setUploadProgress((prev) => ({ ...prev, [uploadId]: 0 }))
+        setUploadResult(null)
+
+        try {
+          const formData = new FormData()
+          formData.append('file', fileInput[uploadId] as File)
+          formData.append('caption', form.caption.trim())
+          formData.append('alt', form.alt.trim())
+          formData.append('category', form.category)
+          formData.append('width', String(Number(form.width)))
+          formData.append('height', String(Number(form.height)))
+
+          const uploadRes = await fetch('/api/media/upload', {
+            method: 'POST',
+            body: formData,
+          })
+
+          if (!uploadRes.ok) {
+            const body = (await uploadRes.json().catch(() => null)) as {
+              error?: string
+              details?: string[]
+            } | null
+            throw new Error(
+              body?.details?.join(', ') ?? body?.error ?? `Upload failed (${uploadRes.status})`,
+            )
+          }
+
+          const uploadData = (await uploadRes.json()) as {
+            ok: boolean
+            image: any
+            fileUrl: string
+            message: string
+          }
+          fileUrl = uploadData.fileUrl || uploadData.image.src
+          setUploadResult('File uploaded successfully.')
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : 'Upload failed'
+          setFormErrors((prev) => ({ ...prev, file: msg }))
+          setUploadResult(null)
+          setUploading((prev) => {
+            const next = { ...prev }
+            delete next[uploadId]
+            return next
+          })
+          setUploadProgress((prev) => {
+            const next = { ...prev }
+            delete next[uploadId]
+            return next
+          })
+          return
+        } finally {
+          setUploading((prev) => {
+            const next = { ...prev }
+            delete next[uploadId]
+            return next
+          })
+          setUploadProgress((prev) => {
+            const next = { ...prev }
+            delete next[uploadId]
+            return next
+          })
+        }
+      }
+
+      // Step 2: Now create or update the gallery metadata record
       const payload = {
-        src: form.src.trim(),
+        src: fileUrl !== null ? fileUrl : form.src.trim(),
         caption: form.caption.trim(),
         alt: form.alt.trim(),
         category: form.category,
@@ -205,16 +328,20 @@ export default function GalleryAdminPage() {
 
       setModalOpen(false)
       await fetchImages()
+      setUploadResult(fileUrl !== null ? 'Uploaded and added.' : 'Image added.')
     } catch (err) {
-      const msg =
-        err instanceof Error ? err.message : 'Something went wrong'
+      const msg = err instanceof Error ? err.message : 'Something went wrong'
       setFormErrors({ submit: msg })
     } finally {
       setMutating(false)
     }
   }
 
-  /* ── Delete ── */
+  /* ── Delete ──
+   * The API distinguishes metadata deletion from Storage cleanup. A partial
+   * result (record gone, file still in Storage) must be shown as a warning —
+   * never as clean success.
+   */
   async function handleDelete() {
     if (deleteConfirm === null) return
     if (!window.confirm('Are you sure you want to delete this image?')) {
@@ -223,18 +350,53 @@ export default function GalleryAdminPage() {
     }
     try {
       const res = await fetch(`/api/gallery/${deleteConfirm}`, { method: 'DELETE' })
+      const body = (await res.json().catch(() => null)) as {
+        error?: string
+        partial?: boolean
+        warning?: string
+      } | null
+
       if (!res.ok) {
-        const body = (await res.json().catch(() => null)) as { error?: string } | null
         throw new Error(body?.error ?? `API returned ${res.status}`)
       }
+
       setImages((prev) => prev.filter((i) => i.id !== deleteConfirm))
       setDeleteConfirm(null)
+
+      if (body?.partial) {
+        setDeleteWarning(body.warning ?? 'The record was deleted, but its file remains in storage.')
+      } else {
+        setDeleteWarning('')
+      }
       setUploadResult('Deleted.')
     } catch (err) {
-      window.alert(
-        err instanceof Error ? err.message : 'Failed to delete image',
-      )
+      window.alert(err instanceof Error ? err.message : 'Failed to delete image')
       setDeleteConfirm(null)
+      setDeleteWarning('')
+    }
+  }
+
+  /* ── Publish / unpublish ── */
+  async function handleTogglePublish(img: GalleryImage) {
+    const next = img.isPublished !== false ? false : true
+    try {
+      const res = await fetch(`/api/gallery/${img.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isPublished: next }),
+      })
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as {
+          error?: string
+          details?: string[]
+        } | null
+        throw new Error(
+          body?.details?.join(', ') ?? body?.error ?? `API returned ${res.status}`,
+        )
+      }
+      await fetchImages()
+    } catch (err) {
+      window.alert(err instanceof Error ? err.message : 'Failed to update publication state')
     }
   }
 
@@ -262,12 +424,27 @@ export default function GalleryAdminPage() {
           className="px-4 py-2 rounded-lg text-sm font-bold transition-all hover:shadow-[0_0_20px_rgba(0,212,255,0.35)]"
           style={{
             background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
-            color: '#030712',
+            color: '#0A0A0B',
           }}
         >
           + Add Image
         </button>
       </div>
+
+      {/* Partial-deletion warning */}
+      {deleteWarning && (
+        <div
+          className="rounded-xl p-4 mb-6"
+          style={{
+            ...glass,
+            border: '1px solid rgba(239,68,68,0.3)',
+          }}
+        >
+          <p className="text-sm" style={{ color: '#FFB4B4' }}>
+            {deleteWarning}
+          </p>
+        </div>
+      )}
 
       {/* Loading */}
       {status === 'loading' && (
@@ -321,14 +498,12 @@ export default function GalleryAdminPage() {
                 className="relative overflow-hidden"
                 style={{ aspectRatio: '4/3', background: '#080810' }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={img.src}
                   alt={img.alt}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                 />
-                {/* Category badge */}
                 <span
                   className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[10px] font-mono uppercase tracking-wider"
                   style={{
@@ -340,6 +515,18 @@ export default function GalleryAdminPage() {
                 >
                   {img.category}
                 </span>
+                {img.isPublished === false && (
+                  <span
+                    className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-md text-[10px] font-mono uppercase tracking-wider"
+                    style={{
+                      background: 'rgba(239,68,68,0.75)',
+                      color: '#fff',
+                      border: '1px solid rgba(239,68,68,0.5)',
+                    }}
+                  >
+                    Draft
+                  </span>
+                )}
               </div>
 
               {/* Info */}
@@ -380,6 +567,18 @@ export default function GalleryAdminPage() {
                     </button>
                   )}
                 </div>
+
+                {/* Publication toggle */}
+                <button
+                  onClick={() => handleTogglePublish(img)}
+                  className="w-full mt-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                  style={{
+                    border: `1px solid ${(img.isPublished === false) ? 'rgba(239,68,68,0.35)' : `${ACCENT}30`}`,
+                    color: (img.isPublished === false) ? '#f87171' : ACCENT,
+                  }}
+                >
+                  {img.isPublished === false ? 'Publish' : 'Unpublish'}
+                </button>
               </div>
             </div>
           ))}
@@ -450,6 +649,55 @@ export default function GalleryAdminPage() {
                 {formErrors.src && (
                   <p style={errStyle}>{formErrors.src}</p>
                 )}
+              </div>
+
+              {/* File upload */}
+              <div>
+                <label htmlFor="g-file" style={labelStyle}>
+                  Image File (optional)
+                </label>
+                <input
+                  id="g-file"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  onChange={(e) => handleFileSelect(e, editingId ?? Date.now())}
+                  style={{
+                    ...inputStyle(!!fileError[editingId ?? Date.now()]),
+                    padding: '8px',
+                  }}
+                />
+                {(fileInput[editingId ?? Date.now()] !== null && fileInput[editingId ?? Date.now()] && (
+    <p style={{ color: '#6B8F3E', fontSize: 12, marginTop: 4 }}>
+      Selected: {fileInput[editingId ?? Date.now()]?.name ?? 'File'}
+    </p>
+  ))}
+  {fileError[editingId ?? Date.now()] && (
+    <p style={errStyle}>{fileError[editingId ?? Date.now()]}</p>
+  )}
+  {uploading[editingId ?? Date.now()] && (
+    <p style={{ color: '#6B8F3E', fontSize: 12, marginTop: 4 }}>
+      Uploading…
+    </p>
+  )}
+                {uploadResult && (
+                  <p style={{ color: '#6B8F3E', fontSize: 12, marginTop: 4 }}>
+                    {uploadResult}
+                  </p>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    removeFile(editingId ?? Date.now())
+                  }}
+                  style={{
+                    fontSize: 12,
+                    color: '#94a3b8',
+                    marginTop: 6,
+                    textDecoration: 'underline',
+                  }}
+                >
+                  Remove file
+                </button>
               </div>
 
               {/* caption */}
@@ -583,14 +831,14 @@ export default function GalleryAdminPage() {
                   className="flex-1 px-5 py-3 rounded-xl font-bold text-sm transition-all disabled:opacity-60"
                   style={{
                     background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
-                    color: '#030712',
+                    color: '#0A0A0B',
                   }}
                 >
                   {mutating
                     ? 'Saving…'
                     : isEditing
-                      ? 'Save Changes'
-                      : 'Add Image'}
+                    ? 'Save Changes'
+                    : 'Add Image'}
                 </button>
                 <button
                   type="button"

@@ -32,7 +32,16 @@ export type GalleryImage = {
   caption: string
   /** Meaningful alt text for assistive technology. */
   alt: string
-  category: GalleryCategory
+  /**
+   * Category of the gallery item.
+   *
+   * NOTE: this is a plain `string` (not the `GalleryCategory` union) because the
+   * canonical source of truth for gallery metadata is the Supabase
+   * `gallery_metadata` table, where this column is a free-text VARCHAR. The UI
+   * filters with `populatedCategories()` which only surfaces categories that
+   * actually exist in the dataset, so any string value renders correctly.
+   */
+  category: string
   /** Intrinsic dimensions — required to reserve space and avoid layout shift. */
   width: number
   height: number

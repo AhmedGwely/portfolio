@@ -3,5 +3,10 @@ node_modules
 .next
 out
 dist
-.env
-.env*.local
+*.py
+__pycache__/
+*.pyc
+tsconfig.tsbuildinfo
+.next/
+.output_cache/
+

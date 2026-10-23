@@ -227,7 +227,7 @@ export default function Projects() {
                 aria-pressed={active}
                 className={`px-4 py-2 rounded-lg text-sm font-body font-medium transition-all duration-200 ${
                   active
-                    ? 'bg-[#00D4FF] text-[#030712] shadow-[0_0_20px_rgba(0,212,255,0.4)]'
+                    ? 'bg-[#00D4FF] text-[#0A0A0B] shadow-[0_0_20px_rgba(0,212,255,0.4)]'
                     : 'glass text-slate-400 hover:text-slate-200 border border-[rgba(255,255,255,0.06)]'
                 }`}
               >
@@ -240,12 +240,14 @@ export default function Projects() {
           })}
         </motion.div>
 
-        {/* Project grid */}
+        {/* Project grid — horizontal scroll on desktop, normal grid on mobile */}
         {visibleProjects.length > 0 ? (
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {visibleProjects.map((project, i) => (
-              <ProjectCard key={project.title} project={project} index={i} />
-            ))}
+          <div className="flex gap-6 overflow-x-auto pb-4 px-6 sm:px-0">
+            <div className="flex gap-6 min-w-max">
+              {visibleProjects.map((project, i) => (
+                <ProjectCard key={project.title} project={project} index={i} />
+              ))}
+            </div>
           </div>
         ) : (
           <div className="glass rounded-2xl p-12 text-center border border-[rgba(0,212,255,0.08)]">

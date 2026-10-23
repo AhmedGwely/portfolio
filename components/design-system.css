@@ -1,0 +1,320 @@
+// Post-Cody design system + motion tokens for the portfolio.
+// Midnight minimal: near-black base (#0A0A0B), single emerald accent (#3ECF8E),
+// Geist + Geist Mono, NO gradients, NO emojis. Every moving element relates to
+// AI / computer vision.
+// Shared tokens so every moving element stays consistent.
+
+// ─── Fonts (Geist + Geist Mono, per brief) ───────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Near-black base */
+  --bg: #0A0A0B;
+  --surface: #111113;
+  --surface-raised: #16161A;
+
+  /* Border */
+  --border: #2A2A2D;
+  --border-strong: #3A3A3F;
+
+  /* Text */
+  --text: #EDEDED;
+  --text-muted: #9B9B9B;
+  --text-dim: #5C5C5C;
+
+  /* Single emerald accent (#3ECF8E) */
+  --accent: #3ECF8E;
+  --accent-soft: rgba(62, 207, 142, 0.12);
+  --accent-dim: rgba(62, 207, 142, 0.72);
+  --accent-glow: rgba(62, 207, 142, 0.45);
+  --accent-strong: rgba(62, 207, 142, 1);
+
+  /* Secondary (retained for compatibility) */
+  --cyan: #00D4FF;
+  --violet: #7C3AED;
+
+  /* Typography */
+  --font-display: 'Geist', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Motion durations (ms) */
+  --dur-fast: 150ms;
+  --dur-default: 250ms;
+  --dur-slow: 600ms;
+  --dur-visible: 900ms;
+
+  /* Easing */
+  --ease-primary: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring-soft: cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Glass ─────────────────────────────────────────────────────────────────── */
+.glass {
+  background: var(--bg-panel);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.glass-hover:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border);
+  box-shadow: 0 0 30px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ── Text utilities ────────────────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+.text-accent {
+  color: var(--accent);
+}
+.text-muted {
+  color: var(--text-muted);
+}
+.text-dim {
+  color: var(--text-dim);
+}
+.text-bg {
+  color: var(--bg);
+}
+
+/* ── Accent-border glow (Linear/Vercel card-border-glow technique) ────────── */
+.accent-border-group {
+  position: relative;
+}
+.accent-border-group::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--dur-default) var(--ease-primary);
+}
+.accent-border-group:hover::before {
+  opacity: 0.6;
+}
+
+/* ── Subtle border glow on hover ───────────────────────────────────────────── */
+.border-glow {
+  position: relative;
+}
+.border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  border-color: var(--accent);
+  opacity: 0;
+  transition: opacity var(--dur-default) var(--ease-primary);
+  pointer-events: none;
+}
+.border-glow:hover::after {
+  opacity: 0.5;
+}
+
+/* ── Hover lift ────────────────────────────────────────────────────────────── */
+.hover-lift {
+  transition: transform var(--dur-default) var(--ease-primary),
+    box-shadow var(--dur-default) var(--ease-primary);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--elevation-lg);
+}
+
+/* ── Fade-in on scroll ─────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--dur-visible) var(--ease-primary),
+    transform var(--dur-visible) var(--ease-primary);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Section number (01, 02 … mono) ───────────────────────────────────────── */
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+/* ── Marquee track (infinite scroll) ──────────────────────────────────────── */
+.marquee-track {
+  display: flex;
+  gap: var(--space-lg);
+  animation: marquee var(--dur-visible) linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Left/right edge fade masks for marquee ──────────────────────────────── */
+.marquee-track::before,
+.marquee-track::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+}
+.marquee-track::before {
+  left: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
+}
+.marquee-track::after {
+  right: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+
+/* ── Cursor spotlight (desktop) ───────────────────────────────────────────── */
+.cursor-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+  filter: blur(30px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity var(--dur-default) var(--ease-primary);
+  z-index: 0;
+}
+.cursor-spotlight.is-active {
+  opacity: 0.5;
+}
+
+/* ── Scroll progress bar (thin emerald, fixed top) ────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: transparent;
+  z-index: 9999;
+  transition: background var(--dur-slow) var(--ease-primary);
+}
+.scroll-progress.is-active {
+  background: var(--accent);
+  width: 100%;
+}
+
+/* ── Intro loader (AG// wordmark draw-up) ─────────────────────────────────── */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  transition: transform var(--dur-slow) var(--ease-primary);
+}
+.loader.is-hidden {
+  transform: translateY(-100%);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-panel);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-dim);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ── Reduced-motion overrides ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .loader {
+    transition: none;
+  }
+  .cursor-spotlight {
+    display: none;
+  }
+}
+
+/* ── Responsive: disable cursor-based effects on mobile ───────────────────── */
+@media (max-width: 768px) {
+  .cursor-spotlight {
+    display: none;
+  }
+}

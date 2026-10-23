@@ -211,7 +211,7 @@ export default function FeaturedVideo() {
                   <div className="absolute top-4 left-4 flex items-center gap-2">
                     <span
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-[11px] font-bold tracking-wide"
-                      style={{ background: ACCENT, color: '#030712' }}
+                      style={{ background: ACCENT, color: '#0A0A0B' }}
                     >
                       <Play size={10} fill="currentColor" />
                       MAIN FEATURED
@@ -250,7 +250,7 @@ export default function FeaturedVideo() {
                           boxShadow: `0 0 50px ${ACCENT}80, 0 0 100px ${ACCENT}35`,
                         }}
                       >
-                        <Play size={32} className="text-[#030712] ml-1.5" fill="currentColor" />
+                        <Play size={32} className="text-[#0A0A0B] ml-1.5" fill="currentColor" />
                       </motion.div>
                     </div>
                   </div>
@@ -343,7 +343,7 @@ export default function FeaturedVideo() {
                 className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-body font-bold text-sm transition-all duration-300 hover:shadow-[0_0_35px_rgba(0,212,255,0.45)]"
                 style={{
                   background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
-                  color: '#030712',
+                  color: '#0A0A0B',
                 }}
               >
                 <Play size={16} fill="currentColor" />

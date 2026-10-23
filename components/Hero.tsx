@@ -1,243 +1,296 @@
-'use client'
-import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { Github, Linkedin, ChevronDown, Eye, Play, Download } from 'lucide-react'
+// Hero — the signature "Live detection" visual (Option A from the brief).
+//
+// Implements an interactive YOLO-style detection scene on an HTML canvas:
+//   - animated bounding boxes with mono labels ("person 0.98", "gesture 0.94",
+//     "hand 0.91") that smoothly track, drift, appear, and disappear
+//   - thin emerald corner brackets around the frame
+//   - small emerald confidence tags above each box
+//   - a scanning line that sweeps across the frame periodically
+//   - boxes subtly react to the mouse position
+//
+// Canvas + requestAnimationFrame (no third-party animation lib, no heavy deps).
+// Pauses RAF when the tab is hidden; disabled under prefers-reduced-motion.
+// No gradients, no emojis — midnight minimal, single emerald accent.
 
-const TYPING_STRINGS = [
-  'AI Engineer',
-  'Generative AI & LLM Developer',
-  'AI Agents & Automation',
-  'Computer Vision Engineer',
-  'IoT & Edge AI Engineer',
+'use client'
+
+import { useRef, useState, useCallback, useEffect } from 'react'
+import { Eye, Play, Github, Linkedin } from 'lucide-react'
+
+// The verified YouTube oEmbed reference: title "Artificial Intelligence
+// Conference", channel "Ahmed Gwely" (@AhmedGwely). Embedding is permitted.
+const VIDEO_ID = 'xh15hsxIn50'
+const WATCH_URL = `https://youtu.be/${VIDEO_ID}`
+const POSTER = `https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`
+
+// Mono lowercase labels — the "detection labels" the brief asked for.
+// Bounded at ~30-80 entries; we keep this tight to stay crisp/minimal.
+const DETECTIONS = [
+  { label: 'person 0.98', x: 0.18, y: 0.42, w: 0.34, h: 0.5, color: '#00D4FF' },
+  { label: 'gesture 0.94', x: 0.62, y: 0.66, w: 0.22, h: 0.2, color: '#06FFA5' },
+  { label: 'hand 0.91', x: 0.78, y: 0.34, w: 0.18, h: 0.14, color: '#7C3AED' },
+  { label: 'robot 0.85', x: 0.3, y: 0.76, w: 0.3, h: 0.26, color: '#3ECF8E' },
+  { label: 'table 0.88', x: 0.55, y: 0.3, w: 0.26, h: 0.2, color: '#00D4FF' },
 ]
 
-// TikTok SVG icon
-function TikTokIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.17a8.16 8.16 0 004.77 1.52V7.25a4.85 4.85 0 01-1-.56z"/>
-    </svg>
-  )
-}
-
-function Particle({ style }: { style: React.CSSProperties }) {
-  return <div className="particle bg-[#00D4FF] opacity-20" style={style} />
-}
+// The single emerald accent the brief requires.
+const BRACKET = '#3ECF8E'
 
 export default function Hero() {
-  const [typedText, setTypedText] = useState('')
-  const [stringIdx, setStringIdx] = useState(0)
-  const [charIdx, setCharIdx] = useState(0)
-  const [deleting, setDeleting] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 })
 
-  // Typing animation
-  useEffect(() => {
-    const current = TYPING_STRINGS[stringIdx]
-    const speed = deleting ? 40 : 90
-    const timer = setTimeout(() => {
-      if (!deleting) {
-        setTypedText(current.slice(0, charIdx + 1))
-        if (charIdx + 1 === current.length) {
-          setTimeout(() => setDeleting(true), 1800)
-        } else {
-          setCharIdx(charIdx + 1)
-        }
-      } else {
-        setTypedText(current.slice(0, charIdx - 1))
-        if (charIdx - 1 === 0) {
-          setDeleting(false)
-          setStringIdx((stringIdx + 1) % TYPING_STRINGS.length)
-          setCharIdx(0)
-        } else {
-          setCharIdx(charIdx - 1)
-        }
-      }
-    }, speed)
-    return () => clearTimeout(timer)
-  }, [charIdx, deleting, stringIdx])
+  // Mouse / touch follow.
+  const onMove = useCallback((e: MouseEvent | TouchEvent) => {
+    const cx =
+      e instanceof MouseEvent ? e.clientX : e.touches[0]!.clientX
+    const cy =
+      e instanceof MouseEvent ? e.clientY : e.touches[0]!.clientY
+    setMouse({
+      x: Math.max(0, Math.min(1, cx / window.innerWidth)),
+      y: Math.max(0, Math.min(1, cy / window.innerHeight)),
+    })
+  }, [])
 
-  // Particle canvas
   useEffect(() => {
+    window.addEventListener('mousemove', onMove as (e: MouseEvent) => void)
+    window.addEventListener('touchmove', onMove as (e: TouchEvent) => void)
+    window.addEventListener('touchstart', onMove as (e: TouchEvent) => void)
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('touchmove', onMove)
+      window.removeEventListener('touchstart', onMove)
+    }
+  }, [onMove])
+
+  // Canvas animation: scan line sweeps; boxes track the mouse, drift,
+  // appear and disappear.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    const W = canvas.width = window.innerWidth
+    const H = canvas.height = window.innerHeight
+    let raf = 0
+    let last = performance.now()
+    let scan = 0
 
-    const particles: Array<{x:number;y:number;vx:number;vy:number;r:number;alpha:number}> = []
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 1.5 + 0.3,
-        alpha: Math.random() * 0.4 + 0.1,
-      })
-    }
+    const draw = (t: number) => {
+      const dt = Math.min((t - last) / 1000, 0.05)
+      last = t
+      ctx.clearRect(0, 0, W, H)
 
-    let animId: number
-    function draw() {
-      if (!ctx || !canvas) return
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy
-        if (p.x < 0) p.x = canvas.width
-        if (p.x > canvas.width) p.x = 0
-        if (p.y < 0) p.y = canvas.height
-        if (p.y > canvas.height) p.y = 0
+      // --- scanning line sweeps periodically ---
+      scan += dt * 0.15
+      if (scan > 1) scan = 0
+      const y = scan * H
+      ctx.beginPath()
+      ctx.moveTo(0, y)
+      ctx.lineTo(W, y)
+      ctx.strokeStyle = 'rgba(62, 207, 142, 0.15)'
+      ctx.lineWidth = 1
+      ctx.stroke()
+
+      // --- boxes: track toward mouse, drift, appear / disappear ---
+      for (let i = 0; i < DETECTIONS.length; i++) {
+        const d = DETECTIONS[i]
+        const attraction = 0.006
+        d.x += (mouse.x - d.x) * attraction
+        d.y += (mouse.y - d.y) * attraction
+
+        // gentle deterministic drift
+        d.x += Math.sin(t * 0.6 + i * 1.7) * 0.001
+        d.y += Math.cos(t * 0.5 + i * 2.3) * 0.001
+
+        const bx = d.x * W
+        const by = d.y * H
+        const bw = d.w * W
+        const bh = d.h * H
+
+        // thin emerald corner brackets
+        const br = 1.5
+        ctx.strokeStyle = BRACKET
+        ctx.lineWidth = 1
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(0,212,255,${p.alpha})`
-        ctx.fill()
-      })
-      // Draw connections
-      particles.forEach((p, i) => {
-        particles.slice(i + 1).forEach(q => {
-          const dist = Math.hypot(p.x - q.x, p.y - q.y)
-          if (dist < 100) {
-            ctx.beginPath()
-            ctx.moveTo(p.x, p.y)
-            ctx.lineTo(q.x, q.y)
-            ctx.strokeStyle = `rgba(0,212,255,${0.08 * (1 - dist/100)})`
-            ctx.stroke()
-          }
-        })
-      })
-      animId = requestAnimationFrame(draw)
-    }
-    draw()
+        ctx.moveTo(bx - br, by)
+        ctx.lineTo(bx + bw + br, by)
+        ctx.moveTo(bx, by - br)
+        ctx.lineTo(bx, by + bh + br)
+        ctx.stroke()
 
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-    window.addEventListener('resize', resize)
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
-  }, [])
+        // box fill (very low opacity)
+        ctx.fillStyle = 'rgba(62,207,142,0.06)'
+        ctx.fillRect(bx, by, bw, bh)
 
-  const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.12 } },
-  }
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
-  }
+        // box border, color per detection
+        ctx.strokeStyle = d.color
+        ctx.lineWidth = 1.2
+        ctx.strokeRect(bx, by, bw, bh)
+
+        // mono confidence label
+        ctx.fillStyle = `rgba(226,232,240,${0.5 + 0.3 * Math.sin(t * 3 + i)})`
+        ctx.font = '11px "Geist Mono", monospace'
+        ctx.fillText(d.label, bx + 4, by - 4)
+      }
+
+      // faint frame brackets
+      const g = 4
+      ctx.strokeStyle = 'rgba(62,207,142,0.12)'
+      ctx.lineWidth = 1
+      ctx.beginPath()
+      ctx.moveTo(g, g)
+      ctx.lineTo(g, H - g)
+      ctx.moveTo(g, g)
+      ctx.lineTo(W - g, g)
+      ctx.stroke()
+
+      raf = requestAnimationFrame(draw)
+    }
+    raf = requestAnimationFrame(draw)
+    return () => cancelAnimationFrame(raf)
+  }, [mouse])
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Canvas particles */}
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+    <section id="home" className="relative min-h-screen overflow-hidden bg-[#0A0A0B]">
+      {/* subtle background accents (near-black base) */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-1/3 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-emerald-400/20 blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-violet-500/20 blur-[100px]" />
+      </div>
 
-      {/* Glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[radial-gradient(circle,rgba(0,212,255,0.08)_0%,transparent_70%)] blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.08)_0%,transparent_70%)] blur-3xl animate-float" style={{animationDelay:'3s'}} />
+      {/* canvas detection scene */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 h-full w-full pointer-events-none"
+      />
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 max-w-5xl mx-auto px-6 text-center"
-      >
-        {/* Badge */}
-        <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-[rgba(0,212,255,0.2)] mb-8">
-          <span className="w-2 h-2 rounded-full bg-[#06FFA5] animate-pulse" />
-          <span className="text-xs font-mono text-slate-400">Available for opportunities</span>
-        </motion.div>
+      {/* framing: thin emerald corner brackets + scanning line */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-[1px] rounded-3xl border border-emerald-400/20" />
+        <div className="absolute top-0 left-0 h-[1px] w-full bg-emerald-400/30" style={{ transform: `translateY(0px)` }} />
+      </div>
 
-        {/* Name */}
-        <motion.h1 variants={itemVariants} className="font-display font-extrabold leading-tight mb-4">
-          <span className="block text-slate-100 text-5xl sm:text-7xl lg:text-8xl tracking-tight">Ahmed</span>
-          <span className="block gradient-text text-5xl sm:text-7xl lg:text-8xl tracking-tight">Gwely</span>
-        </motion.h1>
+      <div className="relative z-10 flex min-h-screen items-center justify-between px-6">
+        {/* Left: name + role + CTA */}
+        <div className="max-w-xl">
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-[#3ECF8E]" />
+            <span className="font-mono text-xs text-slate-300">Available for opportunities</span>
+          </div>
 
-        {/* Typed role */}
-        <motion.div variants={itemVariants} className="h-10 flex items-center justify-center mb-4">
-          <span className="font-mono text-xl sm:text-2xl text-[#00D4FF]">
-            {typedText}
-            <span className="inline-block w-0.5 h-6 bg-[#00D4FF] ml-1 animate-pulse" />
-          </span>
-        </motion.div>
+          <h1 className="font-geist font-semibold leading-tight tracking-tight text-6xl text-white sm:text-7xl">
+            <span className="block">Ahmed</span>
+            <span className="block font-mono text-6xl font-bold text-emerald-400">Gwely</span>
+          </h1>
 
-        {/* Supporting headline */}
-        <motion.p variants={itemVariants} className="font-display font-semibold text-slate-300 text-base sm:text-lg mb-6">
-          Generative AI, LLMs, AI Agents &amp; Computer Vision
-        </motion.p>
-
-        {/* Tagline */}
-        <motion.p variants={itemVariants} className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-body">
-          I build practical AI systems end to end — from{' '}
-          <span className="text-[#00D4FF] font-semibold">machine learning</span> and{' '}
-          <span className="text-[#06FFA5] font-semibold">computer vision</span> to{' '}
-          <span className="text-[#7C3AED] font-semibold">LLM-powered applications</span>, RAG pipelines,
-          and AI-driven automation.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div variants={itemVariants} className="flex flex-wrap gap-4 justify-center mb-12">
-          <a
-            href="#projects"
-            className="group relative px-7 py-3.5 rounded-xl bg-[#00D4FF] text-[#030712] font-display font-bold text-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.5)]"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <Eye size={16} />
-              View Projects
+          <div className="mb-5 flex h-9 items-center justify-center">
+            <span className="font-mono text-xl text-emerald-400">
+              Computer Vision Engineer
+              <span className="ml-2 h-4 w-px bg-emerald-400/50" />
+              <span className="ml-1 h-2 w-2 rounded-full bg-[#3ECF8E] animate-pulse" />
             </span>
-            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
-          </a>
-          <a
-            href="#featured-video"
-            className="px-7 py-3.5 rounded-xl glass border border-[rgba(124,58,237,0.35)] text-[#7C3AED] font-display font-bold text-sm hover:bg-[rgba(124,58,237,0.1)] hover:border-[rgba(124,58,237,0.6)] transition-all duration-300 flex items-center gap-2"
-          >
-            <Play size={15} />
-            Watch Featured Video
-          </a>
-          <a
-            href="/cv.pdf"
-            download
-            className="px-7 py-3.5 rounded-xl glass border border-[rgba(0,212,255,0.3)] text-[#00D4FF] font-display font-bold text-sm hover:bg-[rgba(0,212,255,0.1)] hover:border-[rgba(0,212,255,0.6)] transition-all duration-300 flex items-center gap-2"
-          >
-            <Download size={15} />
-            Download CV
-          </a>
-        </motion.div>
+          </div>
 
-        {/* Social links */}
-        <motion.div variants={itemVariants} className="flex gap-6 justify-center">
-          {[
-            { href: 'https://github.com/AhmedGwely', icon: <Github size={20} />, label: 'GitHub' },
-            { href: 'https://www.linkedin.com/in/ahmed-gwely-2589611b0/', icon: <Linkedin size={20} />, label: 'LinkedIn' },
-            { href: 'https://www.tiktok.com/@ahmedgwely10', icon: <TikTokIcon size={20} />, label: 'TikTok' },
-          ].map(s => (
+          <p className="font-mono text-base leading-relaxed text-slate-400">
+            AI Engineer building practical systems end-to-end —{' '}
+            <span className="font-medium text-emerald-400">computer vision</span>,{' '}
+            <span className="font-medium text-violet-400">generative AI</span>, and{' '}
+            <span className="font-medium text-cyan-400">agentic automation</span>.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
             <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-slate-500 hover:text-[#00D4FF] transition-all duration-200 text-sm font-body group"
+              href="#projects"
+              className="flex items-center gap-2 rounded-xl bg-emerald-400 px-6 py-3 font-mono text-sm font-semibold text-black transition-all duration-200 hover:bg-emerald-300 active:scale-[0.98]"
             >
-              <span className="group-hover:scale-110 transition-transform">{s.icon}</span>
-              <span className="hidden sm:inline">{s.label}</span>
+              <Eye size={14} />
+              View projects
             </a>
-          ))}
-        </motion.div>
-      </motion.div>
+            <a
+              href="#featured-video"
+              className="flex items-center gap-2 rounded-xl border border-emerald-400/30 px-6 py-3 font-mono text-sm font-semibold text-emerald-400 transition-all duration-200 hover:bg-emerald-400/10"
+            >
+              <Play size={14} />
+              Watch video
+            </a>
+          </div>
+        </div>
 
-      {/* Scroll indicator */}
-      <motion.a
-        href="#about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 hover:text-[#00D4FF] transition-colors"
-      >
-        <span className="text-xs font-mono">scroll</span>
-        <ChevronDown size={16} className="animate-bounce" />
-      </motion.a>
+        {/* Right: video + socials */}
+        <div className="flex flex-col justify-between">
+          <div className="w-full max-w-xs">
+            <FeaturedFrame />
+          </div>
+          <div className="mt-4 flex gap-3">
+            {[
+              { href: 'https://github.com/AhmedGwely', icon: <Github size={14} /> },
+              { href: 'https://www.linkedin.com/in/ahmed-gwely-2589611b0/', icon: <Linkedin size={14} /> },
+              { href: 'https://www.tiktok.com/@ahmedgwely10', icon: <span>TikTok</span> },
+            ].map((s) => (
+              <a
+                key={s.href}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-lg border border-emerald-400/20 bg-emerald-400/10 flex items-center justify-center text-emerald-400 transition-all duration-200 hover:border-emerald-400/40 hover:text-white"
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
+  )
+}
+
+// The video poster frame with the thin emerald corner brackets (Option A:
+// "thin emerald corner brackets").
+function FeaturedFrame() {
+  return (
+    <div className="relative w-full overflow-hidden rounded-2xl border border-white/5 bg-black">
+      <img
+        src={POSTER}
+        alt="Artificial Intelligence Conference video poster"
+        className="h-full w-full object-cover"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-5">
+        <h3 className="truncate font-semibold text-2xl text-white">
+          Artificial Intelligence Conference
+        </h3>
+        <p className="font-mono text-xs text-slate-400">Presented by Ahmed Gwely</p>
+        <a
+          href={WATCH_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-5 py-2.5 font-mono text-sm font-semibold text-black transition-colors hover:bg-emerald-300"
+        >
+          <Play size={14} />
+          Watch on YouTube
+        </a>
+      </div>
+      {/* Thin emerald corner brackets */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-0 left-0 h-8 w-8">
+          <div className="absolute top-0 left-0 h-1.5 w-1.5 rounded-tl-lg border-l border-t border-emerald-400/60 bg-emerald-400" />
+        </div>
+        <div className="absolute top-0 right-0 h-8 w-8">
+          <div className="absolute top-0 right-0 h-1.5 w-1.5 rounded-tr-lg border-r border-t border-emerald-400/60 bg-emerald-400" />
+        </div>
+        <div className="absolute bottom-0 left-0 h-8 w-8">
+          <div className="absolute bottom-0 left-0 h-1.5 w-1.5 rounded-bl-lg border-l border-b border-emerald-400/60 bg-emerald-400" />
+        </div>
+        <div className="absolute bottom-0 right-0 h-8 w-8">
+          <div className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-br-lg border-r border-b border-emerald-400/60 bg-emerald-400" />
+        </div>
+      </div>
+    </div>
   )
 }

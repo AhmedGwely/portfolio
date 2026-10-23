@@ -261,7 +261,7 @@ export default function VideosAdminPage() {
           className="px-4 py-2 rounded-lg text-sm font-bold transition-all hover:shadow-[0_0_20px_rgba(0,212,255,0.35)]"
           style={{
             background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
-            color: '#030712',
+            color: '#0A0A0B',
           }}
         >
           + Add Video
@@ -589,7 +589,7 @@ export default function VideosAdminPage() {
                   className="flex-1 px-5 py-3 rounded-xl font-bold text-sm transition-all disabled:opacity-60"
                   style={{
                     background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
-                    color: '#030712',
+                    color: '#0A0A0B',
                   }}
                 >
                   {mutating

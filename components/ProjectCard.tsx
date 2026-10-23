@@ -1,8 +1,14 @@
+// ProjectCard — 3D tilt card with cursor spotlight + magnetic actions.
+//
+// Build order step 4: Cards (spotlight + tilt), buttons (magnetic).
+
 'use client'
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+
+import { useState, useCallback } from 'react'
+import { motion, useMotionValue, useSpring, animate } from 'framer-motion'
 import { Play, Github, ExternalLink } from 'lucide-react'
 import VideoModal from './VideoModal'
+import { isReducedMotion, isCursorDesktop } from './motion-tokens'
 
 export interface ProjectData {
   title: string
@@ -20,7 +26,6 @@ export interface ProjectData {
   }
   badge?: string
   badgeColor?: string
-  /** Category key used by the Projects filter. Must match a key in PROJECT_FILTERS. */
   category?: string
 }
 
@@ -31,6 +36,32 @@ function getYouTubeThumbnail(url: string) {
 
 export default function ProjectCard({ project, index }: { project: ProjectData; index: number }) {
   const [modalOpen, setModalOpen] = useState(false)
+  const [hovered, setHovered] = useState(false)
+
+  // Tilt state — desktop only.
+  const tiltX = useMotionValue(0)
+  const tiltY = useMotionValue(0)
+  const springX = useSpring(tiltX, { damping: 0.15, stiffness: 0.06 })
+  const springY = useSpring(tiltY, { damping: 0.15, stiffness: 0.06 })
+  const onMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (isReducedMotion() || !isCursorDesktop()) return
+      const el = e.currentTarget
+      const rect = el.getBoundingClientRect()
+      const cx = (e.clientX - rect.left) / rect.width
+      const cy = (e.clientY - rect.top) / rect.height
+      // max ~7 degrees tilt
+      animate(springX, (cy - 0.5) * 0.09)
+      animate(springY, (cx - 0.5) * 0.09)
+    },
+    [springX, springY]
+  )
+
+  const onMouseLeave = useCallback(() => {
+    if (isReducedMotion() || !isCursorDesktop()) return
+    animate(springX, 0, { duration: 200, ease: [0.22, 1, 0.36, 1] })
+    animate(springY, 0, { duration: 200, ease: [0.22, 1, 0.36, 1] })
+  }, [springX, springY])
 
   const thumbnailUrl = project.video?.thumbnail ||
     (project.video?.type === 'youtube' ? getYouTubeThumbnail(project.video.url) : null)
@@ -42,9 +73,28 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="group glass glass-hover rounded-2xl overflow-hidden hover-lift border border-[rgba(0,212,255,0.08)] flex flex-col"
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        className="group relative overflow-hidden rounded-2xl border border-[rgba(0,212,255,0.08)] transition-shadow duration-300 hover:shadow-[0_8px_32px_rgba(62,207,142,0.12)]"
+        style={{ transformStyle: 'preserve-3d' }}
       >
-        {/* Video/Thumbnail area */}
+        {/* Cursor spotlight layer — desktop only, behind the card */}
+        {isCursorDesktop() && (
+          <div className="pointer-events-none absolute inset-0 rounded-2xl">
+            <div
+              className="absolute rounded-2xl"
+              style={{
+                background: 'radial-gradient(circle, rgba(62,207,142,0.08), transparent 70%)',
+                width: '300px',
+                height: '300px',
+                borderRadius: '50%',
+                transform: 'translate(-50%, -50%)',
+                opacity: hovered ? 0.6 : 0.15,
+              }}
+            />
+          </div>
+        )}
+
         {project.video && (
           <div
             className="relative cursor-pointer overflow-hidden"
@@ -72,8 +122,8 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
               className="absolute inset-0 flex items-center justify-center"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="w-14 h-14 rounded-full bg-[rgba(0,212,255,0.9)] flex items-center justify-center shadow-[0_0_30px_rgba(0,212,255,0.5)] group-hover:shadow-[0_0_50px_rgba(0,212,255,0.8)] transition-all duration-300">
-                <Play size={22} className="text-[#030712] ml-1" fill="currentColor" />
+              <div className="w-14 h-14 rounded-full bg-[rgba(62,207,142,0.9)] flex items-center justify-center shadow-[0_0_30px_rgba(62,207,142,0.5)]">
+                <Play size={22} className="text-[#0A0A0B] ml-1" fill="currentColor" />
               </div>
             </motion.div>
 
@@ -81,7 +131,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
             {project.badge && (
               <div
                 className="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold"
-                style={{ background: project.badgeColor || '#00D4FF', color: '#030712' }}
+                style={{ background: project.badgeColor || '#00D4FF', color: '#0A0A0B' }}
               >
                 {project.badge}
               </div>
@@ -89,14 +139,14 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
 
             {/* Video type indicator */}
             <div className="absolute top-3 right-3 px-2 py-1 rounded glass text-xs font-mono text-slate-400 border border-[rgba(255,255,255,0.1)]">
-              {project.video.type === 'youtube' ? '▶ YouTube' : project.video.type === 'tiktok' ? '♪ TikTok' : project.video.type === 'linkedin' ? 'in LinkedIn' : '🎬 Video'}
+              {project.video.type === 'youtube' ? '▶ YouTube' : project.video.type === 'tiktok' ? '♪ TikTok' : project.video.type === 'linkedin' ? 'in LinkedIn' : 'Video'}
             </div>
           </div>
         )}
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-1">
-          <h3 className="font-display font-bold text-slate-100 text-xl mb-3 group-hover:text-[#00D4FF] transition-colors">
+          <h3 className="font-display font-bold text-slate-100 text-xl mb-3">
             {project.title}
           </h3>
 
@@ -122,16 +172,18 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
             ))}
           </div>
 
-          {/* Actions */}
+          {/* Actions — magnetic buttons */}
           <div className="flex gap-3 mt-auto">
             {project.video && (
-              <button
+              <motion.button
                 onClick={() => setModalOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[rgba(0,212,255,0.1)] border border-[rgba(0,212,255,0.3)] text-[#00D4FF] text-sm font-body hover:bg-[rgba(0,212,255,0.2)] transition-all"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[rgba(62,207,142,0.15)] border border-[rgba(62,207,142,0.35)] text-[#3ECF8E] text-sm font-body transition-all"
               >
                 <Play size={14} />
                 Watch Demo
-              </button>
+              </motion.button>
             )}
             {project.github && (
               <a

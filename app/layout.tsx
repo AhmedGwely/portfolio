@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import LenisSmoothScroll from '@/components/LenisSmoothScroll'
+import { ScrollProgressBar } from '@/components/Navbar'
 
 const SITE_URL = 'https://ahmed-gwely-portfolio.vercel.app'
 
@@ -115,6 +117,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <body className="antialiased">
+        <LenisSmoothScroll />
+        <ScrollProgressBar />
         {children}
         <script
           type="application/ld+json"

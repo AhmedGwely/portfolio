@@ -353,7 +353,7 @@ export default function YouTubePlayer({
               className="w-20 h-20 rounded-full flex items-center justify-center"
               style={{ background: `linear-gradient(135deg, ${accent}, ${accent2})`, boxShadow: `0 0 45px ${accent}70` }}
             >
-              <RotateCcw size={30} className="text-[#030712]" />
+              <RotateCcw size={30} className="text-[#0A0A0B]" />
             </span>
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">Replay</span>
           </motion.button>

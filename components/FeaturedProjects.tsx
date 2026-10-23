@@ -107,7 +107,7 @@ function FeaturedCard({ project, index }: { project: typeof featured[0]; index: 
                   boxShadow: `0 0 40px ${project.accent}60`,
                 }}
               >
-                <Play size={30} className="text-[#030712] ml-1.5" fill="currentColor" />
+                <Play size={30} className="text-[#0A0A0B] ml-1.5" fill="currentColor" />
               </motion.div>
             </div>
 

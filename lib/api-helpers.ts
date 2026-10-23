@@ -1,8 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { verifyToken } from '@/lib/auth'
 
-/** A single gallery image record as stored in data/gallery.json. */
+/**
+ * Gallery database row shape as returned by the Supabase
+ * `gallery_metadata` table.
+ *
+ * The database column containing the alternative text is named `alt_text`.
+ * It is NOT part of the public API contract — `alt` is the application-
+ * facing name.
+ */
 export type GalleryImageEntry = {
+  id: number
+  src: string
+  caption: string
+  alt: string
+  alt_text: string
+  category: string
+  width: number
+  height: number
+}
+
+/**
+ * Application-facing gallery image record (API responses, UI components,
+ * public data layer).
+ *
+ * `alt` is the single field the rest of the codebase uses for alternative
+ * text. It is derived from the Supabase column `alt_text` in the data layer
+ * (see `mapAltTextToAlt`) so that no other module has to know the database
+ * column name.
+ */
+export type GalleryImage = {
   id: number
   src: string
   caption: string
@@ -10,6 +37,23 @@ export type GalleryImageEntry = {
   category: string
   width: number
   height: number
+}
+
+/**
+ * Map a database row (`alt_text` column) onto the application-facing
+ * `GalleryImage` type. This is the single, explicit mapping between the
+ * database schema and the application contract.
+ */
+export function mapAltTextToAlt(row: GalleryImageEntry): GalleryImage {
+  return {
+    id: row.id,
+    src: row.src,
+    caption: row.caption,
+    alt: row.alt_text,
+    category: row.category,
+    width: row.width,
+    height: row.height,
+  }
 }
 
 /**
@@ -72,7 +116,11 @@ export function stripHtml(input: string): string {
   return input.replace(/<[^>]*>/g, '')
 }
 
-export type GalleryBody = Partial<Omit<GalleryImageEntry, 'id'>>
+/**
+ * Request body accepted by the gallery API. Does NOT include `alt_text` —
+ * that field is always derived from `alt` server-side.
+ */
+export type GalleryBody = Partial<Omit<GalleryImageEntry, 'id' | 'alt_text'>>
 
 /** A single project record as stored in data/projects.json. */
 export type ProjectEntry = {

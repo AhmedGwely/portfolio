@@ -410,7 +410,7 @@ export default function SettingsAdminPage() {
               className="px-8 py-3 rounded-xl font-bold text-sm transition-all disabled:opacity-60 hover:shadow-[0_0_20px_rgba(0,212,255,0.35)]"
               style={{
                 background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
-                color: '#030712',
+                color: '#0A0A0B',
               }}
             >
               {mutating ? 'Saving…' : 'Save Settings'}
