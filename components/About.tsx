@@ -30,7 +30,8 @@ export default function About() {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true })
 
   return (
-    <section id="about" ref={ref} className="py-32 px-6 max-w-6xl mx-auto">
+    <section id="about" ref={ref} className="py-32 px-6">
+      <div className="max-w-7xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -52,7 +53,7 @@ export default function About() {
             </h2>
             <div className="space-y-4 var(--text-dim) font-body leading-relaxed text-base">
               <p>
-                I&apos;m <span className="var(--text-muted) font-medium">Ahmed Gwely</span>, an AI Engineer working across the full lifecycle of intelligent systems — training and evaluating models, integrating them into real applications, and deploying them where they actually run.
+                I&apos;m <span className="var(--text-muted) font-medium">Ahmed Fathy Gwely</span>, an AI Engineer working across the full lifecycle of intelligent systems — training and evaluating models, integrating them into real applications, and deploying them where they actually run.
               </p>
               <p>
                 My foundation is <span className="text-[var(--accent)]">Computer Vision</span>: real-time detection, tracking and classification built on custom datasets, then optimized for edge inference. I&apos;ve shipped that end to end — a video and sensor pipeline running in production for water-station automation, and YOLO-based monitoring deployed on a Raspberry Pi 5.
@@ -106,6 +107,7 @@ export default function About() {
           </div>
         </div>
       </motion.div>
+      </div>
     </section>
   )
 }

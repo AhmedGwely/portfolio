@@ -8,12 +8,13 @@ const SITE_URL = 'https://ahmed-gwely-portfolio.vercel.app'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Ahmed Gwely | AI Engineer — Generative AI, LLMs, AI Agents & Computer Vision',
-    template: '%s | Ahmed Gwely',
+    default: 'Ahmed Fathy Gwely | AI Engineer — Computer Vision, Generative AI, LLMs & Edge AI',
+    template: '%s | Ahmed Fathy Gwely',
   },
   description:
-    'AI Engineer building practical AI systems end to end — from machine learning and computer vision to LLM-powered applications, RAG pipelines, and AI-driven automation.',
+    'AI Engineer building practical systems end to end — computer vision, generative AI, LLM applications, RAG pipelines, and edge AI deployed where they actually run.',
   keywords: [
+    'Ahmed Fathy Gwely',
     'Ahmed Gwely',
     'AI Engineer',
     'Generative AI',
@@ -21,25 +22,25 @@ export const metadata: Metadata = {
     'AI Agents',
     'RAG Pipelines',
     'Computer Vision',
+    'Edge AI',
     'Deep Learning',
     'PyTorch',
     'YOLO',
-    'Edge AI',
     'IoT',
     'Machine Learning',
   ],
-  authors: [{ name: 'Ahmed Gwely', url: SITE_URL }],
-  creator: 'Ahmed Gwely',
+  authors: [{ name: 'Ahmed Fathy Gwely', url: SITE_URL }],
+  creator: 'Ahmed Fathy Gwely',
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     url: SITE_URL,
-    siteName: 'Ahmed Gwely — AI Engineer',
-    title: 'Ahmed Gwely | AI Engineer',
+    siteName: 'Ahmed Fathy Gwely — AI Engineer',
+    title: 'Ahmed Fathy Gwely | AI Engineer',
     description:
-      'Generative AI, LLMs, AI Agents & Computer Vision — building practical AI systems end to end.',
+      'AI Engineer — Computer Vision, Generative AI, LLMs and Edge AI. Building practical AI systems end to end.',
     locale: 'en_US',
     images: [
       {
@@ -47,15 +48,15 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: 'image/png',
-        alt: 'Ahmed Gwely — AI Engineer: Generative AI, LLMs, AI Agents & Computer Vision',
+        alt: 'Ahmed Fathy Gwely — AI Engineer: Computer Vision, Generative AI, LLMs & Edge AI',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ahmed Gwely | AI Engineer',
+    title: 'Ahmed Fathy Gwely | AI Engineer',
     description:
-      'Generative AI, LLMs, AI Agents & Computer Vision — building practical AI systems end to end.',
+      'AI Engineer — Computer Vision, Generative AI, LLMs and Edge AI. Building practical AI systems end to end.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -79,12 +80,12 @@ export const metadata: Metadata = {
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Ahmed Gwely',
-  alternateName: 'Ahmed Fathy Gwely',
+  name: 'Ahmed Fathy Gwely',
+  alternateName: 'Ahmed Gwely',
   url: SITE_URL,
   jobTitle: 'AI Engineer',
   description:
-    'AI Engineer working across Generative AI, LLMs, AI agents and Computer Vision — building practical AI systems end to end.',
+    'AI Engineer working across Computer Vision, Generative AI, LLMs, AI agents and Edge AI — building practical AI systems end to end.',
   knowsAbout: [
     'Artificial Intelligence',
     'Generative AI',
@@ -110,6 +111,7 @@ const personJsonLd = {
     'https://github.com/AhmedGwely',
     'https://www.linkedin.com/in/ahmed-gwely-2589611b0/',
     'https://www.tiktok.com/@ahmedgwely10',
+    'https://www.youtube.com/@AhmedGwely',
   ],
 }
 

@@ -74,7 +74,7 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-mono text-xs var(--text-dim)">
-            © {new Date().getFullYear()} Ahmed Gwely. Designed &amp; built with{' '}
+            © {new Date().getFullYear()} Ahmed Fathy Gwely. Designed &amp; built with{' '}
             <span className="text-[var(--accent)]">Next.js</span> +{' '}
             <span className="text-[var(--accent)]">Framer Motion</span>.
           </p>
