@@ -97,7 +97,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="hidden md:flex #5C5C5C hover:#EDEDED"
+          className="md:hidden #5C5C5C hover:#EDEDED"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
