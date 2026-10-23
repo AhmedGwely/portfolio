@@ -7,7 +7,7 @@ const stats = [
   { value: 15, suffix: '+', label: 'AI Projects Shipped', color: 'var(--accent)' },
   { value: 500, suffix: '+', label: 'Students Taught', color: 'var(--accent)' },
   { value: 12, suffix: '+', label: 'Technologies Mastered', color: 'var(--accent)' },
-  { value: 94, suffix: '%', label: 'Best Model Accuracy', color: '#FFD700' },
+  { value: 94, suffix: '%', label: 'Best Model Accuracy', color: 'var(--text)' },
 ]
 
 function CounterNumber({ target, suffix, color, inView }: { target: number; suffix: string; color: string; inView: boolean }) {
@@ -31,7 +31,7 @@ function CounterNumber({ target, suffix, color, inView }: { target: number; suff
   }, [inView, target])
 
   return (
-    <span style={{ color }} className="font-display font-extrabold text-5xl sm:text-6xl tabular-nums">
+    <span style={{ color }} className="font-display font-medium text-5xl sm:text-6xl tabular-nums">
       {count}{suffix}
     </span>
   )
@@ -51,8 +51,8 @@ export default function Stats() {
           animate={inView ? { opacity: 1 } : {}}
           className="text-center mb-16"
         >
-          <p className="font-mono text-xs #5C5C5C uppercase tracking-widest mb-3">By the numbers</p>
-          <h2 className="font-display font-semibold text-3xl sm:text-4xl #EDEDED">
+          <p className="font-mono text-xs var(--text-dim) uppercase tracking-widest mb-3">By the numbers</p>
+          <h2 className="font-display font-medium text-3xl sm:text-4xl var(--text)">
             Impact that&apos;s <span className="gradient-text">measurable</span>
           </h2>
         </motion.div>
@@ -70,7 +70,7 @@ export default function Stats() {
               <div className="mb-2">
                 <CounterNumber target={stat.value} suffix={stat.suffix} color={stat.color} inView={inView} />
               </div>
-              <p className="font-body #5C5C5C text-sm mt-2">{stat.label}</p>
+              <p className="font-body var(--text-dim) text-sm mt-2">{stat.label}</p>
               <div className="mt-4 h-0.5 rounded-full mx-auto w-12" style={{ background: `linear-gradient(90deg, transparent, ${stat.color}, transparent)` }} />
             </motion.div>
           ))}

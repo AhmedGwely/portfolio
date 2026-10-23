@@ -25,14 +25,14 @@ const socials = [
     href: 'https://www.linkedin.com/in/ahmed-gwely-2589611b0/',
     icon: <Linkedin size={20} />,
     handle: 'ahmed-gwely',
-    color: '#3ECF8E',
+    color: 'var(--accent)',
   },
   {
     label: 'TikTok',
     href: 'https://www.tiktok.com/@ahmedgwely10',
     icon: <TikTokIcon size={20} />,
     handle: '@ahmedgwely10',
-    color: '#FF0050',
+    color: 'var(--accent)',
   },
   {
     label: 'Email',
@@ -99,7 +99,7 @@ export default function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="mb-16"
         >
-          <h2 className="text-4xl font-semibold #EDEDED">
+          <h2 className="text-4xl font-medium var(--text)">
             Let’s Build Something
           </h2>
           <p className="text-gray-400 mt-2">
@@ -121,7 +121,7 @@ export default function Contact() {
                 <div style={{ color: s.color }}>{s.icon}</div>
                 <div>
                   <div className="text-sm text-gray-400">{s.label}</div>
-                  <div className="#EDEDED">{s.handle}</div>
+                  <div className="var(--text)">{s.handle}</div>
                 </div>
               </a>
             ))}
@@ -134,12 +134,12 @@ export default function Contact() {
               {sent ? (
                 <div className="text-center py-10">
                   <CheckCircle className="mx-auto text-green-400" size={40} />
-                  <h3 className="#EDEDED text-xl mt-3">
+                  <h3 className="var(--text) text-xl mt-3">
                     Message Sent!
                   </h3>
                   <button
                     onClick={() => setSent(false)}
-                    className="text-[#3ECF8E] mt-4"
+                    className="text-[var(--accent)] mt-4"
                   >
                     Send another
                   </button>
@@ -152,7 +152,7 @@ export default function Contact() {
                     placeholder="Name"
                     value={form.name}
                     onChange={handleChange}
-                    className="w-full p-3 bg-black/30 #EDEDED rounded"
+                    className="w-full p-3 bg-black/30 var(--text) rounded"
                     required
                   />
 
@@ -161,7 +161,7 @@ export default function Contact() {
                     placeholder="Email"
                     value={form.email}
                     onChange={handleChange}
-                    className="w-full p-3 bg-black/30 #EDEDED rounded"
+                    className="w-full p-3 bg-black/30 var(--text) rounded"
                     required
                   />
 
@@ -170,7 +170,7 @@ export default function Contact() {
                     placeholder="Subject"
                     value={form.subject}
                     onChange={handleChange}
-                    className="w-full p-3 bg-black/30 #EDEDED rounded"
+                    className="w-full p-3 bg-black/30 var(--text) rounded"
                     required
                   />
 
@@ -180,14 +180,14 @@ export default function Contact() {
                     value={form.message}
                     onChange={handleChange}
                     rows={6}
-                    className="w-full p-3 bg-black/30 #EDEDED rounded"
+                    className="w-full p-3 bg-black/30 var(--text) rounded"
                     required
                   />
 
                   <button
                     type="submit"
                     disabled={sending}
-                    className="w-full bg-[#3ECF8E] text-black font-semibold p-3 rounded"
+                    className="w-full bg-[var(--accent)] text-black font-medium p-3 rounded"
                   >
                     {sending ? 'Sending...' : 'Send Message'}
                   </button>

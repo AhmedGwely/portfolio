@@ -30,9 +30,9 @@ export default function Footer() {
         {/* Top row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-8 mb-10">
           {/* Logo */}
-          <a href="#" className="font-display font-semibold text-2xl">
+          <a href="#" className="font-display font-medium text-2xl">
             <span className="gradient-text">AG</span>
-            <span className="#5C5C5C font-mono text-sm ml-2">// AI Engineer</span>
+            <span className="var(--text-dim) font-mono text-sm ml-2">// AI Engineer</span>
           </a>
 
           {/* Nav links */}
@@ -41,7 +41,7 @@ export default function Footer() {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-body text-sm #5C5C5C hover:text-[#3ECF8E] transition-colors"
+                className="font-body text-sm var(--text-dim) hover:text-[var(--accent)] transition-colors"
               >
                 {link.label}
               </a>
@@ -60,7 +60,7 @@ export default function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg glass border border-[rgba(255,255,255,0.06)] flex items-center justify-center #5C5C5C hover:text-[#3ECF8E] hover:border-[rgba(62,207,142,0.12)] transition-all"
+                className="w-9 h-9 rounded-lg glass border border-[rgba(255,255,255,0.06)] flex items-center justify-center var(--text-dim) hover:text-[var(--accent)] hover:border-[rgba(62,207,142,0.12)] transition-all"
               >
                 {s.icon}
               </a>
@@ -73,21 +73,21 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-mono text-xs #5C5C5C">
+          <p className="font-mono text-xs var(--text-dim)">
             © {new Date().getFullYear()} Ahmed Gwely. Designed &amp; built with{' '}
-            <span className="text-[#3ECF8E]">Next.js</span> +{' '}
-            <span className="text-[#3ECF8E]">Framer Motion</span>.
+            <span className="text-[var(--accent)]">Next.js</span> +{' '}
+            <span className="text-[var(--accent)]">Framer Motion</span>.
           </p>
 
           <div className="flex items-center gap-6">
-            <span className="font-mono text-xs #5C5C5C">
-              <span className="text-[#3ECF8E]">▲</span> Deployed on Vercel
+            <span className="font-mono text-xs var(--text-dim)">
+              <span className="text-[var(--accent)]">▲</span> Deployed on Vercel
             </span>
 
             {/* Back to top */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-2 font-mono text-xs #5C5C5C hover:text-[#3ECF8E] transition-colors group"
+              className="flex items-center gap-2 font-mono text-xs var(--text-dim) hover:text-[var(--accent)] transition-colors group"
             >
               Back to top
               <ArrowUp size={12} className="group-hover:-translate-y-1 transition-transform" />

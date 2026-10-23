@@ -109,7 +109,7 @@ export default function FeaturedVideo() {
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-            <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl #EDEDED leading-[1.05] tracking-tight">
+            <h2 className="font-display font-medium text-4xl sm:text-5xl lg:text-6xl var(--text) leading-[1.05] tracking-tight">
               Artificial Intelligence{' '}
               <span className="gradient-text">Conference</span>
             </h2>
@@ -126,7 +126,7 @@ export default function FeaturedVideo() {
                 />
                 <span className="relative inline-flex w-2 h-2 rounded-full" style={{ background: ACCENT_3 }} />
               </span>
-              <span className="font-mono text-[11px] #5C5C5C uppercase tracking-widest">
+              <span className="font-mono text-[11px] var(--text-dim) uppercase tracking-widest">
                 Now Streaming
               </span>
             </div>
@@ -210,8 +210,8 @@ export default function FeaturedVideo() {
                   {/* Top chips */}
                   <div className="absolute top-4 left-4 flex items-center gap-2">
                     <span
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-[11px] font-semibold tracking-wide"
-                      style={{ background: ACCENT, color: '#0A0A0B' }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-[11px] font-medium tracking-wide"
+                      style={{ background: ACCENT, color: 'var(--bg)' }}
                     >
                       <Play size={10} fill="currentColor" />
                       MAIN FEATURED
@@ -220,7 +220,7 @@ export default function FeaturedVideo() {
 
                   <div className="absolute top-4 right-4 flex items-center gap-2">
                     <span
-                      className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg font-mono text-[11px] #9B9B9B backdrop-blur-md"
+                      className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg font-mono text-[11px] var(--text-muted) backdrop-blur-md"
                       style={{ background: 'rgba(255,0,0,0.22)', border: '1px solid rgba(255,0,0,0.35)' }}
                     >
                       <Youtube size={12} />
@@ -250,7 +250,7 @@ export default function FeaturedVideo() {
                           boxShadow: `0 0 50px ${ACCENT}80, 0 0 100px ${ACCENT}35`,
                         }}
                       >
-                        <Play size={32} className="text-[#0A0A0B] ml-1.5" fill="currentColor" />
+                        <Play size={32} className="text-[var(--bg)] ml-1.5" fill="currentColor" />
                       </motion.div>
                     </div>
                   </div>
@@ -261,20 +261,20 @@ export default function FeaturedVideo() {
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 mb-1.5">
                           <Radio size={12} style={{ color: ACCENT_3 }} />
-                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] #5C5C5C">
+                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] var(--text-dim)">
                             Keynote
                           </span>
                         </div>
-                        <p className="font-display font-semibold #EDEDED text-lg sm:text-2xl leading-tight truncate">
+                        <p className="font-display font-medium var(--text) text-lg sm:text-2xl leading-tight truncate">
                           Artificial Intelligence Conference
                         </p>
-                        <p className="font-body #5C5C5C text-xs sm:text-sm mt-1">
+                        <p className="font-body var(--text-dim) text-xs sm:text-sm mt-1">
                           Presented by Ahmed Gwely
                         </p>
                       </div>
 
                       <span
-                        className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl font-body text-sm font-semibold #EDEDED shrink-0 backdrop-blur-md"
+                        className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl font-body text-sm font-medium var(--text) shrink-0 backdrop-blur-md"
                         style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}
                       >
                         Play here
@@ -297,10 +297,10 @@ export default function FeaturedVideo() {
         >
           {/* Copy */}
           <div className="lg:col-span-3">
-            <h3 className="font-display font-semibold text-2xl sm:text-3xl #EDEDED mb-3 leading-tight">
+            <h3 className="font-display font-medium text-2xl sm:text-3xl var(--text) mb-3 leading-tight">
               Sharing applied AI with the next generation of engineers
             </h3>
-            <p className="font-body text-base sm:text-lg #5C5C5C mb-5 leading-relaxed">
+            <p className="font-body text-base sm:text-lg var(--text-dim) mb-5 leading-relaxed">
               A full conference keynote on artificial intelligence — covering real-world computer
               vision systems, deep learning in production, and what it takes to move a model from a
               notebook to something people actually use.
@@ -329,10 +329,10 @@ export default function FeaturedVideo() {
                     className="absolute left-0 top-0 bottom-0 w-[2px]"
                     style={{ background: `linear-gradient(180deg, ${ACCENT}, ${ACCENT_2})` }}
                   />
-                  <div className="font-mono text-[10px] #5C5C5C uppercase tracking-widest mb-1">
+                  <div className="font-mono text-[10px] var(--text-dim) uppercase tracking-widest mb-1">
                     {m.label}
                   </div>
-                  <div className="font-body text-sm #64748B">{m.value}</div>
+                  <div className="font-body text-sm var(--text-faint)">{m.value}</div>
                 </motion.div>
               ))}
             </div>
@@ -340,10 +340,10 @@ export default function FeaturedVideo() {
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
               <button
                 onClick={() => start(true)}
-                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-body font-semibold text-sm transition-all duration-300 hover:shadow-[0_0_35px_rgba(62,207,142,0.45)]"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-body font-medium text-sm transition-all duration-300 hover:shadow-[0_0_35px_rgba(62,207,142,0.45)]"
                 style={{
                   background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
-                  color: '#0A0A0B',
+                  color: 'var(--bg)',
                 }}
               >
                 <Play size={16} fill="currentColor" />
@@ -353,7 +353,7 @@ export default function FeaturedVideo() {
                 href={WATCH_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl glass border border-[rgba(255,255,255,0.1)] #5C5C5C font-body text-sm hover:#EDEDED hover:border-[rgba(255,255,255,0.3)] transition-all"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl glass border border-[rgba(255,255,255,0.1)] var(--text-dim) font-body text-sm hover:var(--text) hover:border-[rgba(255,255,255,0.3)] transition-all"
               >
                 <Youtube size={16} />
                 Watch on YouTube

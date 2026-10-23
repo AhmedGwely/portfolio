@@ -64,12 +64,12 @@ export default function IntroLoader() {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A0A0B]"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--bg)]"
       style={{ transform: done ? 'translateY(-100%)' : 'translateY(0)' }}
     >
-      <div className="font-mono text-5xl font-semibold tracking-[0.35em] text-emerald-400">
+      <div className="font-mono text-5xl font-medium tracking-[0.35em] text-emerald-400">
         AG
-        <span className="text-[0.3em] text-[#3ECF8E] mx-2">//</span>
+        <span className="text-[0.3em] text-[var(--accent)] mx-2">//</span>
       </div>
     </div>
   )

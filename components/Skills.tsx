@@ -53,7 +53,7 @@ const skillCategories = [
   },
   {
     label: 'AI Agents & Automation',
-    color: '#3ECF8E',
+    color: 'var(--accent)',
     keywords: ['Agents', 'Automation', 'Workflow'],
     mini: 'steps',
     skills: [
@@ -65,7 +65,7 @@ const skillCategories = [
   },
   {
     label: 'Edge AI & IoT',
-    color: '#FF6B6B',
+    color: 'var(--accent)',
     keywords: ['Edge', 'IoT', 'Embedded'],
     mini: 'mqtt',
     skills: [
@@ -77,7 +77,7 @@ const skillCategories = [
   },
   {
     label: 'Data Science & Analytics',
-    color: '#FFD700',
+    color: 'var(--text)',
     keywords: ['Data', 'Visualization', 'Analytics'],
     mini: 'graph',
     skills: [
@@ -163,10 +163,10 @@ export default function Skills() {
         >
           <div className="flex items-center gap-4 mb-4">
             <span className="font-mono text-emerald-400 text-sm">02.</span>
-            <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">Skills</span>
+            <span className="var(--text-dim) font-mono text-xs uppercase tracking-widest">Skills</span>
             <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.3)] to-transparent" />
           </div>
-          <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED">
+          <h2 className="font-display font-medium text-4xl sm:text-5xl var(--text)">
             Technical <span className="text-emerald-400">Arsenal</span>
           </h2>
         </motion.div>
@@ -223,7 +223,7 @@ export default function Skills() {
                             initial={{ opacity: 0, y: 4 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: i * 0.15 }}
-                            className="font-mono text-sm #64748B"
+                            className="font-mono text-sm var(--text-faint)"
                           >
                             {ch}
                           </motion.span>
@@ -247,7 +247,7 @@ export default function Skills() {
                         {['1', '2', '3', '4'].map((n) => (
                           <motion.span
                             key={n}
-                            className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-mono #EDEDED"
+                            className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-mono var(--text)"
                             style={{ background: cat.color }}
                             {...anim.animate}
                           />
@@ -271,7 +271,7 @@ export default function Skills() {
                       <div className="flex gap-2">
                         <span className="text-2xl">{GLYPHS.chart}</span>
                         <motion.span
-                          className="font-mono text-sm #5C5C5C"
+                          className="font-mono text-sm var(--text-dim)"
                           style={{ opacity: inView ? 1 : 0 }}
                           {...anim.animate}
                         >
@@ -297,7 +297,7 @@ export default function Skills() {
 
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-2 h-6 rounded-full shrink-0" style={{ background: cat.color }} />
-                  <h3 className="font-display font-semibold #9B9B9B text-sm uppercase tracking-wider leading-tight">
+                  <h3 className="font-display font-medium var(--text-muted) text-sm uppercase tracking-wider leading-tight">
                     {cat.label}
                   </h3>
                 </div>
@@ -321,7 +321,7 @@ export default function Skills() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          <p className="font-mono text-xs #5C5C5C uppercase tracking-widest mb-4 text-center">
+          <p className="font-mono text-xs var(--text-dim) uppercase tracking-widest mb-4 text-center">
             Full Stack Technology
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -345,7 +345,7 @@ export default function Skills() {
                 className="glass glass-hover rounded-xl px-4 py-2 flex items-center gap-2 cursor-default hover-lift"
               >
                 <span className="text-xs text-emerald-400">{tech.glyph}</span>
-                <span className="font-body text-sm #64748B">{tech.name}</span>
+                <span className="font-body text-sm var(--text-faint)">{tech.name}</span>
               </motion.div>
             ))}
           </div>
@@ -366,7 +366,7 @@ function SkillItem({ name, color, inView, delay }: {
       className="mb-3 flex items-center gap-2.5"
     >
       <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color }} />
-      <span className="font-body text-sm #64748B">{name}</span>
+      <span className="font-body text-sm var(--text-faint)">{name}</span>
     </motion.div>
   )
 }

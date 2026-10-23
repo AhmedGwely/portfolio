@@ -67,10 +67,10 @@ export default function VideoModal({ isOpen, onClose, video, title }: VideoModal
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(0,212,255,0.1)]">
-              <h3 className="font-display font-semibold text-slate-100 text-lg">{title}</h3>
+              <h3 className="font-display font-medium text-slate-100 text-lg">{title}</h3>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-lg glass flex items-center justify-center #5C5C5C hover:text-white hover:bg-red-500/20 transition-all"
+                className="w-8 h-8 rounded-lg glass flex items-center justify-center var(--text-dim) hover:text-white hover:bg-red-500/20 transition-all"
               >
                 <X size={16} />
               </button>

@@ -6,8 +6,8 @@ import { Award, X, ExternalLink, ChevronLeft, ChevronRight, ZoomIn, FileText } f
 
 const certificates = [
   // Engineering
-  { id:20, title:'Samsung AI Engineering', issuer:'Samsung Innovation Campus', category:'Engineering', color:'#1428A0', emoji:'📱', file:'/certificates/Samsung_AI_Engineering.jpg', preview:'/certificates/Samsung_AI_Engineering.png', type:'image' as const },
-  { id:21, title:'Samsung IOT Engineering', issuer:'Samsung', category:'Engineering', color:'#1428A0', emoji:'🏆', file:'/certificates/Sams_IOT.jpeg', preview:'/certificates/Sams_IOT.jpeg', type:'image' as const },
+  { id:20, title:'Samsung AI Engineering', issuer:'Samsung Innovation Campus', category:'Engineering', color:'var(--text)', emoji:'📱', file:'/certificates/Samsung_AI_Engineering.jpg', preview:'/certificates/Samsung_AI_Engineering.png', type:'image' as const },
+  { id:21, title:'Samsung IOT Engineering', issuer:'Samsung', category:'Engineering', color:'var(--text)', emoji:'🏆', file:'/certificates/Sams_IOT.jpeg', preview:'/certificates/Sams_IOT.jpeg', type:'image' as const },
   // AI & ML
   { id:10, title:'Oracle Generative AI Professional', issuer:'Oracle', category:'AI & ML', color:'#FF0000', emoji:'🌐', file:'/certificates/Orcale_GEN_AI.pdf', preview:'/certificates/previews/Orcale_GEN_AI.png', type:'pdf' as const },
   { id:6, title:'Building LLM Applications with Prompt Engineering', issuer:'NVIDIA', category:'AI & ML', color:'var(--accent)', emoji:'💬', file:'/certificates/Building_LLM_Applications.pdf', preview:'/certificates/previews/Building_LLM_Applications_With_Prompt_Engineering.png', type:'pdf' as const },
@@ -22,18 +22,18 @@ const certificates = [
   // Data Science
   { id:16, title:'Oracle Data Science Professional', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🗄️', file:'/certificates/Orcale_DataScience.pdf', preview:'/certificates/previews/Orcale_DataScience.png', type:'pdf' as const },
   { id:17, title:'Oracle Data Science Badge', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🔴', file:'/certificates/DS_b.jpg', preview:'/certificates/DS_b.jpg', type:'image' as const },
-  { id:13, title:'Data Science Capstone', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📈', file:'/certificates/Data_Science_Capstone.pdf', preview:'/certificates/previews/Data_Science_Capstone.png', type:'pdf' as const },
-  { id:14, title:'Data Analysis with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'🐍', file:'/certificates/data_analysis_with_python.pdf', preview:'/certificates/previews/data_analysis_with_python.png', type:'pdf' as const },
-  { id:15, title:'Data Visualization with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📉', file:'/certificates/data visualisation with python.pdf', preview:'/certificates/previews/data_visualisation_with_python.png', type:'pdf' as const },
+  { id:13, title:'Data Science Capstone', issuer:'IBM / Coursera', category:'Data Science', color:'var(--text)', emoji:'📈', file:'/certificates/Data_Science_Capstone.pdf', preview:'/certificates/previews/Data_Science_Capstone.png', type:'pdf' as const },
+  { id:14, title:'Data Analysis with Python', issuer:'IBM / Coursera', category:'Data Science', color:'var(--text)', emoji:'🐍', file:'/certificates/data_analysis_with_python.pdf', preview:'/certificates/previews/data_analysis_with_python.png', type:'pdf' as const },
+  { id:15, title:'Data Visualization with Python', issuer:'IBM / Coursera', category:'Data Science', color:'var(--text)', emoji:'📉', file:'/certificates/data visualisation with python.pdf', preview:'/certificates/previews/data_visualisation_with_python.png', type:'pdf' as const },
 
   // Computer Vision
   { id:1, title:'Deep Learning for Computer Vision', issuer:'Professional Course', category:'Computer Vision', color:'var(--accent)', emoji:'👁', file:'/certificates/Deep_Learning_For_computer_Vision.pdf', preview:'/certificates/previews/Deep_Learning_For_computer_Vision.png', type:'pdf' as const },
   { id:2, title:'Computer Vision Applications', issuer:'Professional Course', category:'Computer Vision', color:'var(--accent)', emoji:'🎯', file:'/certificates/Computer_Vision_Applications.pdf', preview:'/certificates/previews/Computer_Vision_Applications.png', type:'pdf' as const },
  
   // Programming
-  { id:18, title:'Python for AI and Data Science', issuer:'IBM / Coursera', category:'Programming', color:'#FF6B6B', emoji:'🐍', file:'/certificates/python_for_AI_and_Data_science.pdf', preview:'/certificates/previews/python_for_AI_and_Data_science.png', type:'pdf' as const },
+  { id:18, title:'Python for AI and Data Science', issuer:'IBM / Coursera', category:'Programming', color:'var(--accent)', emoji:'🐍', file:'/certificates/python_for_AI_and_Data_science.pdf', preview:'/certificates/previews/python_for_AI_and_Data_science.png', type:'pdf' as const },
   // Quantum
-  { id:22, title:'Quantum Computing Introduction', issuer:'GUC × Qiskit Fallfest', category:'Quantum', color:'#8B5CF6', emoji:'⚛️', file:'/certificates/quantum-intro-GUC_Qiskit_Fallfest_cert.jpg', preview:'/certificates/quantum-intro-GUC_Qiskit_Fallfest_cert.jpg', type:'image' as const },
+  { id:22, title:'Quantum Computing Introduction', issuer:'GUC × Qiskit Fallfest', category:'Quantum', color:'var(--text-muted)', emoji:'⚛️', file:'/certificates/quantum-intro-GUC_Qiskit_Fallfest_cert.jpg', preview:'/certificates/quantum-intro-GUC_Qiskit_Fallfest_cert.jpg', type:'image' as const },
   // Projects
 ]
 
@@ -61,17 +61,17 @@ function CertificateModal({ cert, onClose, onPrev, onNext, index, total }: {
         <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
           <div className="flex-1 min-w-0 pr-4">
             <span className="font-mono text-[10px] uppercase tracking-widest" style={{ color:cert.color }}>{cert.category}</span>
-            <h3 className="font-semibold #EDEDED text-base mt-0.5 leading-snug line-clamp-1">{cert.title}</h3>
-            <p className="#5C5C5C text-xs mt-0.5">{cert.issuer}</p>
+            <h3 className="font-medium var(--text) text-base mt-0.5 leading-snug line-clamp-1">{cert.title}</h3>
+            <p className="var(--text-dim) text-xs mt-0.5">{cert.issuer}</p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <a href={cert.file} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg #5C5C5C text-xs font-medium transition-colors hover:#EDEDED"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg var(--text-dim) text-xs font-medium transition-colors hover:var(--text)"
               style={{ background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)' }}>
               <ExternalLink size={12}/>{cert.type==='pdf'?'Open PDF':'Open'}
             </a>
             <button onClick={onClose}
-              className="w-8 h-8 rounded-lg flex items-center justify-center #5C5C5C transition-all hover:#EDEDED hover:bg-red-500/20">
+              className="w-8 h-8 rounded-lg flex items-center justify-center var(--text-dim) transition-all hover:var(--text) hover:bg-red-500/20">
               <X size={15}/>
             </button>
           </div>
@@ -93,11 +93,11 @@ function CertificateModal({ cert, onClose, onPrev, onNext, index, total }: {
 
         {/* Navigation */}
         <div className="flex items-center justify-between px-6 py-3" style={{ borderTop:'1px solid rgba(255,255,255,0.06)' }}>
-          <button onClick={onPrev} className="flex items-center gap-1.5 #5C5C5C hover:#EDEDED transition-colors text-sm">
+          <button onClick={onPrev} className="flex items-center gap-1.5 var(--text-dim) hover:var(--text) transition-colors text-sm">
             <ChevronLeft size={15}/> Previous
           </button>
-          <span className="font-mono text-xs #5C5C5C">{index+1} / {total}</span>
-          <button onClick={onNext} className="flex items-center gap-1.5 #5C5C5C hover:#EDEDED transition-colors text-sm">
+          <span className="font-mono text-xs var(--text-dim)">{index+1} / {total}</span>
+          <button onClick={onNext} className="flex items-center gap-1.5 var(--text-dim) hover:var(--text) transition-colors text-sm">
             Next <ChevronRight size={15}/>
           </button>
         </div>
@@ -123,7 +123,7 @@ function CertCard({ cert, index, inView, onClick }: {
       whileHover={{ scale:1.02, boxShadow:`0 8px 32px ${cert.color}22` }}
     >
       {/* Preview thumbnail */}
-      <div className="relative overflow-hidden" style={{ height:180, background:'#0a0a14' }}>
+      <div className="relative overflow-hidden" style={{ height:180, background:'var(--bg)' }}>
         {!imgErr ? (
           <img
             src={cert.preview}
@@ -142,7 +142,7 @@ function CertCard({ cert, index, inView, onClick }: {
 
         {/* Hover overlay */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ background:'rgba(0,0,0,0.52)' }}>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl #EDEDED text-sm font-semibold" style={{ background:cert.color }}>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-xl var(--text) text-sm font-medium" style={{ background:cert.color }}>
             <ZoomIn size={14}/> View
           </div>
         </div>
@@ -159,8 +159,8 @@ function CertCard({ cert, index, inView, onClick }: {
       {/* Text */}
       <div className="p-4">
         <div className="font-mono text-[10px] uppercase tracking-widest mb-1" style={{ color:cert.color }}>{cert.category}</div>
-        <h3 className="#9B9B9B text-sm font-semibold leading-snug line-clamp-2 group-hover:#EDEDED transition-colors">{cert.title}</h3>
-        <p className="#5C5C5C text-xs mt-1">{cert.issuer}</p>
+        <h3 className="var(--text-muted) text-sm font-medium leading-snug line-clamp-2 group-hover:var(--text) transition-colors">{cert.title}</h3>
+        <p className="var(--text-dim) text-xs mt-1">{cert.issuer}</p>
       </div>
     </motion.div>
   )
@@ -205,7 +205,7 @@ export default function Certificates() {
         <div className="max-w-7xl mx-auto">
           <div className="glass rounded-2xl p-12 text-center" style={{ border: '1px solid rgba(124,58,237,0.08)' }}>
             <div className="w-8 h-8 mx-auto mb-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'rgba(124,58,237,0.25)', borderTopColor: 'transparent' }} />
-            <p className="font-body #5C5C5C text-sm">Loading certificates…</p>
+            <p className="font-body var(--text-dim) text-sm">Loading certificates…</p>
           </div>
         </div>
       </section>
@@ -219,18 +219,18 @@ export default function Certificates() {
         {/* Header */}
         <motion.div initial={{ opacity:0, y:30 }} animate={inView?{ opacity:1, y:0 }:{}} transition={{ duration:0.7 }} className="mb-12">
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[#3ECF8E] text-sm">05.</span>
-            <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">Credentials</span>
+            <span className="font-mono text-[var(--accent)] text-sm">05.</span>
+            <span className="var(--text-dim) font-mono text-xs uppercase tracking-widest">Credentials</span>
             <div className="flex-1 h-px bg-gradient-to-r from-[rgba(124,58,237,0.4)] to-transparent"/>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED">
+            <h2 className="font-display font-medium text-4xl sm:text-5xl var(--text)">
               Certificates &amp; <span style={{ color:'var(--accent)' }}>Credentials</span>
             </h2>
             <div className="flex items-center gap-2 rounded-xl px-4 py-2"
               style={{ background:'rgba(124,58,237,0.08)', border:'1px solid rgba(124,58,237,0.2)' }}>
               <Award size={15} style={{ color:'var(--accent)' }}/>
-              <span className="font-mono text-sm #5C5C5C">{certs.length} certificates</span>
+              <span className="font-mono text-sm var(--text-dim)">{certs.length} certificates</span>
             </div>
           </div>
         </motion.div>
@@ -261,13 +261,13 @@ export default function Certificates() {
           {[
             { label:'Computer Vision', count:certs.filter(c=>c.category==='Computer Vision').length, color:'var(--accent)' },
             { label:'AI & ML',         count:certs.filter(c=>c.category==='AI & ML').length,         color:'var(--accent)' },
-            { label:'Data Science',    count:certs.filter(c=>c.category==='Data Science').length,    color:'#FFD700' },
-            { label:'Programming',     count:certs.filter(c=>c.category==='Programming').length,     color:'#FF6B6B' },
+            { label:'Data Science',    count:certs.filter(c=>c.category==='Data Science').length,    color:'var(--text)' },
+            { label:'Programming',     count:certs.filter(c=>c.category==='Programming').length,     color:'var(--accent)' },
           ].map(s => (
             <div key={s.label} className="rounded-xl p-4 text-center"
               style={{ background:`${s.color}08`, border:`1px solid ${s.color}20` }}>
-              <div className="font-semibold text-3xl mb-1" style={{ color:s.color }}>{s.count}</div>
-              <div className="text-xs #5C5C5C">{s.label}</div>
+              <div className="font-medium text-3xl mb-1" style={{ color:s.color }}>{s.count}</div>
+              <div className="text-xs var(--text-dim)">{s.label}</div>
             </div>
           ))}
         </motion.div>

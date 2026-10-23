@@ -68,9 +68,9 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="font-display font-semibold text-xl tracking-tight">
+        <a href="#" className="font-display font-medium text-xl tracking-tight">
           <span className="font-mono text-emerald-400">AG</span>
-          <span className="#5C5C5C text-sm font-mono ml-2">{'// AI Engineer'}</span>
+          <span className="var(--text-dim) text-sm font-mono ml-2">{'// AI Engineer'}</span>
         </a>
 
         {/* Desktop nav */}
@@ -79,7 +79,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="#5C5C5C hover:text-emerald-400 font-body text-sm font-medium transition-colors duration-200 relative group"
+              className="var(--text-dim) hover:text-emerald-400 font-body text-sm font-medium transition-colors duration-200 relative group"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-px var(--accent) group-hover:w-full transition-all duration-300" />
@@ -97,7 +97,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden #5C5C5C hover:#EDEDED"
+          className="md:hidden var(--text-dim) hover:var(--text)"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -119,7 +119,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="#5C5C5C hover:text-emerald-400 font-body text-sm font-medium py-2"
+                  className="var(--text-dim) hover:text-emerald-400 font-body text-sm font-medium py-2"
                 >
                   {link.label}
                 </a>

@@ -5,22 +5,22 @@ import { Brain, Code2, Cpu, MessageSquare } from 'lucide-react'
 
 const highlights = [
   {
-    icon: <Brain size={22} className="text-[#3ECF8E]" />,
+    icon: <Brain size={22} className="text-[var(--accent)]" />,
     title: 'Computer Vision',
     desc: 'Real-time detection, tracking and classification with YOLO, CNNs and Transformers — from custom dataset annotation through to ONNX deployment.',
   },
   {
-    icon: <Cpu size={22} className="text-[#3ECF8E]" />,
+    icon: <Cpu size={22} className="text-[var(--accent)]" />,
     title: 'Generative AI & LLMs',
     desc: 'LLM application development, prompt engineering and RAG pipelines, with training and certification from NVIDIA and Oracle.',
   },
   {
-    icon: <Code2 size={22} className="text-[#3ECF8E]" />,
+    icon: <Code2 size={22} className="text-[var(--accent)]" />,
     title: 'AI Systems & Edge',
     desc: 'End-to-end pipelines — ingestion to inference to messaging — deployed on Raspberry Pi, ESP32 and MQTT for real-time edge AI.',
   },
   {
-    icon: <MessageSquare size={22} className="text-[#3ECF8E]" />,
+    icon: <MessageSquare size={22} className="text-[var(--accent)]" />,
     title: 'Teaching & Communication',
     desc: 'Instructor and mentor across Samsung Innovation Campus, IEEE, CAT Reloaded and Neurobotics — making complex AI concepts accessible.',
   },
@@ -38,33 +38,33 @@ export default function About() {
       >
         {/* Section header */}
         <div className="flex items-center gap-4 mb-4">
-          <span className="font-mono text-[#3ECF8E] text-sm">01.</span>
-          <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">About Me</span>
+          <span className="font-mono text-[var(--accent)] text-sm">01.</span>
+          <span className="var(--text-dim) font-mono text-xs uppercase tracking-widest">About Me</span>
           <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.12)] to-transparent" />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left: Text */}
           <div>
-            <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED mb-6 leading-tight">
+            <h2 className="font-display font-medium text-4xl sm:text-5xl var(--text) mb-6 leading-tight">
               Building AI that{' '}
               <span className="gradient-text">ships</span>
             </h2>
-            <div className="space-y-4 #5C5C5C font-body leading-relaxed text-base">
+            <div className="space-y-4 var(--text-dim) font-body leading-relaxed text-base">
               <p>
-                I&apos;m <span className="#9B9B9B font-semibold">Ahmed Gwely</span>, an AI Engineer working across the full lifecycle of intelligent systems — training and evaluating models, integrating them into real applications, and deploying them where they actually run.
+                I&apos;m <span className="var(--text-muted) font-medium">Ahmed Gwely</span>, an AI Engineer working across the full lifecycle of intelligent systems — training and evaluating models, integrating them into real applications, and deploying them where they actually run.
               </p>
               <p>
-                My foundation is <span className="text-[#3ECF8E]">Computer Vision</span>: real-time detection, tracking and classification built on custom datasets, then optimized for edge inference. I&apos;ve shipped that end to end — a video and sensor pipeline running in production for water-station automation, and YOLO-based monitoring deployed on a Raspberry Pi 5.
+                My foundation is <span className="text-[var(--accent)]">Computer Vision</span>: real-time detection, tracking and classification built on custom datasets, then optimized for edge inference. I&apos;ve shipped that end to end — a video and sensor pipeline running in production for water-station automation, and YOLO-based monitoring deployed on a Raspberry Pi 5.
               </p>
               <p>
-                Alongside vision, I work in <span className="text-[#3ECF8E]">Generative AI and LLMs</span> — prompt engineering, retrieval-augmented generation and agentic, tool-based workflows — backed by NVIDIA and Oracle certifications and applied in local-first assistant work.
+                Alongside vision, I work in <span className="text-[var(--accent)]">Generative AI and LLMs</span> — prompt engineering, retrieval-augmented generation and agentic, tool-based workflows — backed by NVIDIA and Oracle certifications and applied in local-first assistant work.
               </p>
               <p>
-                Beyond building, I care deeply about <span className="text-[#3ECF8E]">teaching and sharing knowledge</span>. As an instructor and mentor across Samsung Innovation Campus, IEEE and university programs, I break down cutting-edge AI into concepts anyone can grasp — because great technology only matters if it&apos;s understood.
+                Beyond building, I care deeply about <span className="text-[var(--accent)]">teaching and sharing knowledge</span>. As an instructor and mentor across Samsung Innovation Campus, IEEE and university programs, I break down cutting-edge AI into concepts anyone can grasp — because great technology only matters if it&apos;s understood.
               </p>
               <p>
-                I&apos;m driven by one question: <em className="#64748B">&ldquo;What does this AI system actually solve?&rdquo;</em>
+                I&apos;m driven by one question: <em className="var(--text-faint)">&ldquo;What does this AI system actually solve?&rdquo;</em>
               </p>
             </div>
 
@@ -77,8 +77,8 @@ export default function About() {
                 ['Status', '🟢 Open to Work'],
               ].map(([k, v]) => (
                 <div key={k} className="glass rounded-lg p-3 border border-[rgba(62,207,142,0.12)]">
-                  <div className="font-mono text-[10px] #5C5C5C uppercase tracking-widest mb-1">{k}</div>
-                  <div className="font-body text-sm #64748B">{v}</div>
+                  <div className="font-mono text-[10px] var(--text-dim) uppercase tracking-widest mb-1">{k}</div>
+                  <div className="font-body text-sm var(--text-faint)">{v}</div>
                 </div>
               ))}
             </div>
@@ -98,8 +98,8 @@ export default function About() {
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold #EDEDED mb-1">{item.title}</h3>
-                  <p className="#5C5C5C text-sm leading-relaxed font-body">{item.desc}</p>
+                  <h3 className="font-display font-medium var(--text) mb-1">{item.title}</h3>
+                  <p className="var(--text-dim) text-sm leading-relaxed font-body">{item.desc}</p>
                 </div>
               </motion.div>
             ))}

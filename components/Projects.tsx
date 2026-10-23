@@ -88,7 +88,7 @@ const allProjects: ProjectData[] = [
       url: 'https://www.tiktok.com/@ahmedgwely10/video/7473293180511735047',
     },
     badge: '😊 Emotion AI',
-    badgeColor: '#FF6B6B',
+    badgeColor: 'var(--accent)',
     category: 'Computer Vision',
   },
   {
@@ -104,7 +104,7 @@ const allProjects: ProjectData[] = [
       url: 'https://www.tiktok.com/@ahmedgwely10/video/7400084419186396437',
     },
     badge: '📝 OCR',
-    badgeColor: '#FFD700',
+    badgeColor: 'var(--text)',
     category: 'Computer Vision',
   },
   {
@@ -178,7 +178,7 @@ export default function Projects() {
         <div className="max-w-7xl mx-auto">
           <div className="glass rounded-2xl p-12 text-center" style={{ border: '1px solid rgba(62,207,142,0.12)' }}>
             <div className="w-8 h-8 mx-auto mb-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'rgba(0,212,255,0.25)', borderTopColor: 'transparent' }} />
-            <p className="font-body #5C5C5C text-sm">Loading projects…</p>
+            <p className="font-body var(--text-dim) text-sm">Loading projects…</p>
           </div>
         </div>
       </section>
@@ -195,15 +195,15 @@ export default function Projects() {
           className="mb-12"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[#3ECF8E] text-sm">03.</span>
-            <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">Projects</span>
+            <span className="font-mono text-[var(--accent)] text-sm">03.</span>
+            <span className="var(--text-dim) font-mono text-xs uppercase tracking-widest">Projects</span>
             <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.12)] to-transparent" />
           </div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-            <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED">
+            <h2 className="font-display font-medium text-4xl sm:text-5xl var(--text)">
               Shipped with <span className="gradient-text">Proof</span>
             </h2>
-            <p className="#5C5C5C font-body text-sm max-w-sm">
+            <p className="var(--text-dim) font-body text-sm max-w-sm">
               Every project includes a real demo video. Click any card to watch it in action.
             </p>
           </div>
@@ -227,8 +227,8 @@ export default function Projects() {
                 aria-pressed={active}
                 className={`px-4 py-2 rounded-lg text-sm font-body font-medium transition-all duration-200 ${
                   active
-                    ? 'text-[#3ECF8E] text-[#0A0A0B] shadow-[0_0_20px_rgba(62,207,142,0.45)]'
-                    : 'glass #5C5C5C hover:#9B9B9B border border-[rgba(255,255,255,0.06)]'
+                    ? 'text-[var(--accent)] text-[var(--bg)] shadow-[0_0_20px_rgba(62,207,142,0.45)]'
+                    : 'glass var(--text-dim) hover:var(--text-muted) border border-[rgba(255,255,255,0.06)]'
                 }`}
               >
                 {f.label}
@@ -251,12 +251,12 @@ export default function Projects() {
           </div>
         ) : (
           <div className="glass rounded-2xl p-12 text-center border border-[rgba(62,207,142,0.12)]">
-            <p className="font-body #5C5C5C text-sm">
+            <p className="font-body var(--text-dim) text-sm">
               No projects in this category yet.
             </p>
             <button
               onClick={() => setFilter('All')}
-              className="mt-4 px-4 py-2 rounded-lg text-sm font-body text-[#3ECF8E] border border-[rgba(62,207,142,0.12)] hover:bg-[rgba(62,207,142,0.12)] transition-all"
+              className="mt-4 px-4 py-2 rounded-lg text-sm font-body text-[var(--accent)] border border-[rgba(62,207,142,0.12)] hover:bg-[rgba(62,207,142,0.12)] transition-all"
             >
               Show all projects
             </button>
@@ -273,7 +273,7 @@ export default function Projects() {
             href="https://github.com/AhmedGwely"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 #5C5C5C hover:text-[#3ECF8E] font-body text-sm transition-colors group"
+            className="inline-flex items-center gap-2 var(--text-dim) hover:text-[var(--accent)] font-body text-sm transition-colors group"
           >
             <span>View all repositories on GitHub</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>

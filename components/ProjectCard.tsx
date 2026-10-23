@@ -110,7 +110,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-[rgba(62,207,142,0.12)] to-[rgba(124,58,237,0.1)] flex items-center justify-center">
-                <Play size={40} className="text-[#3ECF8E] opacity-50" />
+                <Play size={40} className="text-[var(--accent)] opacity-50" />
               </div>
             )}
 
@@ -123,22 +123,22 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
               whileHover={{ scale: 1.05 }}
             >
               <div className="w-14 h-14 rounded-full bg-[rgba(62,207,142,0.9)] flex items-center justify-center shadow-[0_0_30px_rgba(62,207,142,0.5)]">
-                <Play size={22} className="text-[#0A0A0B] ml-1" fill="currentColor" />
+                <Play size={22} className="text-[var(--bg)] ml-1" fill="currentColor" />
               </div>
             </motion.div>
 
             {/* Badge */}
             {project.badge && (
               <div
-                className="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold"
-                style={{ background: project.badgeColor || 'var(--accent)', color: '#0A0A0B' }}
+                className="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-mono font-medium"
+                style={{ background: project.badgeColor || 'var(--accent)', color: 'var(--bg)' }}
               >
                 {project.badge}
               </div>
             )}
 
             {/* Video type indicator */}
-            <div className="absolute top-3 right-3 px-2 py-1 rounded glass text-xs font-mono #5C5C5C border border-[rgba(255,255,255,0.1)]">
+            <div className="absolute top-3 right-3 px-2 py-1 rounded glass text-xs font-mono var(--text-dim) border border-[rgba(255,255,255,0.1)]">
               {project.video.type === 'youtube' ? '▶ YouTube' : project.video.type === 'tiktok' ? '♪ TikTok' : project.video.type === 'linkedin' ? 'in LinkedIn' : 'Video'}
             </div>
           </div>
@@ -146,21 +146,21 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-1">
-          <h3 className="font-display font-semibold #EDEDED text-xl mb-3">
+          <h3 className="font-display font-medium var(--text) text-xl mb-3">
             {project.title}
           </h3>
 
           <div className="space-y-2 mb-4 flex-1">
-            <p className="#5C5C5C text-sm font-body">
-              <span className="text-[#3ECF8E] font-semibold">Problem: </span>
+            <p className="var(--text-dim) text-sm font-body">
+              <span className="text-[var(--accent)] font-medium">Problem: </span>
               {project.problem}
             </p>
-            <p className="#5C5C5C text-sm font-body">
-              <span className="text-[#3ECF8E] font-semibold">Solution: </span>
+            <p className="var(--text-dim) text-sm font-body">
+              <span className="text-[var(--accent)] font-medium">Solution: </span>
               {project.solution}
             </p>
-            <p className="#5C5C5C text-sm font-body">
-              <span className="text-[#3ECF8E] font-semibold">Impact: </span>
+            <p className="var(--text-dim) text-sm font-body">
+              <span className="text-[var(--accent)] font-medium">Impact: </span>
               {project.impact}
             </p>
           </div>
@@ -179,7 +179,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
                 onClick={() => setModalOpen(true)}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[rgba(62,207,142,0.15)] border border-[rgba(62,207,142,0.35)] text-[#3ECF8E] text-sm font-body transition-all"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[rgba(62,207,142,0.15)] border border-[rgba(62,207,142,0.35)] text-[var(--accent)] text-sm font-body transition-all"
               >
                 <Play size={14} />
                 Watch Demo
@@ -190,7 +190,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-[rgba(255,255,255,0.1)] #5C5C5C text-sm font-body hover:#EDEDED hover:border-[rgba(255,255,255,0.3)] transition-all"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-[rgba(255,255,255,0.1)] var(--text-dim) text-sm font-body hover:var(--text) hover:border-[rgba(255,255,255,0.3)] transition-all"
               >
                 <Github size={14} />
                 Code
@@ -201,7 +201,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-[rgba(255,255,255,0.1)] #5C5C5C text-sm font-body hover:#EDEDED hover:border-[rgba(255,255,255,0.3)] transition-all ml-auto"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-[rgba(255,255,255,0.1)] var(--text-dim) text-sm font-body hover:var(--text) hover:border-[rgba(255,255,255,0.3)] transition-all ml-auto"
               >
                 <ExternalLink size={14} />
                 Live

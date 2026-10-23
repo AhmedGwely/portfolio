@@ -20,7 +20,7 @@ export const dynamic = 'force-dynamic'
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-[#0A0A0B] overflow-x-hidden">
+    <main className="relative min-h-screen bg-[var(--bg)] overflow-x-hidden">
       <div className="fixed inset-0 grid-bg opacity-100 pointer-events-none z-0" />
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(0,212,255,0.06)_0%,transparent_70%)]" />

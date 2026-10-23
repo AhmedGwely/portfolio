@@ -1,5 +1,5 @@
 // Post-Cody motion system — shared tokens for the portfolio.
-// Single emerald accent (#3ECF8E), Geist + Geist Mono, no gradients, no emojis.
+// Single emerald accent (var(--accent)), Geist + Geist Mono, no gradients, no emojis.
 // Shared values so every moving element stays consistent (brief rule: "Define
 // shared motion tokens in one file; reuse them everywhere").
 

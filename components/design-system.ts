@@ -1,18 +1,18 @@
 // Design system — Post-Cody design tokens for the portfolio.
-// Midnight minimal: near-black base, single emerald accent (#3ECF8E),
+// Midnight minimal: near-black base, single emerald accent (var(--accent)),
 // Geist + Geist Mono, NO gradients, NO emojis. Every moving element
 // relates to AI / computer vision.
 
 export const COLORS = {
-  bg: '#0A0A0B', // near-black
-  bgPanel: '#111113',
-  bgElevated: '#16161A',
-  border: '#2A2A2D',
-  borderSoft: '#243044',
-  text: '#EDEDED',
-  textMuted: '#94A3B8',
-  textDim: '#64748B',
-  accent: '#3ECF8E', // single emerald
+  bg: 'var(--bg)', // near-black
+  bgPanel: 'var(--surface)',
+  bgElevated: 'var(--surface)',
+  border: 'var(--border)',
+  borderSoft: 'var(--surface)',
+  text: 'var(--text)',
+  textMuted: 'var(--text-dim)',
+  textDim: 'var(--text-faint)',
+  accent: 'var(--accent)', // single emerald
   accentSoft: 'rgba(62,207,142,0.12)',
   accentDim: 'rgba(62,207,142,0.72)',
   accentGlow: 'rgba(62,207,142,0.45)',
