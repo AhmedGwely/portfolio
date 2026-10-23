@@ -10,3 +10,7 @@ tsconfig.tsbuildinfo
 .next/
 .output_cache/
 
+# Environment variables (never commit secrets)
+.env
+.env*
+

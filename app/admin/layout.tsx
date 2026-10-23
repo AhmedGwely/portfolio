@@ -53,7 +53,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   if (checking || !authenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0a0a14]">
-        <div className="text-[#00D4FF] text-lg animate-pulse">Loading…</div>
+        <div className="text-[#3ECF8E] text-lg animate-pulse">Loading…</div>
       </div>
     )
   }
@@ -61,9 +61,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-[#0a0a14] text-gray-200 flex">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-[#00D4FF]/10 bg-[#0D1117]/50 flex flex-col">
-        <div className="p-6 border-b border-[#00D4FF]/10">
-          <h2 className="text-lg font-bold font-[Syne] text-[#00D4FF]">Admin CMS</h2>
+      <aside className="w-64 border-r border-[#3ECF8E]/10 bg-[#111113]/50 flex flex-col">
+        <div className="p-6 border-b border-[#3ECF8E]/10">
+          <h2 className="text-lg font-bold font-[Syne] text-[#3ECF8E]">Admin CMS</h2>
         </div>
 
         <nav className="flex-1 p-4 space-y-1">
@@ -75,8 +75,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 href={item.href}
                 className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   isActive
-                    ? 'bg-[#00D4FF]/10 text-[#00D4FF] border border-[#00D4FF]/20'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-[#00D4FF]/10 text-[#3ECF8E] border border-[#00D4FF]/20'
+                    : '#5C5C5C hover:text-white hover:bg-white/5'
                 }`}
               >
                 {item.label}
@@ -89,10 +89,10 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       {/* Main content */}
       <div className="flex-1 flex flex-col">
         {/* Top bar */}
-        <header className="h-14 border-b border-[#00D4FF]/10 bg-[#0D1117]/50 flex items-center justify-between px-6">
+        <header className="h-14 border-b border-[#3ECF8E]/10 bg-[#111113]/50 flex items-center justify-between px-6">
           <a
             href="/"
-            className="text-sm text-gray-400 hover:text-[#00D4FF] transition-colors"
+            className="text-sm #5C5C5C hover:text-[#3ECF8E] transition-colors"
           >
             ← View Site
           </a>

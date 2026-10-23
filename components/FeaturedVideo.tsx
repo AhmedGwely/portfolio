@@ -5,9 +5,9 @@ import { useInView } from 'react-intersection-observer'
 import { Play, ExternalLink, Youtube, Radio, Sparkles } from 'lucide-react'
 import YouTubePlayer from './YouTubePlayer'
 
-const ACCENT = '#00D4FF'
-const ACCENT_2 = '#7C3AED'
-const ACCENT_3 = '#06FFA5'
+const ACCENT = 'var(--accent)'
+const ACCENT_2 = 'var(--accent)'
+const ACCENT_3 = 'var(--accent)'
 
 // Verified via YouTube oEmbed: title "Artificial Intelligence Conference",
 // channel "Ahmed Gwely" (@AhmedGwely). Embedding is permitted.
@@ -83,11 +83,11 @@ export default function FeaturedVideo() {
       {/* Ambient glow — matches the page background language */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[500px] blur-3xl opacity-[0.07]"
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[500px] blur-[120px] opacity-7"
           style={{ background: `radial-gradient(ellipse at center, ${ACCENT}, transparent 70%)` }}
         />
         <div
-          className="absolute bottom-0 right-1/4 w-[500px] h-[400px] blur-3xl opacity-[0.06]"
+          className="absolute bottom-0 right-1/4 w-[500px] h-[400px] blur-[120px] opacity-6"
           style={{ background: `radial-gradient(ellipse at center, ${ACCENT_2}, transparent 70%)` }}
         />
       </div>
@@ -105,11 +105,11 @@ export default function FeaturedVideo() {
             <span className="font-mono text-xs uppercase tracking-[0.25em]" style={{ color: ACCENT }}>
               Main Featured
             </span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(0,212,255,0.35)] to-transparent" />
+            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.45)] to-transparent" />
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-            <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-100 leading-[1.05] tracking-tight">
+            <h2 className="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl #EDEDED leading-[1.05] tracking-tight">
               Artificial Intelligence{' '}
               <span className="gradient-text">Conference</span>
             </h2>
@@ -126,7 +126,7 @@ export default function FeaturedVideo() {
                 />
                 <span className="relative inline-flex w-2 h-2 rounded-full" style={{ background: ACCENT_3 }} />
               </span>
-              <span className="font-mono text-[11px] text-slate-400 uppercase tracking-widest">
+              <span className="font-mono text-[11px] #5C5C5C uppercase tracking-widest">
                 Now Streaming
               </span>
             </div>
@@ -210,7 +210,7 @@ export default function FeaturedVideo() {
                   {/* Top chips */}
                   <div className="absolute top-4 left-4 flex items-center gap-2">
                     <span
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-[11px] font-bold tracking-wide"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-[11px] font-semibold tracking-wide"
                       style={{ background: ACCENT, color: '#0A0A0B' }}
                     >
                       <Play size={10} fill="currentColor" />
@@ -220,7 +220,7 @@ export default function FeaturedVideo() {
 
                   <div className="absolute top-4 right-4 flex items-center gap-2">
                     <span
-                      className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg font-mono text-[11px] text-slate-200 backdrop-blur-md"
+                      className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg font-mono text-[11px] #9B9B9B backdrop-blur-md"
                       style={{ background: 'rgba(255,0,0,0.22)', border: '1px solid rgba(255,0,0,0.35)' }}
                     >
                       <Youtube size={12} />
@@ -261,20 +261,20 @@ export default function FeaturedVideo() {
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 mb-1.5">
                           <Radio size={12} style={{ color: ACCENT_3 }} />
-                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] #5C5C5C">
                             Keynote
                           </span>
                         </div>
-                        <p className="font-display font-bold text-white text-lg sm:text-2xl leading-tight truncate">
+                        <p className="font-display font-semibold #EDEDED text-lg sm:text-2xl leading-tight truncate">
                           Artificial Intelligence Conference
                         </p>
-                        <p className="font-body text-slate-400 text-xs sm:text-sm mt-1">
+                        <p className="font-body #5C5C5C text-xs sm:text-sm mt-1">
                           Presented by Ahmed Gwely
                         </p>
                       </div>
 
                       <span
-                        className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl font-body text-sm font-semibold text-white shrink-0 backdrop-blur-md"
+                        className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl font-body text-sm font-semibold #EDEDED shrink-0 backdrop-blur-md"
                         style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}
                       >
                         Play here
@@ -297,10 +297,10 @@ export default function FeaturedVideo() {
         >
           {/* Copy */}
           <div className="lg:col-span-3">
-            <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-100 mb-3 leading-tight">
+            <h3 className="font-display font-semibold text-2xl sm:text-3xl #EDEDED mb-3 leading-tight">
               Sharing applied AI with the next generation of engineers
             </h3>
-            <p className="font-body text-base sm:text-lg text-slate-400 mb-5 leading-relaxed">
+            <p className="font-body text-base sm:text-lg #5C5C5C mb-5 leading-relaxed">
               A full conference keynote on artificial intelligence — covering real-world computer
               vision systems, deep learning in production, and what it takes to move a model from a
               notebook to something people actually use.
@@ -329,10 +329,10 @@ export default function FeaturedVideo() {
                     className="absolute left-0 top-0 bottom-0 w-[2px]"
                     style={{ background: `linear-gradient(180deg, ${ACCENT}, ${ACCENT_2})` }}
                   />
-                  <div className="font-mono text-[10px] text-slate-600 uppercase tracking-widest mb-1">
+                  <div className="font-mono text-[10px] #5C5C5C uppercase tracking-widest mb-1">
                     {m.label}
                   </div>
-                  <div className="font-body text-sm text-slate-300">{m.value}</div>
+                  <div className="font-body text-sm #64748B">{m.value}</div>
                 </motion.div>
               ))}
             </div>
@@ -340,7 +340,7 @@ export default function FeaturedVideo() {
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
               <button
                 onClick={() => start(true)}
-                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-body font-bold text-sm transition-all duration-300 hover:shadow-[0_0_35px_rgba(0,212,255,0.45)]"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-body font-semibold text-sm transition-all duration-300 hover:shadow-[0_0_35px_rgba(62,207,142,0.45)]"
                 style={{
                   background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
                   color: '#0A0A0B',
@@ -353,7 +353,7 @@ export default function FeaturedVideo() {
                 href={WATCH_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl glass border border-[rgba(255,255,255,0.1)] text-slate-400 font-body text-sm hover:text-white hover:border-[rgba(255,255,255,0.3)] transition-all"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl glass border border-[rgba(255,255,255,0.1)] #5C5C5C font-body text-sm hover:#EDEDED hover:border-[rgba(255,255,255,0.3)] transition-all"
               >
                 <Youtube size={16} />
                 Watch on YouTube

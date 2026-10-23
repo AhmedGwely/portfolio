@@ -10,15 +10,15 @@ const certificates = [
   { id:21, title:'Samsung IOT Engineering', issuer:'Samsung', category:'Engineering', color:'#1428A0', emoji:'🏆', file:'/certificates/Sams_IOT.jpeg', preview:'/certificates/Sams_IOT.jpeg', type:'image' as const },
   // AI & ML
   { id:10, title:'Oracle Generative AI Professional', issuer:'Oracle', category:'AI & ML', color:'#FF0000', emoji:'🌐', file:'/certificates/Orcale_GEN_AI.pdf', preview:'/certificates/previews/Orcale_GEN_AI.png', type:'pdf' as const },
-  { id:6, title:'Building LLM Applications with Prompt Engineering', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'💬', file:'/certificates/Building_LLM_Applications.pdf', preview:'/certificates/previews/Building_LLM_Applications_With_Prompt_Engineering.png', type:'pdf' as const },
-  { id:7, title:'RAG — Retrieval-Augmented Generation', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🔗', file:'/certificates/RAG_Nvdia.pdf', preview:'/certificates/previews/RAG_Nvdia.png', type:'pdf' as const },
+  { id:6, title:'Building LLM Applications with Prompt Engineering', issuer:'NVIDIA', category:'AI & ML', color:'var(--accent)', emoji:'💬', file:'/certificates/Building_LLM_Applications.pdf', preview:'/certificates/previews/Building_LLM_Applications_With_Prompt_Engineering.png', type:'pdf' as const },
+  { id:7, title:'RAG — Retrieval-Augmented Generation', issuer:'NVIDIA', category:'AI & ML', color:'var(--accent)', emoji:'🔗', file:'/certificates/RAG_Nvdia.pdf', preview:'/certificates/previews/RAG_Nvdia.png', type:'pdf' as const },
   { id:8, title:'Introducing Generative AI with AWS', issuer:'Amazon Web Services', category:'AI & ML', color:'#FF9900', emoji:'☁️', file:'/certificates/Introducing_Generative_AI_with_AWS.pdf', preview:'/certificates/previews/Introducing_Generative_AI_with_AWS.png', type:'pdf' as const },
-  { id:9, title:'ITI Generative AI', issuer:'ITI Egypt', category:'AI & ML', color:'#7C3AED', emoji:'🎓', file:'/certificates/ITI_Gen_AI.pdf', preview:'/certificates/previews/ITI_Gen_AI.png', type:'pdf' as const },
-  { id:5, title:'AI for All: From Basics to GenAI', issuer:'NVIDIA', category:'AI & ML', color:'#7C3AED', emoji:'🧠', file:'/certificates/AI_for_All_From_Basics_to_GenAI.pdf', preview:'/certificates/previews/AI_for_All_From_Basics_to_GenAI_Practice_AI_for_All_From_Basics_to_GenAI_Practice_-_Nvidia.png', type:'pdf' as const },
+  { id:9, title:'ITI Generative AI', issuer:'ITI Egypt', category:'AI & ML', color:'var(--accent)', emoji:'🎓', file:'/certificates/ITI_Gen_AI.pdf', preview:'/certificates/previews/ITI_Gen_AI.png', type:'pdf' as const },
+  { id:5, title:'AI for All: From Basics to GenAI', issuer:'NVIDIA', category:'AI & ML', color:'var(--accent)', emoji:'🧠', file:'/certificates/AI_for_All_From_Basics_to_GenAI.pdf', preview:'/certificates/previews/AI_for_All_From_Basics_to_GenAI_Practice_AI_for_All_From_Basics_to_GenAI_Practice_-_Nvidia.png', type:'pdf' as const },
 
   // Machine Learning
-  { id:11, title:'Supervised ML: Regression & Classification', issuer:'DeepLearning.AI / Coursera', category:'Machine Learning', color:'#06FFA5', emoji:'📊', file:'/certificates/Supervised_ML.pdf', preview:'/certificates/previews/Supervised_Machine_Learning_Regression_and_Classification.png', type:'pdf' as const },
-  { id:12, title:'Introduction to Deep Learning', issuer:'Professional Course', category:'Machine Learning', color:'#06FFA5', emoji:'🧬', file:'/certificates/introduction_to_deep_learning.pdf', preview:'/certificates/previews/introduction_to_deep_learning.png', type:'pdf' as const },
+  { id:11, title:'Supervised ML: Regression & Classification', issuer:'DeepLearning.AI / Coursera', category:'Machine Learning', color:'var(--accent)', emoji:'📊', file:'/certificates/Supervised_ML.pdf', preview:'/certificates/previews/Supervised_Machine_Learning_Regression_and_Classification.png', type:'pdf' as const },
+  { id:12, title:'Introduction to Deep Learning', issuer:'Professional Course', category:'Machine Learning', color:'var(--accent)', emoji:'🧬', file:'/certificates/introduction_to_deep_learning.pdf', preview:'/certificates/previews/introduction_to_deep_learning.png', type:'pdf' as const },
   // Data Science
   { id:16, title:'Oracle Data Science Professional', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🗄️', file:'/certificates/Orcale_DataScience.pdf', preview:'/certificates/previews/Orcale_DataScience.png', type:'pdf' as const },
   { id:17, title:'Oracle Data Science Badge', issuer:'Oracle', category:'Data Science', color:'#FF0000', emoji:'🔴', file:'/certificates/DS_b.jpg', preview:'/certificates/DS_b.jpg', type:'image' as const },
@@ -27,8 +27,8 @@ const certificates = [
   { id:15, title:'Data Visualization with Python', issuer:'IBM / Coursera', category:'Data Science', color:'#FFD700', emoji:'📉', file:'/certificates/data visualisation with python.pdf', preview:'/certificates/previews/data_visualisation_with_python.png', type:'pdf' as const },
 
   // Computer Vision
-  { id:1, title:'Deep Learning for Computer Vision', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'👁', file:'/certificates/Deep_Learning_For_computer_Vision.pdf', preview:'/certificates/previews/Deep_Learning_For_computer_Vision.png', type:'pdf' as const },
-  { id:2, title:'Computer Vision Applications', issuer:'Professional Course', category:'Computer Vision', color:'#00D4FF', emoji:'🎯', file:'/certificates/Computer_Vision_Applications.pdf', preview:'/certificates/previews/Computer_Vision_Applications.png', type:'pdf' as const },
+  { id:1, title:'Deep Learning for Computer Vision', issuer:'Professional Course', category:'Computer Vision', color:'var(--accent)', emoji:'👁', file:'/certificates/Deep_Learning_For_computer_Vision.pdf', preview:'/certificates/previews/Deep_Learning_For_computer_Vision.png', type:'pdf' as const },
+  { id:2, title:'Computer Vision Applications', issuer:'Professional Course', category:'Computer Vision', color:'var(--accent)', emoji:'🎯', file:'/certificates/Computer_Vision_Applications.pdf', preview:'/certificates/previews/Computer_Vision_Applications.png', type:'pdf' as const },
  
   // Programming
   { id:18, title:'Python for AI and Data Science', issuer:'IBM / Coursera', category:'Programming', color:'#FF6B6B', emoji:'🐍', file:'/certificates/python_for_AI_and_Data_science.pdf', preview:'/certificates/previews/python_for_AI_and_Data_science.png', type:'pdf' as const },
@@ -61,17 +61,17 @@ function CertificateModal({ cert, onClose, onPrev, onNext, index, total }: {
         <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
           <div className="flex-1 min-w-0 pr-4">
             <span className="font-mono text-[10px] uppercase tracking-widest" style={{ color:cert.color }}>{cert.category}</span>
-            <h3 className="font-semibold text-white text-base mt-0.5 leading-snug line-clamp-1">{cert.title}</h3>
-            <p className="text-slate-500 text-xs mt-0.5">{cert.issuer}</p>
+            <h3 className="font-semibold #EDEDED text-base mt-0.5 leading-snug line-clamp-1">{cert.title}</h3>
+            <p className="#5C5C5C text-xs mt-0.5">{cert.issuer}</p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <a href={cert.file} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 text-xs font-medium transition-colors hover:text-white"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg #5C5C5C text-xs font-medium transition-colors hover:#EDEDED"
               style={{ background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.1)' }}>
               <ExternalLink size={12}/>{cert.type==='pdf'?'Open PDF':'Open'}
             </a>
             <button onClick={onClose}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 transition-all hover:text-white hover:bg-red-500/20">
+              className="w-8 h-8 rounded-lg flex items-center justify-center #5C5C5C transition-all hover:#EDEDED hover:bg-red-500/20">
               <X size={15}/>
             </button>
           </div>
@@ -93,11 +93,11 @@ function CertificateModal({ cert, onClose, onPrev, onNext, index, total }: {
 
         {/* Navigation */}
         <div className="flex items-center justify-between px-6 py-3" style={{ borderTop:'1px solid rgba(255,255,255,0.06)' }}>
-          <button onClick={onPrev} className="flex items-center gap-1.5 text-slate-500 hover:text-white transition-colors text-sm">
+          <button onClick={onPrev} className="flex items-center gap-1.5 #5C5C5C hover:#EDEDED transition-colors text-sm">
             <ChevronLeft size={15}/> Previous
           </button>
-          <span className="font-mono text-xs text-slate-600">{index+1} / {total}</span>
-          <button onClick={onNext} className="flex items-center gap-1.5 text-slate-500 hover:text-white transition-colors text-sm">
+          <span className="font-mono text-xs #5C5C5C">{index+1} / {total}</span>
+          <button onClick={onNext} className="flex items-center gap-1.5 #5C5C5C hover:#EDEDED transition-colors text-sm">
             Next <ChevronRight size={15}/>
           </button>
         </div>
@@ -142,7 +142,7 @@ function CertCard({ cert, index, inView, onClick }: {
 
         {/* Hover overlay */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ background:'rgba(0,0,0,0.52)' }}>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-semibold" style={{ background:cert.color }}>
+          <div className="flex items-center gap-2 px-4 py-2 rounded-xl #EDEDED text-sm font-semibold" style={{ background:cert.color }}>
             <ZoomIn size={14}/> View
           </div>
         </div>
@@ -159,8 +159,8 @@ function CertCard({ cert, index, inView, onClick }: {
       {/* Text */}
       <div className="p-4">
         <div className="font-mono text-[10px] uppercase tracking-widest mb-1" style={{ color:cert.color }}>{cert.category}</div>
-        <h3 className="text-slate-200 text-sm font-semibold leading-snug line-clamp-2 group-hover:text-white transition-colors">{cert.title}</h3>
-        <p className="text-slate-600 text-xs mt-1">{cert.issuer}</p>
+        <h3 className="#9B9B9B text-sm font-semibold leading-snug line-clamp-2 group-hover:#EDEDED transition-colors">{cert.title}</h3>
+        <p className="#5C5C5C text-xs mt-1">{cert.issuer}</p>
       </div>
     </motion.div>
   )
@@ -205,7 +205,7 @@ export default function Certificates() {
         <div className="max-w-7xl mx-auto">
           <div className="glass rounded-2xl p-12 text-center" style={{ border: '1px solid rgba(124,58,237,0.08)' }}>
             <div className="w-8 h-8 mx-auto mb-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'rgba(124,58,237,0.25)', borderTopColor: 'transparent' }} />
-            <p className="font-body text-slate-400 text-sm">Loading certificates…</p>
+            <p className="font-body #5C5C5C text-sm">Loading certificates…</p>
           </div>
         </div>
       </section>
@@ -219,18 +219,18 @@ export default function Certificates() {
         {/* Header */}
         <motion.div initial={{ opacity:0, y:30 }} animate={inView?{ opacity:1, y:0 }:{}} transition={{ duration:0.7 }} className="mb-12">
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[#7C3AED] text-sm">05.</span>
-            <span className="text-slate-600 font-mono text-xs uppercase tracking-widest">Credentials</span>
+            <span className="font-mono text-[#3ECF8E] text-sm">05.</span>
+            <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">Credentials</span>
             <div className="flex-1 h-px bg-gradient-to-r from-[rgba(124,58,237,0.4)] to-transparent"/>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-100">
-              Certificates &amp; <span style={{ color:'#7C3AED' }}>Credentials</span>
+            <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED">
+              Certificates &amp; <span style={{ color:'var(--accent)' }}>Credentials</span>
             </h2>
             <div className="flex items-center gap-2 rounded-xl px-4 py-2"
               style={{ background:'rgba(124,58,237,0.08)', border:'1px solid rgba(124,58,237,0.2)' }}>
-              <Award size={15} style={{ color:'#7C3AED' }}/>
-              <span className="font-mono text-sm text-slate-400">{certs.length} certificates</span>
+              <Award size={15} style={{ color:'var(--accent)' }}/>
+              <span className="font-mono text-sm #5C5C5C">{certs.length} certificates</span>
             </div>
           </div>
         </motion.div>
@@ -241,7 +241,7 @@ export default function Certificates() {
             <button key={cat} onClick={()=>setFilter(cat)}
               className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
               style={filter===cat
-                ? { background:'#7C3AED', color:'#fff', boxShadow:'0 0 20px rgba(124,58,237,0.4)' }
+                ? { background:'var(--accent)', color:'#fff', boxShadow:'0 0 20px rgba(124,58,237,0.4)' }
                 : { background:'rgba(255,255,255,0.04)', color:'#94a3b8', border:'1px solid rgba(255,255,255,0.06)' }}>
               {cat}
               {cat!=='All' && <span className="ml-1.5 text-[10px] opacity-60">({certs.filter(c=>c.category===cat).length})</span>}
@@ -259,15 +259,15 @@ export default function Certificates() {
         {/* Stats */}
         <motion.div initial={{ opacity:0 }} animate={inView?{ opacity:1 }:{}} transition={{ delay:0.9 }} className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
-            { label:'Computer Vision', count:certs.filter(c=>c.category==='Computer Vision').length, color:'#00D4FF' },
-            { label:'AI & ML',         count:certs.filter(c=>c.category==='AI & ML').length,         color:'#7C3AED' },
+            { label:'Computer Vision', count:certs.filter(c=>c.category==='Computer Vision').length, color:'var(--accent)' },
+            { label:'AI & ML',         count:certs.filter(c=>c.category==='AI & ML').length,         color:'var(--accent)' },
             { label:'Data Science',    count:certs.filter(c=>c.category==='Data Science').length,    color:'#FFD700' },
             { label:'Programming',     count:certs.filter(c=>c.category==='Programming').length,     color:'#FF6B6B' },
           ].map(s => (
             <div key={s.label} className="rounded-xl p-4 text-center"
               style={{ background:`${s.color}08`, border:`1px solid ${s.color}20` }}>
-              <div className="font-bold text-3xl mb-1" style={{ color:s.color }}>{s.count}</div>
-              <div className="text-xs text-slate-500">{s.label}</div>
+              <div className="font-semibold text-3xl mb-1" style={{ color:s.color }}>{s.count}</div>
+              <div className="text-xs #5C5C5C">{s.label}</div>
             </div>
           ))}
         </motion.div>

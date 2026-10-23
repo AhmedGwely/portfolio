@@ -5,8 +5,8 @@ import { useCallback, useEffect, useState, type CSSProperties, type FormEvent } 
 /* ──────────────────────────────────────────────────────────────────────────
    Theme constants — mirror app/admin/layout.tsx
    ────────────────────────────────────────────────────────────────────────── */
-const ACCENT = '#00D4FF'
-const ACCENT_2 = '#7C3AED'
+const ACCENT = '#3ECF8E'
+const ACCENT_2 = '#3ECF8E'
 
 const VIDEO_TYPES = ['youtube', 'tiktok', 'linkedin', 'mp4'] as const
 
@@ -76,7 +76,7 @@ const TYPE_COLORS: Record<VideoType, string> = {
   youtube: '#FF0000',
   tiktok: '#000000',
   linkedin: '#0A66C2',
-  mp4: '#06FFA5',
+  mp4: '#3ECF8E',
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -358,7 +358,7 @@ export default function VideosAdminPage() {
                         className="text-[10px] font-mono px-2 py-1 rounded"
                         style={{
                           background: 'rgba(6,255,165,0.1)',
-                          color: '#06FFA5',
+                          color: '#3ECF8E',
                           border: '1px solid rgba(6,255,165,0.2)',
                         }}
                       >

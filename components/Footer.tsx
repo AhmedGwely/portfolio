@@ -22,17 +22,17 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-[rgba(0,212,255,0.08)] py-12 px-6 overflow-hidden">
+    <footer className="relative border-t border-[rgba(62,207,142,0.12)] py-12 px-6 overflow-hidden">
       {/* Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-[radial-gradient(ellipse_at_bottom,rgba(0,212,255,0.06),transparent_70%)]" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-24 bg-[radial-gradient(ellipse_at_bottom,rgba(62,207,142,0.12),transparent_70%)]" />
 
       <div className="max-w-6xl mx-auto relative">
         {/* Top row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-8 mb-10">
           {/* Logo */}
-          <a href="#" className="font-display font-bold text-2xl">
+          <a href="#" className="font-display font-semibold text-2xl">
             <span className="gradient-text">AG</span>
-            <span className="text-slate-600 font-mono text-sm ml-2">// AI Engineer</span>
+            <span className="#5C5C5C font-mono text-sm ml-2">// AI Engineer</span>
           </a>
 
           {/* Nav links */}
@@ -41,7 +41,7 @@ export default function Footer() {
               <a
                 key={link.href}
                 href={link.href}
-                className="font-body text-sm text-slate-600 hover:text-[#00D4FF] transition-colors"
+                className="font-body text-sm #5C5C5C hover:text-[#3ECF8E] transition-colors"
               >
                 {link.label}
               </a>
@@ -60,7 +60,7 @@ export default function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg glass border border-[rgba(255,255,255,0.06)] flex items-center justify-center text-slate-600 hover:text-[#00D4FF] hover:border-[rgba(0,212,255,0.3)] transition-all"
+                className="w-9 h-9 rounded-lg glass border border-[rgba(255,255,255,0.06)] flex items-center justify-center #5C5C5C hover:text-[#3ECF8E] hover:border-[rgba(62,207,142,0.12)] transition-all"
               >
                 {s.icon}
               </a>
@@ -69,25 +69,25 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-[rgba(0,212,255,0.15)] to-transparent mb-8" />
+        <div className="h-px bg-gradient-to-r from-transparent via-[rgba(62,207,142,0.45)] to-transparent mb-8" />
 
         {/* Bottom row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-mono text-xs text-slate-700">
+          <p className="font-mono text-xs #5C5C5C">
             © {new Date().getFullYear()} Ahmed Gwely. Designed &amp; built with{' '}
-            <span className="text-[#00D4FF]">Next.js</span> +{' '}
-            <span className="text-[#7C3AED]">Framer Motion</span>.
+            <span className="text-[#3ECF8E]">Next.js</span> +{' '}
+            <span className="text-[#3ECF8E]">Framer Motion</span>.
           </p>
 
           <div className="flex items-center gap-6">
-            <span className="font-mono text-xs text-slate-700">
-              <span className="text-[#06FFA5]">▲</span> Deployed on Vercel
+            <span className="font-mono text-xs #5C5C5C">
+              <span className="text-[#3ECF8E]">▲</span> Deployed on Vercel
             </span>
 
             {/* Back to top */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-2 font-mono text-xs text-slate-600 hover:text-[#00D4FF] transition-colors group"
+              className="flex items-center gap-2 font-mono text-xs #5C5C5C hover:text-[#3ECF8E] transition-colors group"
             >
               Back to top
               <ArrowUp size={12} className="group-hover:-translate-y-1 transition-transform" />

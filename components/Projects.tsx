@@ -21,7 +21,7 @@ const allProjects: ProjectData[] = [
     thumbnail: 'https://img.youtube.com/vi/z5086ay7q60/maxresdefault.jpg',
    },
    badge: '🏭 AI + IoT',
-   badgeColor: '#06FFA5',
+   badgeColor: 'var(--accent)',
    category: 'IoT & Edge',
   },
   {
@@ -38,7 +38,7 @@ const allProjects: ProjectData[] = [
       thumbnail: 'https://img.youtube.com/vi/h96VBPSGO2k/maxresdefault.jpg',
     },
     badge: '♿ Accessibility',
-    badgeColor: '#06FFA5',
+    badgeColor: 'var(--accent)',
     category: 'Computer Vision',
   },
   {
@@ -55,7 +55,7 @@ const allProjects: ProjectData[] = [
       thumbnail: 'https://img.youtube.com/vi/9v3JB-1kxgg/maxresdefault.jpg',
     },
     badge: '🖐 Gesture Control',
-    badgeColor: '#00D4FF',
+    badgeColor: 'var(--accent)',
     category: 'Computer Vision',
   },
   {
@@ -72,7 +72,7 @@ const allProjects: ProjectData[] = [
       thumbnail: 'https://img.youtube.com/vi/Z_daZ8G1Qls/maxresdefault.jpg',
     },
     badge: '🎮 GameAI',
-    badgeColor: '#7C3AED',
+    badgeColor: 'var(--accent)',
     category: 'Computer Vision',
   },
   {
@@ -121,7 +121,7 @@ const allProjects: ProjectData[] = [
       thumbnail: 'https://img.youtube.com/vi/9v3JB-1kxgg/maxresdefault.jpg',
     },
     badge: '🚀 Production',
-    badgeColor: '#00D4FF',
+    badgeColor: 'var(--accent)',
     category: 'Computer Vision',
   },
 ]
@@ -176,9 +176,9 @@ export default function Projects() {
     return (
       <section id="projects" ref={ref} className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="glass rounded-2xl p-12 text-center" style={{ border: '1px solid rgba(0,212,255,0.08)' }}>
+          <div className="glass rounded-2xl p-12 text-center" style={{ border: '1px solid rgba(62,207,142,0.12)' }}>
             <div className="w-8 h-8 mx-auto mb-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: 'rgba(0,212,255,0.25)', borderTopColor: 'transparent' }} />
-            <p className="font-body text-slate-400 text-sm">Loading projects…</p>
+            <p className="font-body #5C5C5C text-sm">Loading projects…</p>
           </div>
         </div>
       </section>
@@ -195,15 +195,15 @@ export default function Projects() {
           className="mb-12"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[#00D4FF] text-sm">03.</span>
-            <span className="text-slate-600 font-mono text-xs uppercase tracking-widest">Projects</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(0,212,255,0.3)] to-transparent" />
+            <span className="font-mono text-[#3ECF8E] text-sm">03.</span>
+            <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">Projects</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.12)] to-transparent" />
           </div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-            <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-100">
+            <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED">
               Shipped with <span className="gradient-text">Proof</span>
             </h2>
-            <p className="text-slate-500 font-body text-sm max-w-sm">
+            <p className="#5C5C5C font-body text-sm max-w-sm">
               Every project includes a real demo video. Click any card to watch it in action.
             </p>
           </div>
@@ -227,8 +227,8 @@ export default function Projects() {
                 aria-pressed={active}
                 className={`px-4 py-2 rounded-lg text-sm font-body font-medium transition-all duration-200 ${
                   active
-                    ? 'bg-[#00D4FF] text-[#0A0A0B] shadow-[0_0_20px_rgba(0,212,255,0.4)]'
-                    : 'glass text-slate-400 hover:text-slate-200 border border-[rgba(255,255,255,0.06)]'
+                    ? 'text-[#3ECF8E] text-[#0A0A0B] shadow-[0_0_20px_rgba(62,207,142,0.45)]'
+                    : 'glass #5C5C5C hover:#9B9B9B border border-[rgba(255,255,255,0.06)]'
                 }`}
               >
                 {f.label}
@@ -250,13 +250,13 @@ export default function Projects() {
             </div>
           </div>
         ) : (
-          <div className="glass rounded-2xl p-12 text-center border border-[rgba(0,212,255,0.08)]">
-            <p className="font-body text-slate-400 text-sm">
+          <div className="glass rounded-2xl p-12 text-center border border-[rgba(62,207,142,0.12)]">
+            <p className="font-body #5C5C5C text-sm">
               No projects in this category yet.
             </p>
             <button
               onClick={() => setFilter('All')}
-              className="mt-4 px-4 py-2 rounded-lg text-sm font-body text-[#00D4FF] border border-[rgba(0,212,255,0.3)] hover:bg-[rgba(0,212,255,0.1)] transition-all"
+              className="mt-4 px-4 py-2 rounded-lg text-sm font-body text-[#3ECF8E] border border-[rgba(62,207,142,0.12)] hover:bg-[rgba(62,207,142,0.12)] transition-all"
             >
               Show all projects
             </button>
@@ -273,7 +273,7 @@ export default function Projects() {
             href="https://github.com/AhmedGwely"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-slate-500 hover:text-[#00D4FF] font-body text-sm transition-colors group"
+            className="inline-flex items-center gap-2 #5C5C5C hover:text-[#3ECF8E] font-body text-sm transition-colors group"
           >
             <span>View all repositories on GitHub</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>

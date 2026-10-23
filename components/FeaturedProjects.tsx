@@ -22,7 +22,7 @@ const featured = [
       { label: 'Hardware', value: 'Webcam' },
       { label: 'Framework', value: 'MediaPipe' },
     ],
-    accent: '#06FFA5',
+    accent: 'var(--accent)',
   },
   {
     title: 'Temple Run — Body as Controller',
@@ -40,7 +40,7 @@ const featured = [
       { label: 'Latency', value: 'Real-Time' },
       { label: 'Controller', value: 'None' },
     ],
-    accent: '#7C3AED',
+    accent: 'var(--accent)',
   },
   {
     title: 'Hand Gestures → 3D Shape Control',
@@ -58,7 +58,7 @@ const featured = [
       { label: 'Input', value: 'Gestures' },
       { label: 'Display', value: '3D Live' },
     ],
-    accent: '#00D4FF',
+    accent: 'var(--accent)',
   },
 ]
 
@@ -115,8 +115,8 @@ function FeaturedCard({ project, index }: { project: typeof featured[0]; index: 
             <div className="absolute bottom-0 left-0 right-0 px-6 py-4 flex gap-6">
               {project.stats.map(s => (
                 <div key={s.label}>
-                  <div className="font-display font-bold text-xl" style={{ color: project.accent }}>{s.value}</div>
-                  <div className="font-mono text-xs text-slate-400">{s.label}</div>
+                  <div className="font-display font-semibold text-xl" style={{ color: project.accent }}>{s.value}</div>
+                  <div className="font-mono text-xs #5C5C5C">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -128,13 +128,13 @@ function FeaturedCard({ project, index }: { project: typeof featured[0]; index: 
           <div className="font-mono text-xs uppercase tracking-widest mb-3" style={{ color: project.accent }}>
             Featured Project
           </div>
-          <h3 className="font-display font-bold text-3xl sm:text-4xl text-slate-100 mb-2 leading-tight">
+          <h3 className="font-display font-semibold text-3xl sm:text-4xl #EDEDED mb-2 leading-tight">
             {project.title}
           </h3>
-          <p className="font-body text-lg font-medium text-slate-400 mb-4 italic">
+          <p className="font-body text-lg font-medium #5C5C5C mb-4 italic">
             &ldquo;{project.headline}&rdquo;
           </p>
-          <p className="font-body text-slate-500 text-sm leading-relaxed mb-6">
+          <p className="font-body #5C5C5C text-sm leading-relaxed mb-6">
             {project.description}
           </p>
           <div className="flex flex-wrap gap-2 mb-8">
@@ -159,7 +159,7 @@ function FeaturedCard({ project, index }: { project: typeof featured[0]; index: 
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 rounded-xl glass border border-[rgba(255,255,255,0.1)] text-slate-400 font-body text-sm hover:text-white hover:border-[rgba(255,255,255,0.3)] transition-all"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl glass border border-[rgba(255,255,255,0.1)] #5C5C5C font-body text-sm hover:#EDEDED hover:border-[rgba(255,255,255,0.3)] transition-all"
             >
               <Github size={16} />
               Code
@@ -190,11 +190,11 @@ export default function FeaturedProjects() {
           className="mb-20"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[#00D4FF] text-sm">04.</span>
-            <span className="text-slate-600 font-mono text-xs uppercase tracking-widest">Spotlight</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(0,212,255,0.3)] to-transparent" />
+            <span className="font-mono text-[#3ECF8E] text-sm">04.</span>
+            <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">Spotlight</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.12)] to-transparent" />
           </div>
-          <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-100">
+          <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED">
             Featured <span className="gradient-text">Work</span>
           </h2>
         </motion.div>

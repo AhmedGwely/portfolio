@@ -98,9 +98,9 @@ export default function YouTubePlayer({
   videoId,
   title,
   watchUrl,
-  accent = '#00D4FF',
-  accent2 = '#7C3AED',
-  accent3 = '#06FFA5',
+  accent = 'var(--accent)',
+  accent2 = 'var(--accent)',
+  accent3 = 'var(--accent)',
 }: Props) {
   const hostRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<YTPlayer | null>(null)
@@ -302,7 +302,7 @@ export default function YouTubePlayer({
   const qualityLevels = ready ? (playerRef.current?.getAvailableQualityLevels?.() ?? []) : []
 
   const glass = 'rgba(8,10,18,0.82)'
-  const chip = 'flex items-center justify-center rounded-lg transition-colors duration-150 hover:bg-white/10 text-slate-200'
+  const chip = 'flex items-center justify-center rounded-lg transition-colors duration-150 hover:bg-white/10 #9B9B9B'
 
   return (
     <div
@@ -355,7 +355,7 @@ export default function YouTubePlayer({
             >
               <RotateCcw size={30} className="text-[#0A0A0B]" />
             </span>
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-slate-300">Replay</span>
+            <span className="font-mono text-xs uppercase tracking-[0.2em] #64748B">Replay</span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -374,7 +374,7 @@ export default function YouTubePlayer({
           >
             {/* Progress */}
             <div className="flex items-center gap-3 mb-2">
-              <span className="font-mono text-[11px] text-slate-300 tabular-nums shrink-0 w-[42px] text-right">
+              <span className="font-mono text-[11px] #64748B tabular-nums shrink-0 w-[42px] text-right">
                 {fmt(current)}
               </span>
 
@@ -408,7 +408,7 @@ export default function YouTubePlayer({
                 />
               </div>
 
-              <span className="font-mono text-[11px] text-slate-400 tabular-nums shrink-0 w-[42px]">
+              <span className="font-mono text-[11px] #5C5C5C tabular-nums shrink-0 w-[42px]">
                 {fmt(duration)}
               </span>
             </div>
@@ -435,7 +435,7 @@ export default function YouTubePlayer({
                   type="range" min={0} max={100} value={muted ? 0 : volume}
                   aria-label="Volume"
                   onChange={(e) => changeVolume(Number(e.target.value))}
-                  className="w-0 group-hover/vol:w-20 transition-all duration-300 h-1 rounded-full cursor-pointer accent-[#00D4FF]"
+                  className="w-0 group-hover/vol:w-20 transition-all duration-300 h-1 rounded-full cursor-pointer accent-[#3ECF8E]"
                   style={{ accentColor: accent }}
                 />
               </div>
@@ -465,7 +465,7 @@ export default function YouTubePlayer({
                       className="absolute bottom-11 right-0 rounded-xl overflow-hidden py-1 min-w-[112px] z-20"
                       style={{ background: glass, border: `1px solid ${accent}35`, backdropFilter: 'blur(14px)' }}
                     >
-                      <div className="px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-slate-500">
+                      <div className="px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest #5C5C5C">
                         Speed
                       </div>
                       {SPEEDS.map((s) => (
@@ -514,7 +514,7 @@ export default function YouTubePlayer({
                     >
                       <div className="flex items-start gap-2 mb-2.5">
                         <Info size={13} style={{ color: accent }} className="mt-0.5 shrink-0" />
-                        <p className="text-[11px] leading-relaxed text-slate-300">
+                        <p className="text-[11px] leading-relaxed #64748B">
                           YouTube manages video quality automatically and no longer allows
                           third-party players to set it. It adapts to your connection and screen.
                         </p>
@@ -522,7 +522,7 @@ export default function YouTubePlayer({
 
                       <div className="flex items-center justify-between rounded-lg px-2.5 py-2 mb-2.5"
                         style={{ background: 'rgba(255,255,255,0.05)' }}>
-                        <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
+                        <span className="font-mono text-[10px] uppercase tracking-widest #5C5C5C">
                           Now playing
                         </span>
                         <span className="font-mono text-xs" style={{ color: accent3 }}>
@@ -532,7 +532,7 @@ export default function YouTubePlayer({
 
                       {qualityLevels.length > 0 && (
                         <div className="mb-2.5">
-                          <div className="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">
+                          <div className="font-mono text-[10px] uppercase tracking-widest #5C5C5C mb-1">
                             Available
                           </div>
                           <div className="flex flex-wrap gap-1">

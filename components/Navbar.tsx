@@ -42,7 +42,7 @@ export function ScrollProgressBar() {
   return (
     <div className="fixed left-0 top-0 z-50 h-1 w-full bg-transparent">
       <div
-        className="h-full bg-emerald-400 transition-[width] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        className="h-full var(--accent) transition-[width] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{ width: `${progress * 100}%` }}
       />
     </div>
@@ -68,9 +68,9 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="font-display font-bold text-xl tracking-tight">
+        <a href="#" className="font-display font-semibold text-xl tracking-tight">
           <span className="font-mono text-emerald-400">AG</span>
-          <span className="text-slate-400 text-sm font-mono ml-2">{'// AI Engineer'}</span>
+          <span className="#5C5C5C text-sm font-mono ml-2">{'// AI Engineer'}</span>
         </a>
 
         {/* Desktop nav */}
@@ -79,16 +79,16 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-slate-400 hover:text-emerald-400 font-body text-sm font-medium transition-colors duration-200 relative group"
+              className="#5C5C5C hover:text-emerald-400 font-body text-sm font-medium transition-colors duration-200 relative group"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-emerald-400 group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-1 left-0 w-0 h-px var(--accent) group-hover:w-full transition-all duration-300" />
             </a>
           ))}
           <a
             href="/cv.pdf"
             download
-            className="flex items-center gap-2 rounded-lg border border-emerald-400/30 px-4 py-2 font-body text-sm font-medium text-emerald-400 transition-all duration-200 hover:bg-emerald-400/10"
+            className="flex items-center gap-2 rounded-lg border border-emerald-400/30 px-4 py-2 font-body text-sm font-medium text-emerald-400 transition-all duration-200 hover:var(--accent)/10"
           >
             <Download size={14} />
             Download CV
@@ -97,7 +97,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden text-slate-400 hover:text-white"
+          className="hidden md:flex #5C5C5C hover:#EDEDED"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -119,7 +119,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="text-slate-400 hover:text-emerald-400 font-body text-sm font-medium py-2"
+                  className="#5C5C5C hover:text-emerald-400 font-body text-sm font-medium py-2"
                 >
                   {link.label}
                 </a>
@@ -127,7 +127,7 @@ export default function Navbar() {
               <a
                 href="/cv.pdf"
                 download
-                className="flex items-center gap-2 rounded-lg border border-emerald-400/30 px-4 py-2 font-body text-sm font-medium w-fit text-emerald-400 hover:bg-emerald-400/10"
+                className="flex items-center gap-2 rounded-lg border border-emerald-400/30 px-4 py-2 font-body text-sm font-medium w-fit text-emerald-400 hover:var(--accent)/10"
               >
                 <Download size={14} />
                 Download CV

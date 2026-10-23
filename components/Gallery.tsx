@@ -8,8 +8,8 @@ import {
 import { GALLERY_IMAGES, populatedCategories, type GalleryImage } from '@/data/gallery'
 import { BOOKING_URL, CONTACT_EMAIL, BUSINESS_WHATSAPP, WHATSAPP_DISPLAY, BOOKER_NAME } from '@/lib/site-config'
 
-const ACCENT = '#00D4FF'
-const ACCENT_2 = '#7C3AED'
+const ACCENT = 'var(--accent)'
+const ACCENT_2 = 'var(--accent)'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -85,11 +85,11 @@ function Lightbox({
             <span className="font-mono text-[10px] uppercase tracking-widest" style={{ color: ACCENT }}>
               {img.category}
             </span>
-            <p className="text-slate-200 text-sm mt-0.5 truncate">{img.caption}</p>
+            <p className="#9B9B9B text-sm mt-0.5 truncate">{img.caption}</p>
           </div>
           <button
             ref={closeRef} onClick={onClose} aria-label="Close image viewer"
-            className="w-9 h-9 shrink-0 rounded-lg flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-500/20 transition-colors"
+            className="w-9 h-9 shrink-0 rounded-lg flex items-center justify-center #5C5C5C hover:#EDEDED hover:bg-red-500/20 transition-colors"
           >
             <X size={17} />
           </button>
@@ -109,12 +109,12 @@ function Lightbox({
         <div className="flex items-center justify-between px-4 sm:px-6 py-3"
           style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <button onClick={onPrev} aria-label="Previous image"
-            className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-sm px-2 py-1">
+            className="flex items-center gap-1.5 #5C5C5C hover:#EDEDED transition-colors text-sm px-2 py-1">
             <ChevronLeft size={16} /> Previous
           </button>
-          <span className="font-mono text-xs text-slate-500">{index + 1} / {images.length}</span>
+          <span className="font-mono text-xs #5C5C5C">{index + 1} / {images.length}</span>
           <button onClick={onNext} aria-label="Next image"
-            className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-sm px-2 py-1">
+            className="flex items-center gap-1.5 #5C5C5C hover:#EDEDED transition-colors text-sm px-2 py-1">
             Next <ChevronRight size={16} />
           </button>
         </div>
@@ -146,15 +146,15 @@ function GalleryCta() {
         <div className="relative flex flex-col lg:flex-row lg:items-center gap-7 justify-between">
           <div className="max-w-xl">
             <div className="flex items-center gap-2.5 mb-2.5">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#06FFA5' }} />
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--accent)' }} />
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] #5C5C5C">
                 Work with me
               </span>
             </div>
-            <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-100 mb-2.5 leading-tight">
+            <h3 className="font-display font-semibold text-2xl sm:text-3xl #EDEDED mb-2.5 leading-tight">
               Let&apos;s talk AI
             </h3>
-            <p className="font-body text-slate-400 text-sm leading-relaxed">
+            <p className="font-body #5C5C5C text-sm leading-relaxed">
               Whether you need an AI system built, a second pair of eyes on a computer-vision
               pipeline, or guidance breaking into applied AI — I&apos;m happy to help.
             </p>
@@ -163,7 +163,7 @@ function GalleryCta() {
           <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0 w-full lg:w-auto">
             <button
               onClick={() => setBookingOpen(true)}
-              className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-body font-bold text-sm transition-all duration-300 hover:shadow-[0_0_35px_rgba(0,212,255,0.45)]"
+              className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-body font-semibold text-sm transition-all duration-300 hover:shadow-[0_0_35px_rgba(62,207,142,0.45)]"
               style={{ background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`, color: '#0A0A0B' }}
             >
               <Calendar size={16} />
@@ -171,7 +171,7 @@ function GalleryCta() {
             </button>
             <button
               onClick={() => setMentorOpen(true)}
-              className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl glass border border-[rgba(255,255,255,0.12)] text-slate-300 font-body text-sm hover:text-white hover:border-[rgba(0,212,255,0.45)] transition-all"
+              className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl glass border border-[rgba(255,255,255,0.12)] #64748B font-body text-sm hover:#EDEDED hover:border-[rgba(62,207,142,0.45)] transition-all"
             >
               <GraduationCap size={16} />
               Request Mentorship
@@ -244,7 +244,7 @@ function BookingModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     onClose()
   }
 
-  const field = 'w-full p-3 rounded-lg text-sm text-slate-100 placeholder:text-slate-600 outline-none transition-colors'
+  const field = 'w-full p-3 rounded-lg text-sm #EDEDED placeholder:#5C5C5C outline-none transition-colors'
   const fieldStyle = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)' }
   const errStyle = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,107,107,0.55)' }
 
@@ -269,22 +269,22 @@ function BookingModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
             <div className="flex items-start justify-between gap-3 px-6 py-4"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
               <div>
-                <h3 id="booking-title" className="font-display font-bold text-slate-100 text-lg">
+                <h3 id="booking-title" className="font-display font-semibold #EDEDED text-lg">
                   Book a Call
                 </h3>
-                <p className="font-body text-slate-500 text-xs mt-0.5">
+                <p className="font-body #5C5C5C text-xs mt-0.5">
                   I&apos;ll confirm a time on WhatsApp.
                 </p>
               </div>
               <button onClick={onClose} aria-label="Close booking form"
-                className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-red-500/20 transition-colors">
+                className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center #5C5C5C hover:#EDEDED hover:bg-red-500/20 transition-colors">
                 <X size={15} />
               </button>
             </div>
 
             <form onSubmit={submit} className="px-6 py-5 space-y-4" noValidate>
               <div>
-                <label htmlFor="b-name" className="block font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1.5">Name *</label>
+                <label htmlFor="b-name" className="block font-mono text-[10px] uppercase tracking-widest #5C5C5C mb-1.5">Name *</label>
                 <input id="b-name" ref={firstRef} name="name" value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Your full name" className={field} style={errors.name ? errStyle : fieldStyle} />
@@ -292,7 +292,7 @@ function BookingModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
               </div>
 
               <div>
-                <label htmlFor="b-phone" className="block font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1.5">Phone number *</label>
+                <label htmlFor="b-phone" className="block font-mono text-[10px] uppercase tracking-widest #5C5C5C mb-1.5">Phone number *</label>
                 <input id="b-phone" name="phone" type="tel" value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="+20 10 12345678" className={field} style={errors.phone ? errStyle : fieldStyle} />
@@ -300,11 +300,11 @@ function BookingModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
               </div>
 
               <button type="submit"
-                className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-body font-bold text-sm transition-all"
+                className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-body font-semibold text-sm transition-all"
                 style={{ background: `linear-gradient(135deg, #25D366, #128C7E)`, color: '#0A0A0B' }}>
                 Send via WhatsApp
               </button>
-              <p className="text-center text-slate-600 text-[11px]">
+              <p className="text-center #5C5C5C text-[11px]">
                 Opens WhatsApp with a pre-filled message
               </p>
             </form>
@@ -378,7 +378,7 @@ function MentorshipModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
     onClose()
   }
 
-  const field = 'w-full p-3 rounded-lg text-sm text-slate-100 placeholder:text-slate-600 outline-none transition-colors'
+  const field = 'w-full p-3 rounded-lg text-sm #EDEDED placeholder:#5C5C5C outline-none transition-colors'
   const fieldStyle = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)' }
   const errStyle = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,107,107,0.55)' }
 
@@ -403,22 +403,22 @@ function MentorshipModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             <div className="flex items-start justify-between gap-3 px-6 py-4"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
               <div>
-                <h3 id="mentorship-title" className="font-display font-bold text-slate-100 text-lg">
+                <h3 id="mentorship-title" className="font-display font-semibold #EDEDED text-lg">
                   Request Mentorship
                 </h3>
-                <p className="font-body text-slate-500 text-xs mt-0.5">
+                <p className="font-body #5C5C5C text-xs mt-0.5">
                   Tell me what you&apos;d like help with.
                 </p>
               </div>
               <button onClick={onClose} aria-label="Close mentorship request"
-                className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-red-500/20 transition-colors">
+                className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center #5C5C5C hover:#EDEDED hover:bg-red-500/20 transition-colors">
                 <X size={15} />
               </button>
             </div>
 
             <form onSubmit={submit} className="px-6 py-5 space-y-4" noValidate>
               <div>
-                <label htmlFor="m-name" className="block font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1.5">Name *</label>
+                <label htmlFor="m-name" className="block font-mono text-[10px] uppercase tracking-widest #5C5C5C mb-1.5">Name *</label>
                 <input id="m-name" ref={firstRef} name="name" value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Your name" className={field} style={errors.name ? errStyle : fieldStyle} />
@@ -426,7 +426,7 @@ function MentorshipModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
               </div>
 
               <div>
-                <label htmlFor="m-phone" className="block font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1.5">Phone number *</label>
+                <label htmlFor="m-phone" className="block font-mono text-[10px] uppercase tracking-widest #5C5C5C mb-1.5">Phone number *</label>
                 <input id="m-phone" name="phone" type="tel" value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="+20 10 12345678" className={field} style={errors.phone ? errStyle : fieldStyle} />
@@ -434,7 +434,7 @@ function MentorshipModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
               </div>
 
               <div>
-                <label htmlFor="m-topic" className="block font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1.5">Mentorship topic *</label>
+                <label htmlFor="m-topic" className="block font-mono text-[10px] uppercase tracking-widest #5C5C5C mb-1.5">Mentorship topic *</label>
                 <input id="m-topic" name="topic" value={form.topic}
                   onChange={(e) => setForm({ ...form, topic: e.target.value })}
                   placeholder="e.g. computer vision, RAG pipelines, career guidance"
@@ -443,7 +443,7 @@ function MentorshipModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
               </div>
 
               <div>
-                <label htmlFor="m-level" className="block font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1.5">Experience level</label>
+                <label htmlFor="m-level" className="block font-mono text-[10px] uppercase tracking-widest #5C5C5C mb-1.5">Experience level</label>
                 <select id="m-level" name="level" value={form.level}
                   onChange={(e) => setForm({ ...form, level: e.target.value })}
                   className={field} style={fieldStyle}>
@@ -454,7 +454,7 @@ function MentorshipModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
               </div>
 
               <div>
-                <label htmlFor="m-message" className="block font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1.5">Message *</label>
+                <label htmlFor="m-message" className="block font-mono text-[10px] uppercase tracking-widest #5C5C5C mb-1.5">Message *</label>
                 <textarea id="m-message" name="message" rows={4} value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="What would you like help with?" className={field}
@@ -464,16 +464,16 @@ function MentorshipModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 
               <div className="flex gap-3 pt-1">
                 <button type="submit"
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-body font-bold text-sm transition-all"
+                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-body font-semibold text-sm transition-all"
                   style={{ background: `linear-gradient(135deg, #25D366, #128C7E)`, color: '#0A0A0B' }}>
                   Send via WhatsApp
                 </button>
                 <button type="button" onClick={onClose}
-                  className="px-5 py-3 rounded-xl font-body text-sm text-slate-400 hover:text-white border border-[rgba(255,255,255,0.1)] transition-colors">
+                  className="px-5 py-3 rounded-xl font-body text-sm #5C5C5C hover:#EDEDED border border-[rgba(255,255,255,0.1)] transition-colors">
                   Cancel
                 </button>
               </div>
-              <p className="text-center text-slate-600 text-[11px]">
+              <p className="text-center #5C5C5C text-[11px]">
                 Opens WhatsApp with a pre-filled message
               </p>
             </form>
@@ -541,7 +541,7 @@ export default function Gallery() {
         <div className="max-w-7xl mx-auto">
           <div className="glass rounded-2xl p-12 text-center" style={{ border: `1px solid ${ACCENT}18` }}>
             <div className="w-8 h-8 mx-auto mb-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: `${ACCENT}40`, borderTopColor: 'transparent' }} />
-            <p className="font-body text-slate-400 text-sm">Loading gallery…</p>
+            <p className="font-body #5C5C5C text-sm">Loading gallery…</p>
           </div>
         </div>
       </section>
@@ -554,7 +554,7 @@ export default function Gallery() {
       <section id="gallery" ref={ref} className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="glass rounded-2xl p-12 text-center" style={{ border: `1px solid ${ACCENT}18` }}>
-            <p className="font-body text-slate-400 text-sm">No images in this category yet.</p>
+            <p className="font-body #5C5C5C text-sm">No images in this category yet.</p>
           </div>
         </div>
       </section>
@@ -572,15 +572,15 @@ export default function Gallery() {
           className="mb-12"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[#00D4FF] text-sm">06.</span>
-            <span className="text-slate-600 font-mono text-xs uppercase tracking-widest">Gallery</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(0,212,255,0.3)] to-transparent" />
+            <span className="font-mono text-[#3ECF8E] text-sm">06.</span>
+            <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">Gallery</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.12)] to-transparent" />
           </div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5">
-            <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-100">
+            <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED">
               Beyond the <span className="gradient-text">Code</span>
             </h2>
-            <p className="text-slate-400 font-body text-sm max-w-sm">
+            <p className="#5C5C5C font-body text-sm max-w-sm">
               A glimpse into my projects, experiments, teaching sessions, and journey in AI.
             </p>
           </div>
@@ -600,8 +600,8 @@ export default function Gallery() {
               return (
                 <button key={c} onClick={() => setCategory(c)} aria-pressed={active}
                   className={`px-4 py-2 rounded-lg text-sm font-body font-medium transition-all duration-200 ${
-                    active ? 'bg-[#00D4FF] text-[#0A0A0B] shadow-[0_0_20px_rgba(0,212,255,0.4)]'
-                           : 'glass text-slate-400 hover:text-slate-200 border border-[rgba(255,255,255,0.06)]'
+                    active ? 'text-[#3ECF8E] text-[#0A0A0B] shadow-[0_0_20px_rgba(62,207,142,0.45)]'
+                           : 'glass #5C5C5C hover:#9B9B9B border border-[rgba(255,255,255,0.06)]'
                   }`}>
                   {c}
                   <span className={`ml-1.5 text-[10px] ${active ? 'opacity-70' : 'opacity-50'}`}>({n})</span>
@@ -663,14 +663,14 @@ export default function Gallery() {
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: ACCENT }}>
                   {slide.category}
                 </span>
-                <p className="font-display font-semibold text-white text-base sm:text-xl leading-snug mt-1 truncate">
+                <p className="font-display font-semibold #EDEDED text-base sm:text-xl leading-snug mt-1 truncate">
                   {slide.caption}
                 </p>
               </div>
               <button
                 onClick={() => setLightbox(index)}
                 aria-label="Open image full screen"
-                className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-slate-200 backdrop-blur-md transition-colors hover:text-white"
+                className="shrink-0 w-10 h-10 rounded-xl flex items-center justify-center #9B9B9B backdrop-blur-md transition-colors hover:#EDEDED"
                 style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)' }}
               >
                 <Maximize2 size={16} />
@@ -681,12 +681,12 @@ export default function Gallery() {
             {shown.length > 1 && (
               <>
                 <button onClick={() => go(-1)} aria-label="Previous image"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center text-white opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center #EDEDED opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity"
                   style={{ background: 'rgba(0,0,0,0.55)', border: `1px solid ${ACCENT}40`, backdropFilter: 'blur(6px)' }}>
                   <ChevronLeft size={20} />
                 </button>
                 <button onClick={() => go(1)} aria-label="Next image"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center text-white opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center #EDEDED opacity-70 hover:opacity-100 focus:opacity-100 transition-opacity"
                   style={{ background: 'rgba(0,0,0,0.55)', border: `1px solid ${ACCENT}40`, backdropFilter: 'blur(6px)' }}>
                   <ChevronRight size={20} />
                 </button>

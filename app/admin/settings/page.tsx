@@ -5,8 +5,8 @@ import { useCallback, useEffect, useState, type CSSProperties, type FormEvent } 
 /* ──────────────────────────────────────────────────────────────────────────
    Theme constants — mirror app/admin/layout.tsx
    ────────────────────────────────────────────────────────────────────────── */
-const ACCENT = '#00D4FF'
-const ACCENT_2 = '#7C3AED'
+const ACCENT = '#3ECF8E'
+const ACCENT_2 = '#3ECF8E'
 
 type SiteConfig = {
   bookingUrl: string | null
@@ -250,7 +250,7 @@ export default function SettingsAdminPage() {
               style={{
                 background: 'rgba(6,255,165,0.08)',
                 border: '1px solid rgba(6,255,165,0.3)',
-                color: '#06FFA5',
+                color: '#3ECF8E',
               }}
             >
               Settings saved successfully.

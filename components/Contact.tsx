@@ -25,7 +25,7 @@ const socials = [
     href: 'https://www.linkedin.com/in/ahmed-gwely-2589611b0/',
     icon: <Linkedin size={20} />,
     handle: 'ahmed-gwely',
-    color: '#0A66C2',
+    color: '#3ECF8E',
   },
   {
     label: 'TikTok',
@@ -39,7 +39,7 @@ const socials = [
     href: 'mailto:ahmedgwbs@gmail.com',
     icon: <Mail size={20} />,
     handle: 'ahmedgwbs@gmail.com',
-    color: '#00D4FF',
+    color: 'var(--accent)',
   },
 ]
 
@@ -99,7 +99,7 @@ export default function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="mb-16"
         >
-          <h2 className="text-4xl font-bold text-white">
+          <h2 className="text-4xl font-semibold #EDEDED">
             Let’s Build Something
           </h2>
           <p className="text-gray-400 mt-2">
@@ -116,12 +116,12 @@ export default function Contact() {
                 key={s.label}
                 href={s.href}
                 target={s.href.startsWith('mailto') ? undefined : '_blank'}
-                className="flex items-center gap-4 p-4 rounded-xl bg-white/5"
+                className="flex items-center gap-4 p-4 rounded-xl bg-[rgba(17,17,18,0.05)]"
               >
                 <div style={{ color: s.color }}>{s.icon}</div>
                 <div>
                   <div className="text-sm text-gray-400">{s.label}</div>
-                  <div className="text-white">{s.handle}</div>
+                  <div className="#EDEDED">{s.handle}</div>
                 </div>
               </a>
             ))}
@@ -129,17 +129,17 @@ export default function Contact() {
 
           {/* FORM */}
           <div className="lg:col-span-3">
-            <div className="p-6 rounded-xl bg-white/5">
+            <div className="p-6 rounded-xl bg-[rgba(17,17,18,0.05)]">
 
               {sent ? (
                 <div className="text-center py-10">
                   <CheckCircle className="mx-auto text-green-400" size={40} />
-                  <h3 className="text-white text-xl mt-3">
+                  <h3 className="#EDEDED text-xl mt-3">
                     Message Sent!
                   </h3>
                   <button
                     onClick={() => setSent(false)}
-                    className="text-cyan-400 mt-4"
+                    className="text-[#3ECF8E] mt-4"
                   >
                     Send another
                   </button>
@@ -152,7 +152,7 @@ export default function Contact() {
                     placeholder="Name"
                     value={form.name}
                     onChange={handleChange}
-                    className="w-full p-3 bg-black/30 text-white rounded"
+                    className="w-full p-3 bg-black/30 #EDEDED rounded"
                     required
                   />
 
@@ -161,7 +161,7 @@ export default function Contact() {
                     placeholder="Email"
                     value={form.email}
                     onChange={handleChange}
-                    className="w-full p-3 bg-black/30 text-white rounded"
+                    className="w-full p-3 bg-black/30 #EDEDED rounded"
                     required
                   />
 
@@ -170,7 +170,7 @@ export default function Contact() {
                     placeholder="Subject"
                     value={form.subject}
                     onChange={handleChange}
-                    className="w-full p-3 bg-black/30 text-white rounded"
+                    className="w-full p-3 bg-black/30 #EDEDED rounded"
                     required
                   />
 
@@ -180,14 +180,14 @@ export default function Contact() {
                     value={form.message}
                     onChange={handleChange}
                     rows={6}
-                    className="w-full p-3 bg-black/30 text-white rounded"
+                    className="w-full p-3 bg-black/30 #EDEDED rounded"
                     required
                   />
 
                   <button
                     type="submit"
                     disabled={sending}
-                    className="w-full bg-cyan-400 text-black font-bold p-3 rounded"
+                    className="w-full bg-[#3ECF8E] text-black font-semibold p-3 rounded"
                   >
                     {sending ? 'Sending...' : 'Send Message'}
                   </button>

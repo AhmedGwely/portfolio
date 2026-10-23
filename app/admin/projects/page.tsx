@@ -5,8 +5,8 @@ import { useCallback, useEffect, useState, type CSSProperties, type FormEvent } 
 /* ──────────────────────────────────────────────────────────────────────────
    Theme constants — mirror app/admin/layout.tsx
    ────────────────────────────────────────────────────────────────────────── */
-const ACCENT = '#00D4FF'
-const ACCENT_2 = '#7C3AED'
+const ACCENT = '#3ECF8E'
+const ACCENT_2 = '#3ECF8E'
 
 const CATEGORIES = [
   'Computer Vision',
@@ -76,7 +76,7 @@ const emptyForm: FormState = {
   videoUrl: '',
   videoThumbnail: '',
   badge: '',
-  badgeColor: '#00D4FF',
+  badgeColor: '#3ECF8E',
   category: 'Computer Vision',
 }
 
@@ -224,7 +224,7 @@ export default function ProjectsAdminPage() {
             }
           : undefined,
         badge: form.badge.trim(),
-        badgeColor: form.badgeColor.trim() || '#00D4FF',
+        badgeColor: form.badgeColor.trim() || '#3ECF8E',
         category: form.category,
       }
 
@@ -421,7 +421,7 @@ export default function ProjectsAdminPage() {
                         className="text-[10px] font-mono px-2 py-1 rounded"
                         style={{
                           background: 'rgba(6,255,165,0.1)',
-                          color: '#06FFA5',
+                          color: '#3ECF8E',
                           border: '1px solid rgba(6,255,165,0.2)',
                         }}
                       >

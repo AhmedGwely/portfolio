@@ -17,8 +17,8 @@ export const COLORS = {
   accentDim: 'rgba(62,207,142,0.72)',
   accentGlow: 'rgba(62,207,142,0.45)',
   // accent role strip / scan line
-  cyan: '#00D4FF',
-  violet: '#7C3AED',
+  cyan: 'var(--accent)',
+  violet: 'var(--accent)',
 } as const
 
 export const FONTS = {

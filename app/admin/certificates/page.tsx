@@ -12,8 +12,8 @@ import {
 /* ──────────────────────────────────────────────────────────────────────────
    Theme constants — mirror app/admin/layout.tsx
    ────────────────────────────────────────────────────────────────────────── */
-const ACCENT = '#00D4FF'
-const ACCENT_2 = '#7C3AED'
+const ACCENT = 'var(--accent)'
+const ACCENT_2 = 'var(--accent)'
 
 const CATEGORIES = [
   'Computer Vision',
@@ -63,7 +63,7 @@ const emptyForm: FormState = {
   title: '',
   issuer: '',
   category: 'Computer Vision',
-  color: '#00D4FF',
+  color: 'var(--accent)',
   emoji: '',
   file: '',
   preview: '',
@@ -283,18 +283,18 @@ export default function CertificatesAdminPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1
-            className="text-2xl font-bold font-[Syne]"
+            className="text-2xl font-semibold font-display"
             style={{ color: ACCENT }}
           >
             Certificates
           </h1>
-          <p className="text-slate-500 text-sm mt-1">
+          <p className="#5C5C5C text-sm mt-1">
             Manage your certificates & credentials.
           </p>
         </div>
         <button
           onClick={openAdd}
-          className="px-4 py-2 rounded-lg text-sm font-bold transition-all hover:shadow-[0_0_20px_rgba(0,212,255,0.35)]"
+          className="px-4 py-2 rounded-lg text-sm font-semibold transition-all hover:shadow-[0_0_20px_rgba(0,212,255,0.35)]"
           style={{
             background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
             color: '#0A0A0B',
@@ -322,7 +322,7 @@ export default function CertificatesAdminPage() {
             border: '1px solid rgba(255,107,107,0.3)',
           }}
         >
-          <p className="text-slate-400 text-sm">{error}</p>
+          <p className="#5C5C5C text-sm">{error}</p>
           <button
             onClick={fetchCertificates}
             className="mt-4 px-4 py-2 rounded-lg text-sm border transition-colors"
@@ -336,7 +336,7 @@ export default function CertificatesAdminPage() {
       {/* Empty state */}
       {status === 'ready' && certificates.length === 0 && (
         <div className="rounded-xl p-16 text-center" style={glass}>
-          <p className="text-slate-500 text-sm">
+          <p className="#5C5C5C text-sm">
             No certificates yet. Click &ldquo;Add Certificate&rdquo; to get
             started.
           </p>
@@ -397,10 +397,10 @@ export default function CertificatesAdminPage() {
                 >
                   {cert.category}
                 </div>
-                <h3 className="text-slate-200 text-xs font-semibold leading-snug line-clamp-2 mb-1">
+                <h3 className="#9B9B9B text-xs font-semibold leading-snug line-clamp-2 mb-1">
                   {cert.emoji} {cert.title}
                 </h3>
-                <p className="text-slate-600 text-[10px] truncate mb-3">
+                <p className="#5C5C5C text-[10px] truncate mb-3">
                   {cert.issuer}
                 </p>
 
@@ -465,14 +465,14 @@ export default function CertificatesAdminPage() {
             >
               <h2
                 id="certs-modal-title"
-                className="font-bold text-slate-100 text-lg font-[Syne]"
+                className="font-semibold text-slate-100 text-lg font-display"
               >
                 {isEditing ? 'Edit Certificate' : 'Add Certificate'}
               </h2>
               <button
                 onClick={() => setModalOpen(false)}
                 aria-label="Close modal"
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-red-500/20 transition-colors"
+                className="w-8 h-8 rounded-lg flex items-center justify-center #5C5C5C hover:text-white hover:bg-red-500/20 transition-colors"
               >
                 ✕
               </button>
@@ -602,7 +602,7 @@ export default function CertificatesAdminPage() {
                       onChange={(e) =>
                         setForm({ ...form, color: e.target.value })
                       }
-                      placeholder="#00D4FF"
+                      placeholder="#3ECF8E"
                       className="flex-1"
                       style={inputStyle(!!formErrors.color)}
                     />
@@ -688,7 +688,7 @@ export default function CertificatesAdminPage() {
                 <button
                   type="submit"
                   disabled={mutating}
-                  className="flex-1 px-5 py-3 rounded-xl font-bold text-sm transition-all disabled:opacity-60"
+                  className="flex-1 px-5 py-3 rounded-xl font-semibold text-sm transition-all disabled:opacity-60"
                   style={{
                     background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_2})`,
                     color: '#0A0A0B',
@@ -703,7 +703,7 @@ export default function CertificatesAdminPage() {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-5 py-3 rounded-xl text-sm text-slate-400 hover:text-white border border-[rgba(255,255,255,0.1)] transition-colors"
+                  className="px-5 py-3 rounded-xl text-sm #5C5C5C hover:text-white border border-[rgba(255,255,255,0.1)] transition-colors"
                 >
                   Cancel
                 </button>

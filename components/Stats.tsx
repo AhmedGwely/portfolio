@@ -4,9 +4,9 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 const stats = [
-  { value: 15, suffix: '+', label: 'AI Projects Shipped', color: '#00D4FF' },
-  { value: 500, suffix: '+', label: 'Students Taught', color: '#7C3AED' },
-  { value: 12, suffix: '+', label: 'Technologies Mastered', color: '#06FFA5' },
+  { value: 15, suffix: '+', label: 'AI Projects Shipped', color: 'var(--accent)' },
+  { value: 500, suffix: '+', label: 'Students Taught', color: 'var(--accent)' },
+  { value: 12, suffix: '+', label: 'Technologies Mastered', color: 'var(--accent)' },
   { value: 94, suffix: '%', label: 'Best Model Accuracy', color: '#FFD700' },
 ]
 
@@ -51,8 +51,8 @@ export default function Stats() {
           animate={inView ? { opacity: 1 } : {}}
           className="text-center mb-16"
         >
-          <p className="font-mono text-xs text-slate-600 uppercase tracking-widest mb-3">By the numbers</p>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-100">
+          <p className="font-mono text-xs #5C5C5C uppercase tracking-widest mb-3">By the numbers</p>
+          <h2 className="font-display font-semibold text-3xl sm:text-4xl #EDEDED">
             Impact that&apos;s <span className="gradient-text">measurable</span>
           </h2>
         </motion.div>
@@ -70,7 +70,7 @@ export default function Stats() {
               <div className="mb-2">
                 <CounterNumber target={stat.value} suffix={stat.suffix} color={stat.color} inView={inView} />
               </div>
-              <p className="font-body text-slate-500 text-sm mt-2">{stat.label}</p>
+              <p className="font-body #5C5C5C text-sm mt-2">{stat.label}</p>
               <div className="mt-4 h-0.5 rounded-full mx-auto w-12" style={{ background: `linear-gradient(90deg, transparent, ${stat.color}, transparent)` }} />
             </motion.div>
           ))}

@@ -5,8 +5,8 @@ import { useEffect, useState, type CSSProperties } from 'react'
 /* ──────────────────────────────────────────────────────────────────────────
    Theme constants — mirror app/admin/layout.tsx
    ────────────────────────────────────────────────────────────────────────── */
-const ACCENT = '#00D4FF'
-const ACCENT_2 = '#7C3AED'
+const ACCENT = '#3ECF8E'
+const ACCENT_2 = '#3ECF8E'
 
 /* ── Types ──────────────────────────────────────────────────────────────── */
 

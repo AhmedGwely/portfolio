@@ -70,7 +70,7 @@ export default function VideoModal({ isOpen, onClose, video, title }: VideoModal
               <h3 className="font-display font-semibold text-slate-100 text-lg">{title}</h3>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-lg glass flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-500/20 transition-all"
+                className="w-8 h-8 rounded-lg glass flex items-center justify-center #5C5C5C hover:text-white hover:bg-red-500/20 transition-all"
               >
                 <X size={16} />
               </button>

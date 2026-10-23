@@ -26,11 +26,11 @@ const POSTER = `https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`
 // Mono lowercase labels — the "detection labels" the brief asked for.
 // Bounded at ~30-80 entries; we keep this tight to stay crisp/minimal.
 const DETECTIONS = [
-  { label: 'person 0.98', x: 0.18, y: 0.42, w: 0.34, h: 0.5, color: '#00D4FF' },
-  { label: 'gesture 0.94', x: 0.62, y: 0.66, w: 0.22, h: 0.2, color: '#06FFA5' },
-  { label: 'hand 0.91', x: 0.78, y: 0.34, w: 0.18, h: 0.14, color: '#7C3AED' },
+  { label: 'person 0.98', x: 0.18, y: 0.42, w: 0.34, h: 0.5, color: 'var(--accent)' },
+  { label: 'gesture 0.94', x: 0.62, y: 0.66, w: 0.22, h: 0.2, color: 'var(--accent)' },
+  { label: 'hand 0.91', x: 0.78, y: 0.34, w: 0.18, h: 0.14, color: 'var(--accent)' },
   { label: 'robot 0.85', x: 0.3, y: 0.76, w: 0.3, h: 0.26, color: '#3ECF8E' },
-  { label: 'table 0.88', x: 0.55, y: 0.3, w: 0.26, h: 0.2, color: '#00D4FF' },
+  { label: 'table 0.88', x: 0.55, y: 0.3, w: 0.26, h: 0.2, color: 'var(--accent)' },
 ]
 
 // The single emerald accent the brief requires.
@@ -159,7 +159,7 @@ export default function Hero() {
     <section id="home" className="relative min-h-screen overflow-hidden bg-[#0A0A0B]">
       {/* subtle background accents (near-black base) */}
       <div className="absolute inset-0">
-        <div className="absolute -top-1/3 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-emerald-400/20 blur-[120px]" />
+        <div className="absolute -top-1/3 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full var(--accent)/20 blur-[120px]" />
         <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-violet-500/20 blur-[100px]" />
       </div>
 
@@ -172,48 +172,48 @@ export default function Hero() {
       {/* framing: thin emerald corner brackets + scanning line */}
       <div className="absolute inset-0">
         <div className="absolute inset-[1px] rounded-3xl border border-emerald-400/20" />
-        <div className="absolute top-0 left-0 h-[1px] w-full bg-emerald-400/30" style={{ transform: `translateY(0px)` }} />
+        <div className="absolute top-0 left-0 h-[1px] w-full var(--accent)/30" style={{ transform: `translateY(0px)` }} />
       </div>
 
       <div className="relative z-10 flex min-h-screen items-center justify-between px-6">
         {/* Left: name + role + CTA */}
         <div className="max-w-xl">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2">
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 var(--accent)/10 px-4 py-2">
             <span className="h-2 w-2 animate-pulse rounded-full bg-[#3ECF8E]" />
-            <span className="font-mono text-xs text-slate-300">Available for opportunities</span>
+            <span className="font-mono text-xs #64748B">Available for opportunities</span>
           </div>
 
-          <h1 className="font-geist font-semibold leading-tight tracking-tight text-6xl text-white sm:text-7xl">
+          <h1 className="font-geist font-semibold leading-tight tracking-tight text-6xl #EDEDED sm:text-7xl">
             <span className="block">Ahmed</span>
-            <span className="block font-mono text-6xl font-bold text-emerald-400">Gwely</span>
+            <span className="block font-mono text-6xl font-semibold text-emerald-400">Gwely</span>
           </h1>
 
           <div className="mb-5 flex h-9 items-center justify-center">
             <span className="font-mono text-xl text-emerald-400">
               Computer Vision Engineer
-              <span className="ml-2 h-4 w-px bg-emerald-400/50" />
+              <span className="ml-2 h-4 w-px var(--accent)/50" />
               <span className="ml-1 h-2 w-2 rounded-full bg-[#3ECF8E] animate-pulse" />
             </span>
           </div>
 
-          <p className="font-mono text-base leading-relaxed text-slate-400">
+          <p className="font-mono text-base leading-relaxed #5C5C5C">
             AI Engineer building practical systems end-to-end —{' '}
             <span className="font-medium text-emerald-400">computer vision</span>,{' '}
             <span className="font-medium text-violet-400">generative AI</span>, and{' '}
-            <span className="font-medium text-cyan-400">agentic automation</span>.
+            <span className="font-medium text-[#3ECF8E]">agentic automation</span>.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="#projects"
-              className="flex items-center gap-2 rounded-xl bg-emerald-400 px-6 py-3 font-mono text-sm font-semibold text-black transition-all duration-200 hover:bg-emerald-300 active:scale-[0.98]"
+              className="flex items-center gap-2 rounded-xl var(--accent) px-6 py-3 font-mono text-sm font-semibold text-black transition-all duration-200 hover:bg-[rgba(62,207,142,0.72)] active:scale-[0.98]"
             >
               <Eye size={14} />
               View projects
             </a>
             <a
               href="#featured-video"
-              className="flex items-center gap-2 rounded-xl border border-emerald-400/30 px-6 py-3 font-mono text-sm font-semibold text-emerald-400 transition-all duration-200 hover:bg-emerald-400/10"
+              className="flex items-center gap-2 rounded-xl border border-emerald-400/30 px-6 py-3 font-mono text-sm font-semibold text-emerald-400 transition-all duration-200 hover:var(--accent)/10"
             >
               <Play size={14} />
               Watch video
@@ -237,7 +237,7 @@ export default function Hero() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg border border-emerald-400/20 bg-emerald-400/10 flex items-center justify-center text-emerald-400 transition-all duration-200 hover:border-emerald-400/40 hover:text-white"
+                className="w-9 h-9 rounded-lg border border-emerald-400/20 var(--accent)/10 flex items-center justify-center text-emerald-400 transition-all duration-200 hover:border-emerald-400/40 hover:#EDEDED"
               >
                 {s.icon}
               </a>
@@ -262,15 +262,15 @@ function FeaturedFrame() {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-5">
-        <h3 className="truncate font-semibold text-2xl text-white">
+        <h3 className="truncate font-semibold text-2xl #EDEDED">
           Artificial Intelligence Conference
         </h3>
-        <p className="font-mono text-xs text-slate-400">Presented by Ahmed Gwely</p>
+        <p className="font-mono text-xs #5C5C5C">Presented by Ahmed Gwely</p>
         <a
           href={WATCH_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-5 py-2.5 font-mono text-sm font-semibold text-black transition-colors hover:bg-emerald-300"
+          className="mt-3 inline-flex items-center gap-2 rounded-xl var(--accent) px-5 py-2.5 font-mono text-sm font-semibold text-black transition-colors hover:bg-[rgba(62,207,142,0.72)]"
         >
           <Play size={14} />
           Watch on YouTube
@@ -279,16 +279,16 @@ function FeaturedFrame() {
       {/* Thin emerald corner brackets */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 left-0 h-8 w-8">
-          <div className="absolute top-0 left-0 h-1.5 w-1.5 rounded-tl-lg border-l border-t border-emerald-400/60 bg-emerald-400" />
+          <div className="absolute top-0 left-0 h-1.5 w-1.5 rounded-tl-lg border-l border-t border-emerald-400/60 var(--accent)" />
         </div>
         <div className="absolute top-0 right-0 h-8 w-8">
-          <div className="absolute top-0 right-0 h-1.5 w-1.5 rounded-tr-lg border-r border-t border-emerald-400/60 bg-emerald-400" />
+          <div className="absolute top-0 right-0 h-1.5 w-1.5 rounded-tr-lg border-r border-t border-emerald-400/60 var(--accent)" />
         </div>
         <div className="absolute bottom-0 left-0 h-8 w-8">
-          <div className="absolute bottom-0 left-0 h-1.5 w-1.5 rounded-bl-lg border-l border-b border-emerald-400/60 bg-emerald-400" />
+          <div className="absolute bottom-0 left-0 h-1.5 w-1.5 rounded-bl-lg border-l border-b border-emerald-400/60 var(--accent)" />
         </div>
         <div className="absolute bottom-0 right-0 h-8 w-8">
-          <div className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-br-lg border-r border-b border-emerald-400/60 bg-emerald-400" />
+          <div className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-br-lg border-r border-b border-emerald-400/60 var(--accent)" />
         </div>
       </div>
     </div>

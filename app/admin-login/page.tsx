@@ -51,10 +51,10 @@ export default function AdminLoginPage() {
         <div className="glass rounded-2xl p-8 border border-[#00D4FF]/20">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold font-[Syne] text-[#00D4FF] neon-text mb-2">
+            <h1 className="text-3xl font-bold font-[Syne] text-[#3ECF8E] neon-text mb-2">
               Admin Portal
             </h1>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm #5C5C5C">
               Enter your password to access the dashboard
             </p>
           </div>

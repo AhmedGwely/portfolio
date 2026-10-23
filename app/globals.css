@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
 
+/* ── Tailwind (v3: three directives — base/components/utilities) ──────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ── Midnight minimal tokens (brief) ────────────────────────────────────────── */
+
 :root {
   /* Base */ --bg: #0A0A0B;
   --surface: #111113;

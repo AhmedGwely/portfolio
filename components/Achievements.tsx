@@ -5,12 +5,12 @@ import { Trophy, Users, Rocket, Code } from 'lucide-react'
 
 const achievements = [
   {
-    icon: <Rocket size={24} className="text-[#06FFA5]" />,
+    icon: <Rocket size={24} className="text-[#3ECF8E]" />,
     category: 'Competition',
     title: 'Finalist — Egypt IoT & AI Challenge',
     description: 'Selected as a finalist with GallineX, a smart poultry monitoring and power-management system, with financial support from ITIDA.',
     date: '2025–2026',
-    accent: '#06FFA5',
+    accent: 'var(--accent)',
   },
   {
     icon: <Trophy size={24} className="text-[#FFD700]" />,
@@ -21,36 +21,36 @@ const achievements = [
     accent: '#FFD700',
   },
   {
-    icon: <Users size={24} className="text-[#00D4FF]" />,
+    icon: <Users size={24} className="text-[#3ECF8E]" />,
     category: 'Speaking',
     title: 'Conference Speaker — Opening Session',
     description: 'Delivered "AI Evolution: Narrow to General Intelligence and Beyond" at the First Student Engineering Conference on AI Applications, Mansoura University — the only student selected to present.',
     date: '01/2026',
-    accent: '#00D4FF',
+    accent: 'var(--accent)',
   },
   {
-    icon: <Users size={24} className="text-[#7C3AED]" />,
+    icon: <Users size={24} className="text-[#3ECF8E]" />,
     category: 'Teaching',
     title: 'AI & Computer Vision Instructor',
     description: 'Instructor and technical program lead for a computer vision and applied machine learning curriculum at Neurobotics, and a deep learning supervisor and mentor across IEEE Mansoura, CAT Reloaded and Luminous MU.',
     date: '2024–Present',
-    accent: '#7C3AED',
+    accent: 'var(--accent)',
   },
   {
-    icon: <Code size={24} className="text-[#00D4FF]" />,
+    icon: <Code size={24} className="text-[#3ECF8E]" />,
     category: 'Community',
     title: 'Head of AI Committee & Co-Founder',
     description: 'Co-founded and led the AI Committee at Momentum MU, serving as Vice Head of Training and as a public speaker for data science and AI initiatives.',
     date: '2023–2025',
-    accent: '#00D4FF',
+    accent: 'var(--accent)',
   },
   {
-    icon: <Code size={24} className="text-[#7C3AED]" />,
+    icon: <Code size={24} className="text-[#3ECF8E]" />,
     category: 'Education',
     title: 'TikTok AI Education Channel',
     description: 'Growing AI education channel breaking down complex vision and AI concepts with hands-on demos — building the next generation of AI engineers.',
     date: 'Present',
-    accent: '#7C3AED',
+    accent: 'var(--accent)',
   },
 ]
 
@@ -66,11 +66,11 @@ export default function Achievements() {
           className="mb-16"
         >
           <div className="flex items-center gap-4 mb-4">
-            <span className="font-mono text-[#00D4FF] text-sm">05.</span>
-            <span className="text-slate-600 font-mono text-xs uppercase tracking-widest">Achievements</span>
-            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(0,212,255,0.3)] to-transparent" />
+            <span className="font-mono text-[#3ECF8E] text-sm">05.</span>
+            <span className="#5C5C5C font-mono text-xs uppercase tracking-widest">Achievements</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[rgba(62,207,142,0.12)] to-transparent" />
           </div>
-          <h2 className="font-display font-bold text-4xl sm:text-5xl text-slate-100">
+          <h2 className="font-display font-semibold text-4xl sm:text-5xl #EDEDED">
             Milestones & <span className="gradient-text">Recognition</span>
           </h2>
         </motion.div>
@@ -93,7 +93,7 @@ export default function Achievements() {
                 >
                   {item.icon}
                 </div>
-                <span className="font-mono text-xs text-slate-600">{item.date}</span>
+                <span className="font-mono text-xs #5C5C5C">{item.date}</span>
               </div>
 
               {/* Category */}
@@ -102,12 +102,12 @@ export default function Achievements() {
               </div>
 
               {/* Title */}
-              <h3 className="font-display font-semibold text-slate-100 text-lg mb-3 leading-snug group-hover:text-white transition-colors">
+              <h3 className="font-display font-semibold #EDEDED text-lg mb-3 leading-snug group-hover:#EDEDED transition-colors">
                 {item.title}
               </h3>
 
               {/* Description */}
-              <p className="font-body text-slate-500 text-sm leading-relaxed">
+              <p className="font-body #5C5C5C text-sm leading-relaxed">
                 {item.description}
               </p>
             </motion.div>

@@ -22,8 +22,8 @@ export const COLORS = {
   accentSoft: 'rgba(62,207,142,0.12)',
   accentDim: 'rgba(62,207,142,0.72)',
   accentGlow: 'rgba(62,207,142,0.45)',
-  cyan: '#00D4FF', // secondary (only used for non-motion accents)
-  violet: '#7C3AED',
+  cyan: 'var(--accent)', // secondary (only used for non-motion accents)
+  violet: 'var(--accent)',
 } as const
 
 export const FONTS = {

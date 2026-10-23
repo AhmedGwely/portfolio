@@ -75,7 +75,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
         transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
-        className="group relative overflow-hidden rounded-2xl border border-[rgba(0,212,255,0.08)] transition-shadow duration-300 hover:shadow-[0_8px_32px_rgba(62,207,142,0.12)]"
+        className="group relative overflow-hidden rounded-2xl border border-[rgba(62,207,142,0.12)] transition-shadow duration-300 hover:shadow-[0_8px_32px_rgba(62,207,142,0.12)]"
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Cursor spotlight layer — desktop only, behind the card */}
@@ -109,8 +109,8 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
                 loading="lazy"
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-[rgba(0,212,255,0.1)] to-[rgba(124,58,237,0.1)] flex items-center justify-center">
-                <Play size={40} className="text-[#00D4FF] opacity-50" />
+              <div className="w-full h-full bg-gradient-to-br from-[rgba(62,207,142,0.12)] to-[rgba(124,58,237,0.1)] flex items-center justify-center">
+                <Play size={40} className="text-[#3ECF8E] opacity-50" />
               </div>
             )}
 
@@ -131,14 +131,14 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
             {project.badge && (
               <div
                 className="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold"
-                style={{ background: project.badgeColor || '#00D4FF', color: '#0A0A0B' }}
+                style={{ background: project.badgeColor || 'var(--accent)', color: '#0A0A0B' }}
               >
                 {project.badge}
               </div>
             )}
 
             {/* Video type indicator */}
-            <div className="absolute top-3 right-3 px-2 py-1 rounded glass text-xs font-mono text-slate-400 border border-[rgba(255,255,255,0.1)]">
+            <div className="absolute top-3 right-3 px-2 py-1 rounded glass text-xs font-mono #5C5C5C border border-[rgba(255,255,255,0.1)]">
               {project.video.type === 'youtube' ? '▶ YouTube' : project.video.type === 'tiktok' ? '♪ TikTok' : project.video.type === 'linkedin' ? 'in LinkedIn' : 'Video'}
             </div>
           </div>
@@ -146,21 +146,21 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
 
         {/* Content */}
         <div className="p-6 flex flex-col flex-1">
-          <h3 className="font-display font-bold text-slate-100 text-xl mb-3">
+          <h3 className="font-display font-semibold #EDEDED text-xl mb-3">
             {project.title}
           </h3>
 
           <div className="space-y-2 mb-4 flex-1">
-            <p className="text-slate-500 text-sm font-body">
-              <span className="text-[#00D4FF] font-semibold">Problem: </span>
+            <p className="#5C5C5C text-sm font-body">
+              <span className="text-[#3ECF8E] font-semibold">Problem: </span>
               {project.problem}
             </p>
-            <p className="text-slate-500 text-sm font-body">
-              <span className="text-[#7C3AED] font-semibold">Solution: </span>
+            <p className="#5C5C5C text-sm font-body">
+              <span className="text-[#3ECF8E] font-semibold">Solution: </span>
               {project.solution}
             </p>
-            <p className="text-slate-500 text-sm font-body">
-              <span className="text-[#06FFA5] font-semibold">Impact: </span>
+            <p className="#5C5C5C text-sm font-body">
+              <span className="text-[#3ECF8E] font-semibold">Impact: </span>
               {project.impact}
             </p>
           </div>
@@ -190,7 +190,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-[rgba(255,255,255,0.1)] text-slate-400 text-sm font-body hover:text-white hover:border-[rgba(255,255,255,0.3)] transition-all"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-[rgba(255,255,255,0.1)] #5C5C5C text-sm font-body hover:#EDEDED hover:border-[rgba(255,255,255,0.3)] transition-all"
               >
                 <Github size={14} />
                 Code
@@ -201,7 +201,7 @@ export default function ProjectCard({ project, index }: { project: ProjectData; 
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-[rgba(255,255,255,0.1)] text-slate-400 text-sm font-body hover:text-white hover:border-[rgba(255,255,255,0.3)] transition-all ml-auto"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-[rgba(255,255,255,0.1)] #5C5C5C text-sm font-body hover:#EDEDED hover:border-[rgba(255,255,255,0.3)] transition-all ml-auto"
               >
                 <ExternalLink size={14} />
                 Live

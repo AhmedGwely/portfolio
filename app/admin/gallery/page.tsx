@@ -5,8 +5,8 @@ import { useCallback, useEffect, useState, type ChangeEvent, type CSSProperties,
 /* ──────────────────────────────────────────────────────────────────────────
    Theme constants — mirror app/admin/layout.tsx
    ────────────────────────────────────────────────────────────────────────── */
-const ACCENT = '#00D4FF'
-const ACCENT_2 = '#7C3AED'
+const ACCENT = '#3ECF8E'
+const ACCENT_2 = '#3ECF8E'
 
 const CATEGORIES = [
   'Conferences & Community',
