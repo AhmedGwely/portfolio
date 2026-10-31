@@ -124,6 +124,23 @@ const allProjects: ProjectData[] = [
     badgeColor: 'var(--accent)',
     category: 'Computer Vision',
   },
+  {
+    title: 'Azmuth AI Assistant',
+    description: 'Next-generation AI desktop assistant for Windows — a local-first intelligent system with deep OS integration, real-time voice interaction, visual intelligence, and autonomous automation capabilities.',
+    problem: 'Desktop workflows are fragmented across isolated tools — no single AI layer to control the entire computer pipeline autonomously.',
+    solution: 'Built a modular, tool-based AI architecture with persistent memory, real-time voice interaction, OS control, and automation pipelines — a unified AI control layer for the operating system.',
+    impact: 'Reduced voice-to-action latency, improved context retention across sessions, and enabled autonomous task execution — from file management to system monitoring and workflow automation.',
+    tech: ['Python', 'Gemini 2.5 Flash', 'React', 'Async/Multi-threaded', 'OS Automation', 'Memory System'],
+    github: 'https://github.com/AhmedGwely/Azmuth_AI_Assistant',
+    live: 'https://github.com/AhmedGwely/Azmuth_AI_Assistant',
+    video: {
+      type: 'mp4',
+      url: '/uploads/azmuth-demo.mp4',
+    },
+    badge: '🎥 AI Assistant',
+    badgeColor: '#3ECF8E',
+    category: 'AI & Machine Learning',
+  },
 ]
 
 /** Filter definitions. Only categories that at least one real project belongs to. */
@@ -131,6 +148,7 @@ const PROJECT_FILTERS = [
   { key: 'All', label: 'All' },
   { key: 'Computer Vision', label: 'Computer Vision' },
   { key: 'IoT & Edge', label: 'IoT & Edge AI' },
+  { key: 'AI & Machine Learning', label: 'AI & Machine Learning' },
 ] as const
 
 export default function Projects() {

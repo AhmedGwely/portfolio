@@ -156,7 +156,7 @@
     "description": "Production-grade object detection system built for speed and accuracy on live video streams.",
     "problem": "Generic detection models are too slow or inaccurate for real-world deployment scenarios.",
     "solution": "Fine-tuned YOLOv8 on custom datasets with TensorRT optimization for maximum inference speed.",
-    "impact": "Fine-tuned YOLOv8 with TensorRT optimization for high-throughput inference \u2014 suitable for edge deployment without cloud dependency.",
+    "impact": "Fine-tuned YOLOv8 with TensorRT optimization for high-throughput inference — suitable for edge deployment without cloud dependency.",
     "tech": [
       "YOLOv8",
       "TensorRT",
@@ -174,5 +174,30 @@
     "badge": "\ud83d\ude80 Production",
     "badgeColor": "#00D4FF",
     "category": "Computer Vision"
+  },
+  {
+    "id": 8,
+    "title": "Azmuth AI Assistant",
+    "description": "Next-generation AI desktop assistant for Windows — a local-first intelligent system with deep OS integration, real-time voice interaction, visual intelligence, and autonomous automation capabilities.",
+    "problem": "Desktop workflows are fragmented across isolated tools — no single AI layer to control the entire computer pipeline autonomously.",
+    "solution": "Built a modular, tool-based AI architecture with persistent memory, real-time voice interaction, OS control, and automation pipelines — a unified AI control layer for the operating system.",
+    "impact": "Reduced voice-to-action latency, improved context retention across sessions, and enabled autonomous task execution — from file management to system monitoring and workflow automation.",
+    "tech": [
+      "Python",
+      "Gemini 2.5 Flash",
+      "React",
+      "Async/Multi-threaded",
+      "OS Automation",
+      "Memory System"
+    ],
+    "github": "https://github.com/AhmedGwely/Azmuth_AI_Assistant",
+    "live": "https://github.com/AhmedGwely/Azmuth_AI_Assistant",
+    "video": {
+      "type": "mp4",
+      "url": "/uploads/azmuth-demo.mp4"
+    },
+    "badge": "\ud83c\udfa5 AI Assistant",
+    "badgeColor": "#3ECF8E",
+    "category": "AI & Machine Learning"
   }
 ]

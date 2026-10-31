@@ -13,4 +13,6 @@ tsconfig.tsbuildinfo
 # Environment variables (never commit secrets)
 .env
 .env*
+# Uploaded media (never commit uploads)
+public/uploads/
 

@@ -53,6 +53,7 @@ type FormState = {
   videoType: VideoType
   videoUrl: string
   videoThumbnail: string
+  videoFile: File | null
   badge: string
   badgeColor: string
   category: Category
@@ -75,6 +76,7 @@ const emptyForm: FormState = {
   videoType: 'youtube',
   videoUrl: '',
   videoThumbnail: '',
+  videoFile: null,
   badge: '',
   badgeColor: '#3ECF8E',
   category: 'Computer Vision',
@@ -93,6 +95,7 @@ function projectToForm(p: Project): FormState {
     videoType: p.video?.type ?? 'youtube',
     videoUrl: p.video?.url ?? '',
     videoThumbnail: p.video?.thumbnail ?? '',
+    videoFile: null,
     badge: p.badge,
     badgeColor: p.badgeColor,
     category: p.category as Category,
@@ -198,14 +201,23 @@ export default function ProjectsAdminPage() {
     setModalOpen(true)
   }
 
-  /* ── Submit create or update ── */
-  async function handleSubmit(e: FormEvent) {
+  /* ── File input handler ── */
+  function handleSubmit(e: FormEvent) {
     e.preventDefault()
     const errors = validateForm(form)
     setFormErrors(errors)
     if (Object.keys(errors).length > 0) return
 
     setMutating(true)
+    handleSubmitAsync(e)
+  }
+
+  async function handleSubmitAsync(e: FormEvent) {
+    e.preventDefault()
+    const errors = validateForm(form)
+    setFormErrors(errors)
+    if (Object.keys(errors).length > 0) return
+
     try {
       const payload = {
         title: form.title.trim(),
@@ -216,16 +228,43 @@ export default function ProjectsAdminPage() {
         tech: form.tech.split(',').map((t) => t.trim()).filter(Boolean),
         github: form.github.trim(),
         live: form.live.trim(),
-        video: form.videoUrl.trim()
-          ? {
-              type: form.videoType,
-              url: form.videoUrl.trim(),
-              thumbnail: form.videoThumbnail.trim() || undefined,
-            }
-          : undefined,
+        video:
+          form.videoType === 'mp4'
+            ? {
+                type: 'mp4',
+                file: form.videoFile ? form.videoFile.name : undefined,
+                url: form.videoFile ? `/uploads/${form.videoFile.name}` : '',
+              }
+            : form.videoUrl.trim()
+              ? {
+                  type: form.videoType,
+                  url: form.videoUrl.trim(),
+                  thumbnail: form.videoThumbnail.trim() || undefined,
+                }
+              : undefined,
         badge: form.badge.trim(),
         badgeColor: form.badgeColor.trim() || '#3ECF8E',
         category: form.category,
+      }
+
+      // Handle MP4 file upload (multipart/form-data) before the project payload
+      if (form.videoType === 'mp4' && form.videoFile) {
+        const formData = new FormData()
+        formData.append('file', form.videoFile)
+        const uploadRes = await fetch('/api/projects/upload', {
+          method: 'POST',
+          body: formData,
+        })
+        if (!uploadRes.ok) {
+          const body = (await uploadRes.json().catch(() => null)) as {
+            error?: string
+          } | null
+          throw new Error(
+            body?.error ?? `Video upload failed (${uploadRes.status})`,
+          )
+        }
+        // Inject the uploaded file info into the payload
+        payload.video!.url = `/uploads/${form.videoFile.name}`
       }
 
       const url =
@@ -690,45 +729,107 @@ export default function ProjectsAdminPage() {
                 </div>
               </div>
 
-              {/* video type / url */}
-              <div className="grid grid-cols-2 gap-4">
+              {/* video file upload (mp4) */}
+              {form.videoType === 'mp4' ? (
                 <div>
-                  <label htmlFor="p-videoType" style={labelStyle}>
-                    Video Type
+                  <label htmlFor="v-file" style={labelStyle}>
+                    Video File (MP4)
                   </label>
-                  <select
-                    id="p-videoType"
-                    value={form.videoType}
+                  <input
+                    id="v-file"
+                    type="file"
+                    accept=".mp4,video/mp4"
+                    style={{
+                      ...inputStyle(),
+                      padding: '8px 10px',
+                      cursor: 'pointer',
+                    }}
                     onChange={(e) =>
                       setForm({
                         ...form,
-                        videoType: e.target.value as VideoType,
+                        videoFile: e.target.files?.[0] || null,
                       })
                     }
-                    style={inputStyle()}
+                  />
+                  <p
+                    style={{
+                      fontSize: 11,
+                      color: '#64748b',
+                      marginTop: 4,
+                      fontFamily: 'monospace',
+                    }}
                   >
-                    <option value="youtube" style={{ background: '#0a0a14' }}>YouTube</option>
-                    <option value="tiktok" style={{ background: '#0a0a14' }}>TikTok</option>
-                    <option value="linkedin" style={{ background: '#0a0a14' }}>LinkedIn</option>
-                    <option value="mp4" style={{ background: '#0a0a14' }}>MP4</option>
-                  </select>
+                    Upload a .mp4 file (max 100 MB). The file is stored on the
+                    server and delivered from the public uploads folder.
+                  </p>
                 </div>
+              ) : (
+                <>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="p-videoType" style={labelStyle}>
+                        Video Type
+                      </label>
+                      <select
+                        id="p-videoType"
+                        value={form.videoType}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            videoType: e.target.value as VideoType,
+                          })
+                        }
+                        style={inputStyle()}
+                      >
+                        <option value="youtube" style={{ background: '#0a0a14' }}>
+                          YouTube
+                        </option>
+                        <option value="tiktok" style={{ background: '#0a0a14' }}>
+                          TikTok
+                        </option>
+                        <option value="linkedin" style={{ background: '#0a0a14' }}>
+                          LinkedIn
+                        </option>
+                        <option value="mp4" style={{ background: '#0a0a14' }}>
+                          MP4
+                        </option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="p-videoUrl" style={labelStyle}>
+                        Video URL
+                      </label>
+                      <input
+                        id="p-videoUrl"
+                        type="text"
+                        value={form.videoUrl}
+                        onChange={(e) =>
+                          setForm({ ...form, videoUrl: e.target.value })
+                        }
+                        placeholder="https://youtu.be/..."
+                        style={inputStyle()}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+              {form.videoType !== 'mp4' && (
                 <div>
-                  <label htmlFor="p-videoUrl" style={labelStyle}>
-                    Video URL
+                  <label htmlFor="p-videoThumbnail" style={labelStyle}>
+                    Video Thumbnail
                   </label>
                   <input
-                    id="p-videoUrl"
+                    id="p-videoThumbnail"
                     type="text"
-                    value={form.videoUrl}
+                    value={form.videoThumbnail}
                     onChange={(e) =>
-                      setForm({ ...form, videoUrl: e.target.value })
+                      setForm({ ...form, videoThumbnail: e.target.value })
                     }
-                    placeholder="https://youtu.be/..."
+                    placeholder="https://img.youtube.com/vi/.../maxresdefault.jpg"
                     style={inputStyle()}
                   />
                 </div>
-              </div>
+              )}
 
               {/* video thumbnail */}
               <div>
